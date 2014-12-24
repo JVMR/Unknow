@@ -23,23 +23,26 @@ public class ServletLogin extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String  usu = request.getParameter("txtLogin");
+		String  usu = request.getParameter("txtUsuario");
 		String  pas = request.getParameter("txtPassword");
 		
+		String mensaje="";
+		
 		Factory fabrica = Factory.getTipo(Factory.TIPO_MYSQL);
-		UsuarioDao dao = fabrica.getUsuario();
-		
+		UsuarioDao usuarioDao = fabrica.getUsuario();
 		Usuario usuario = null;
-		
+
 		try {
-			usuario = dao.valida(usu, pas);
+			usuario = usuarioDao.validaUsuario(usu, pas);
 		} catch (SQLException e) {
+			System.out.println(e);
 			e.printStackTrace();
 		}
-	
+			
 		if(usuario == null){
-			request.setAttribute("MENSAJE", "Contraseña incorrecta/Usuario no existe");
-			request.getRequestDispatcher("/portallogin.jsp").forward(request, response);
+			mensaje="Datos incorrectos o no existen";
+			request.setAttribute("MENSAJE", mensaje);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}else{
 			
 			//Se obtiene la session
@@ -49,7 +52,7 @@ public class ServletLogin extends HttpServlet {
 			session.setAttribute("USUARIO_LOGEADO", usuario);
 			
 			//se ingresa a la intranet
-			request.getRequestDispatcher("/menuPrincipal.jsp").forward(request, response);  
+			request.getRequestDispatcher("/paginas/bienvenido.jsp").forward(request, response);  
 		}
 		
 	}

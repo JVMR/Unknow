@@ -11,24 +11,28 @@ import entidad.Usuario;
 public class MySqlUsuarioDao implements UsuarioDao {
 
 	@Override
-	public Usuario valida(String usu, String pas) throws SQLException {
+	public Usuario validaUsuario(String usu, String pas) throws SQLException {
 		Connection conn= null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		Usuario obj = null;
 		try {
 			conn = new ConexionDB().getConexion();
-			String sql ="call validarUsuario(?,?)";
+			String sql ="call SP_VALIDAUSUARIO(?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, usu);
 			pstm.setString(2, pas);
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				obj = new Usuario();
-				obj.setIdUsuario(rs.getInt("idusuario"));
-				obj.setLogUsu(rs.getString("logusu"));
-				obj.setPasUsu(rs.getString("pasusu"));
-				obj.setNombre(rs.getString("nombre"));
+				obj.setIdEmpleado(rs.getString("idEmpleado"));
+				obj.setNombresEmpleado(rs.getString("nombresEmpleado"));
+				obj.setApellidoPaterno(rs.getString("apellidoPaterno"));
+				obj.setUsuario(rs.getString("usuario"));
+				obj.setPsswrd(rs.getString("psswrd"));
+				obj.setIdCargo(rs.getString("idCargo"));
+				obj.setFoto(rs.getString("foto"));
+				obj.setFechaIngresoEmpleo(rs.getString("fechaIngresoLaboral"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

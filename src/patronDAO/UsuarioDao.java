@@ -6,6 +6,6 @@ import entidad.Usuario;
 
 public interface UsuarioDao {
 
-	public Usuario valida(String usu, String pas) throws SQLException;
+	public Usuario validaUsuario(String usu, String pas) throws SQLException;
 	
 }
