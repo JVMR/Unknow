@@ -1,54 +1,32 @@
 package entidad;
 
-public class Usuario {
+public class Empleado {
 
 	private String idEmpleado;
-	private String idRol;
-	private int idEstado;
+	private String nDNI;
 	private String nombresEmpleado;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
 	private String fechaNacimiento;
 	private String telefono;
-	private String celular;
 	private String numeroSeguroSocial;
+	private String idCargo;
+	private String idEstado;
+	private byte[] foto;
+	private String fechaIngreso;
 	private String usuario;
 	private String psswrd;
-	private String idCargo;
-	private String foto;
-	public String getFoto() {
-		return foto;
-	}
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-	public String getFechaIngresoEmpleo() {
-		return fechaIngresoEmpleo;
-	}
-	public void setFechaIngresoEmpleo(String fechaIngresoEmpleo) {
-		this.fechaIngresoEmpleo = fechaIngresoEmpleo;
-	}
-	private String fechaIngresoEmpleo;
-	
-	
-	
 	public String getIdEmpleado() {
 		return idEmpleado;
 	}
 	public void setIdEmpleado(String idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
-	public String getIdRol() {
-		return idRol;
+	public String getnDNI() {
+		return nDNI;
 	}
-	public void setIdRol(String idRol) {
-		this.idRol = idRol;
-	}
-	public int getIdEstado() {
-		return idEstado;
-	}
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
+	public void setnDNI(String nDNI) {
+		this.nDNI = nDNI;
 	}
 	public String getNombresEmpleado() {
 		return nombresEmpleado;
@@ -80,17 +58,35 @@ public class Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
 	public String getNumeroSeguroSocial() {
 		return numeroSeguroSocial;
 	}
 	public void setNumeroSeguroSocial(String numeroSeguroSocial) {
 		this.numeroSeguroSocial = numeroSeguroSocial;
+	}
+	public String getIdCargo() {
+		return idCargo;
+	}
+	public void setIdCargo(String idCargo) {
+		this.idCargo = idCargo;
+	}
+	public String getIdEstado() {
+		return idEstado;
+	}
+	public void setIdEstado(String idEstado) {
+		this.idEstado = idEstado;
+	}
+	public byte[] getFoto() {
+		return foto;
+	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+	public String getFechaIngreso() {
+		return fechaIngreso;
+	}
+	public void setFechaIngreso(String fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 	public String getUsuario() {
 		return usuario;
@@ -104,13 +100,10 @@ public class Usuario {
 	public void setPsswrd(String psswrd) {
 		this.psswrd = psswrd;
 	}
-	public String getIdCargo() {
-		return idCargo;
-	}
-	public void setIdCargo(String idCargo) {
-		this.idCargo = idCargo;
-	}
-
+	
+	
+	
+	
 	
 	
 }

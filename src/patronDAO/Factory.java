@@ -6,8 +6,18 @@ public abstract class Factory {
 	public static final int TIPO_SQL_SERVER =2;
 	
 	
-	public abstract UsuarioDao getUsuario();
-	
+	public abstract EmpleadoDao getEmpleado();
+	public abstract UnidadOrganicaDao getUnidadOrganica();
+	public abstract ComboDao getCombo();
+
+	public abstract EquipoDao getEquipo();
+
+	public abstract PersonaDao getPersona();
+	public abstract CargoDao getCargo();
+
+	public abstract LesDao getLes();
+	public abstract ResDao getRes();
+
 	
 	public static Factory getTipo(int tipo){
 		switch (tipo) {
