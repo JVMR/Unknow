@@ -33,6 +33,16 @@ public class ServletGestionaLES extends HttpServlet {
 		if(operacion.equals("listarLes")){
 			this.listarLes(request, response);
 		}
+
+		if(operacion.equals("cargarLes")){
+			this.cargarLes(request, response);
+		}
+		if(operacion.equals("cargarLes2")){
+			this.cargarLes2(request, response);
+		}
+		if(operacion.equals("actualizarEstado")){
+			this.actualizarEstadoLes(request, response);
+		}
 	}
 	
 	protected void listarLes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,7 +55,57 @@ public class ServletGestionaLES extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("Les", data);
-		request.getRequestDispatcher("/cun4.jsp").forward(request, response);
+		request.getRequestDispatcher("/listarLES.jsp").forward(request, response);
+	}
+
+	protected void cargarLes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cod= request.getParameter("id");
+		Les obj=null;
+		try {
+			dao=fabrica.getLes();
+			obj= dao.LesxCodigo(cod);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Diagnostico : "+obj.getDiagnostico());
+		request.setAttribute("daoLes", obj);
+		request.getRequestDispatcher("/generarRES.jsp").forward(request, response);
+	}
+	protected void cargarLes2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cod= request.getParameter("id");
+		Les obj=null;
+		try {
+			dao=fabrica.getLes();
+			obj= dao.LesxCodigo(cod);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Diagnostico : "+obj.getDiagnostico());
+		request.setAttribute("daoLes", obj);
+		request.getRequestDispatcher("/consultarDM.jsp").forward(request, response);
+	}
+	protected void actualizarEstadoLes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String idLes =request.getParameter("txtIdLes");
+		String idEstado =request.getParameter("rdEstado");
+		
+			dao=fabrica.getLes();
+			Les l = new Les();
+			
+			l.setIdLes(idLes);
+			l.setIdEstado(idEstado);
+			
+			try {
+				dao.ActualizaEstado(l);
+				System.out.println("Codigo" + l.getIdLes());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		
+			listarLes(request, response);
 	}
 
 }

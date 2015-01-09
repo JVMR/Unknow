@@ -9,6 +9,7 @@ public abstract class Factory {
 	public abstract EmpleadoDao getEmpleado();
 	public abstract UnidadOrganicaDao getUnidadOrganica();
 	public abstract ComboDao getCombo();
+	public abstract UtilitarioDao getUtilitario();
 
 	public abstract EquipoDao getEquipo();
 

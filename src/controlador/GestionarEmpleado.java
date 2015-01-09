@@ -80,9 +80,7 @@ public class GestionarEmpleado extends HttpServlet {
 			InputStream inputStream = null; // input stream of the upload file
 	        byte[] foto = null;
 	        
-	        Part filePart = request.getPart("txtFoto");
-	        
-	        System.out.println("Archivo File :"+filePart);	        
+	        Part filePart = request.getPart("txtFoto");      
 	        if (filePart != null) {
 	            //prints out some information for debugging
 	          // System.out.println(filePart.getName());
@@ -91,7 +89,6 @@ public class GestionarEmpleado extends HttpServlet {
 	             
 	            // obtains input stream of the upload file
 	            inputStream = filePart.getInputStream();
-	            System.out.println("Salio esto : "+inputStream);
 	            //CONVIERTE INPUTSTREAM EN BYTES[]
 	            ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	            byte[] tmp = new byte[4096];
@@ -105,7 +102,6 @@ public class GestionarEmpleado extends HttpServlet {
 	             foto = bos.toByteArray();
 	            //./CONVIERTE INPUTSTREAM EN BYTES[]
 	        }	
-				System.out.println("en bytes creo :"+foto);
 				dao=fabrica.getEmpleado();
 				Empleado emp = new Empleado();
 				
@@ -156,7 +152,6 @@ public class GestionarEmpleado extends HttpServlet {
 		                while((size = sImage.read(bytearray)) != -1 ){
 		                    response.getOutputStream().
 		                    write(bytearray,0,size);
-		                    System.out.println(""+sImage);
 		                }
 	                }         
 	            }

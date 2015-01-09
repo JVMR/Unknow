@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import patronDAO.Factory;
+import patronDAO.UnidadOrganicaDao;
 import entidad.Cargo;
-import entidad.Empleado;
 import entidad.ListadoUnidad;
 import entidad.Rol;
 import entidad.UnidadOrganica;
-import patronDAO.Factory;
-import patronDAO.UnidadOrganicaDao;
 
 /**
  * Servlet implementation class ServletGestionarUnidadOrganica

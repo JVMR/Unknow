@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.ConexionDB;
+import util.ConexionSQL;
 import entidad.Persona;
 
 public class SqlServerPersonaDao implements PersonaDao{
@@ -20,7 +20,7 @@ public class SqlServerPersonaDao implements PersonaDao{
 		int salida=-1;
 		try {
 			System.out.println(""+e.getFoto());
-			conn = new ConexionDB().getConexion();
+			conn = new ConexionSQL().getConexion();
 			String sql ="{CALL registraPersona(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			pstm = conn.prepareStatement(sql);	
 			pstm.setString(1, e.getnDNI());
@@ -58,8 +58,8 @@ public class SqlServerPersonaDao implements PersonaDao{
 		ResultSet rs = null;		
 		int salida=-1;
 		try {
-			conn = new ConexionDB().getConexion();
-			String sql ="{CALL modificaPersona(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			conn = new ConexionSQL().getConexion();
+			String sql ="{CALL modificaPersona(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, e.getnDNI());
 			pstm.setString(2, e.getNombre());
@@ -97,7 +97,7 @@ public class SqlServerPersonaDao implements PersonaDao{
 		ResultSet rs = null;		
 		int salida=-1;
 		try {
-			conn = new ConexionDB().getConexion();
+			conn = new ConexionSQL().getConexion();
 			String sql ="{CALL eliminaPersona(?)}";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, codigo);			
@@ -125,16 +125,14 @@ public class SqlServerPersonaDao implements PersonaDao{
 		List<Persona> data= new ArrayList<Persona>();
 		Persona obj =  null;
 		try {
-			conn = new ConexionDB().getConexion();
+			conn = new ConexionSQL().getConexion();
 			String sql ="{call listaPersona()}";
 			pstm = conn.prepareStatement(sql);					
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				obj = new Persona();
 				obj.setnDNI(rs.getString(1));
-				obj.setNombre(rs.getString(2));
-				obj.setApeP(rs.getString(3));
-				obj.setApeM(rs.getString(4));
+				obj.setNombre(rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4));
 				obj.setSexo(rs.getString(5));
 				obj.setFechaNac(rs.getString(6));
 				obj.setTelefono(rs.getString(7));
@@ -143,7 +141,9 @@ public class SqlServerPersonaDao implements PersonaDao{
 				obj.setFoto(rs.getBytes(10));
 				obj.setFirma(rs.getBytes(11));
 				obj.setHuella(rs.getBytes(12));
-				obj.setIdDistrito(rs.getString(13));				
+				obj.setIdDistrito(rs.getString(13));
+				obj.setIdProv(rs.getString(14));
+				obj.setIdDepart(rs.getString(14));
 				data.add(obj);
 			}	
 		} catch (Exception ex) {
@@ -167,7 +167,7 @@ public class SqlServerPersonaDao implements PersonaDao{
 		ResultSet rs = null;	
 		Persona obj =  null;
 		try {
-			conn = new ConexionDB().getConexion();
+			conn = new ConexionSQL().getConexion();
 			String sql ="{CALL listaPersonaxCodigo(?)}";
 			pstm = conn.prepareStatement(sql);	
 			pstm.setString(1, codigo);	

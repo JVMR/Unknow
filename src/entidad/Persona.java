@@ -1,7 +1,19 @@
 package entidad;
 
 public class Persona {
-	private String nDNI,nombre,apeP,apeM,sexo,fechaNac,telefono,direccion,email,idDistrito;
+	private String nDNI,nombre,apeP,apeM,sexo,fechaNac,telefono,direccion,email,idDistrito,idProv,idDepart;
+	public String getIdProv() {
+		return idProv;
+	}
+	public void setIdProv(String idProv) {
+		this.idProv = idProv;
+	}
+	public String getIdDepart() {
+		return idDepart;
+	}
+	public void setIdDepart(String idDepart) {
+		this.idDepart = idDepart;
+	}
 	private byte[] foto,firma,huella;
 	public String getnDNI() {
 		return nDNI;

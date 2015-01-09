@@ -22,6 +22,7 @@ import entidad.ListadoEquipo;
 @WebServlet("/gestionarEquipo")
 public class ServletGestionarEquipo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	 private static final String CONTENT_TYPE = "text/xml";
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +33,7 @@ public class ServletGestionarEquipo extends HttpServlet {
 	
 	Factory factory= Factory.getTipo(Factory.TIPO_MYSQL);
 	EquipoDao equipoDao=null;
-	String idE="";
+	String 	idE="";
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operacion= request.getParameter("operacion");
@@ -51,15 +52,20 @@ public class ServletGestionarEquipo extends HttpServlet {
 		}
 		if(operacion.equals("cargarEquipo")){
 			this.cargarEquipo(request,response);
+			//this.listarCargoxModificar(request, response);
 		}
 		if(operacion.equals("agregarCargo")){
 			this.agregarCargo(request,response);
 		}
 		if(operacion.equals("agregarCargoModifica")){
 			this.agregarCargoModifica(request,response);
+			
 		}
 		if(operacion.equals("quitarCargo")){
 			this.quitarCargo(request,response);
+		}
+		if(operacion.equals("quitarCargoModificacion")){
+			this.quitarCargoModificacion(request,response);
 		}
 		if(operacion.equals("listarCargo")){
 			this.listarCargo(request,response);
@@ -72,10 +78,59 @@ public class ServletGestionarEquipo extends HttpServlet {
 
 
 
+	private void quitarCargoModificacion(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		String idItem=request.getParameter("idItem");
+		String idCargo=request.getParameter("idCargo");
+		
+		int salida=-1;
+		
+		if(Integer.parseInt(idItem)!=0){
+			for (int i = 0; i < arrayList.size(); i++) {
+				if(arrayList.get(i).getItemCargo()==Integer.parseInt(idItem)){
+					arrayList.remove(i);  
+				}
+			}
+			
+			request.setAttribute("CargoxEquipo_Modifica", arrayList);
+			request.getRequestDispatcher("/tablaListaCargoXEquipo_modifica.jsp").forward(request, response);
+			
+		}else {
+			
+			equipoDao=factory.getEquipo();
+			
+			try {
+				salida=equipoDao.eliminaCargo(idCargo);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for (int i = 0; i < arrayList.size(); i++) {
+				if(arrayList.get(i).getIdCargo().equals(idCargo)){
+					arrayList.remove(i);  
+				}
+			}
+			
+			request.setAttribute("CargoxEquipo_Modifica", arrayList);
+			request.getRequestDispatcher("/tablaListaCargoXEquipo_modifica.jsp").forward(request, response);
+			
+			
+		}
+		
+		
+		
+		
+	}
+
+
+
+
 	private void listarCargo(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("CargoxEquipo", arrayList);
-		request.getRequestDispatcher("/registraEquipo.jsp").forward(request, response);
+		request.getRequestDispatcher("/tablaListaCargoXEquipo.jsp").forward(request, response);
 		
 	}
 
@@ -149,9 +204,6 @@ public class ServletGestionarEquipo extends HttpServlet {
 		
 		listarCargo(request, response);
 		
-		/*request.setAttribute("CargoxEquipo", arrayList);
-		request.getRequestDispatcher("/registraEquipo.jsp").forward(request, response);*/
-		
 	}
 
 	private void registrarEquipo(HttpServletRequest request,
@@ -185,13 +237,50 @@ public class ServletGestionarEquipo extends HttpServlet {
 
 	private void modificarEquipo(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
-		// TODO Auto-generated method stub
+		int salida=-1;
+		
+		//String idUnidad=request.getParameter("cboUnidad");
+		String nombreEquipo=request.getParameter("txtNombreEquipo");
+		String descripcionEquipo=request.getParameter("txtDescripcion");
+		
+		Equipo equipo= new Equipo();
+		equipo.setIdEquipo(idE);
+		equipo.setNombreEquipo(nombreEquipo);
+		equipo.setDescripcionEquipo(descripcionEquipo);
+		
+		equipoDao=factory.getEquipo();
+		try {
+			 equipoDao.modificarEquipo(equipo, arrayList);
+		} catch (SQLException e) {
+			System.out.println("error en servelet"+e);
+			e.printStackTrace();
+		}
+		
+		arrayList.clear();
+		item=0;
+		idE=null;
+		
+		listarEquipos(request, response);
 		
 	}
 
 	private void eliminarEquipo(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
-		// TODO Auto-generated method stub
+	
+		String idEquipo=request.getParameter("id");
+		String mensaje="";
+		
+		equipoDao=factory.getEquipo();
+		try {
+			mensaje= equipoDao.eliminarEquipo(idEquipo);
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		System.out.println(mensaje);
+		listarEquipos(request, response);
+		
+		
 		
 	}
 
@@ -214,7 +303,7 @@ public class ServletGestionarEquipo extends HttpServlet {
 
 	private void cargarEquipo(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
-		idE=request.getParameter("id");
+		 	idE=request.getParameter("id");
 		ListadoEquipo listadoEquipo =null;
 		
 		equipoDao=factory.getEquipo();
@@ -226,12 +315,32 @@ public class ServletGestionarEquipo extends HttpServlet {
 		}
 		
 		request.setAttribute("CargaEquipo", listadoEquipo);
+		request.getRequestDispatcher("/modificaEquipo.jsp").forward(request, response);
 		
-		listarCargoxModificar(request, response);
+		//listarCargoxModificar(request, response);
 	}
 	
 
-	
+	private void listarCargoxModificar(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType(CONTENT_TYPE);
+		
+	//	String id=request.getParameter("idE");
+		
+		equipoDao=factory.getEquipo();
+		
+		try {
+			arrayList=equipoDao.listarCargoxEquipo(idE);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		request.setAttribute("CargoxEquipo_Modifica", arrayList);
+		request.getRequestDispatcher("/tablaListaCargoXEquipo_modifica.jsp").forward(request, response);
+		
+	}
 	
 
 	private void agregarCargoModifica(HttpServletRequest request,
@@ -288,25 +397,13 @@ public class ServletGestionarEquipo extends HttpServlet {
 		
 		arrayList.add(cargoEquipo);
 		
-		listarCargoxModificar(request, response);
+		request.setAttribute("CargoxEquipo_Modifica", arrayList);
+		request.getRequestDispatcher("/tablaListaCargoXEquipo_modifica.jsp").forward(request, response);
+		
+		//listarCargoxModificar(request, response);
 		
 	}
 	
-	private void listarCargoxModificar(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		equipoDao=factory.getEquipo();
-		
-		try {
-			arrayList=equipoDao.listarCargoxEquipo(idE);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		request.setAttribute("CargoxEquipo_Modifica", arrayList);
-		request.getRequestDispatcher("/modificaEquipo.jsp").forward(request, response);
-		
-	}
+	
 
 }

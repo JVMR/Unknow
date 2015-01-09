@@ -14,8 +14,22 @@ import patronDAO.ComboDao;
 
 @SuppressWarnings("serial")
 public class ComboDinamico extends TagSupport{
-private String nombre, sql;
+private String nombre, sql,id;
 	
+	public String getId() {
+	return id;
+}
+
+
+
+
+public void setId(String id) {
+	this.id = id;
+}
+
+
+
+
 	public int doStartTag() throws JspException {
 		//Permite leer archivos properties
 		ResourceBundle rb = ResourceBundle.getBundle("tags");
@@ -26,7 +40,7 @@ private String nombre, sql;
 		ComboDao  dao = bd.getCombo();
 		
 		try {
-			out.print("<select class='form-control' name='" + nombre + "'>");
+			out.print("<select class='form-control' name='" + nombre + "' id='"+id+ "'>");
 			out.print("<option value='-1'>[Seleccione]</option>");
 			
 			List<Combo>  lista = dao.lista(rb.getString(sql));

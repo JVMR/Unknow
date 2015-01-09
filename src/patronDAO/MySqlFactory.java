@@ -52,6 +52,12 @@ public class MySqlFactory extends Factory{
 
 	}
 
+	@Override
+	public UtilitarioDao getUtilitario() {
+		// TODO Auto-generated method stub
+		return new MySqlUtilitarioDao();
+	}
+
 
 	
 	

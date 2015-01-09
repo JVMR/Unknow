@@ -19,9 +19,10 @@ import entidad.UnidadOrganica;
 public interface EquipoDao {
 	
 	public int registrarEquipo( Equipo equipo, ArrayList<ListaCargoEquipo> arrayList) throws SQLException;
-	//public int modificarUnidadOrganica(UnidadOrganica unidadOrganica, Cargo cargo,Rol rol) throws SQLException;
-	//public String eliminarUnidadOrganica(String idunidadOrganica, String idcargo) throws SQLException;
+	public int modificarEquipo( Equipo equipo, ArrayList<ListaCargoEquipo> arrayList) throws SQLException;
+	public String eliminarEquipo(String idEquipo) throws SQLException;
 	public ArrayList<ListadoEquipo> listarEquipo() throws SQLException;
 	public ListadoEquipo listarEquipoXcodigo(String idEquipo) throws SQLException;
 	public ArrayList<ListaCargoEquipo> listarCargoxEquipo(String idEquipo) throws SQLException;
+	public int eliminaCargo(String idCargo) throws SQLException;
 }

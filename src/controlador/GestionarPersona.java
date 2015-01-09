@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import patronDAO.PersonaDao;
 import patronDAO.Factory;
-import util.ConexionDB;
+import patronDAO.PersonaDao;
+import util.ConexionSQL;
 import entidad.Persona;
 
 /**
@@ -35,7 +35,7 @@ public class GestionarPersona extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-	Factory fabrica= Factory.getTipo(Factory.TIPO_MYSQL);
+	Factory fabrica= Factory.getTipo(Factory.TIPO_SQL_SERVER);
 	PersonaDao dao= null;
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operacion= request.getParameter("operacion");
@@ -50,11 +50,11 @@ public class GestionarPersona extends HttpServlet {
 			this.fotoPersona(request, response);
 		}
 		if(operacion.equals("firmaPersona")){
-			this.fotoPersona(request, response);
+			this.firmaPersona(request, response);
 		}
-		if(operacion.equals("huellaPersona")){
-			this.fotoPersona(request, response);
-		}
+		/*if(operacion.equals("huellaPersona")){
+			this.huellaPersona(request, response);
+		}*/
 		if(operacion.equals("cargarPersona")){
 			this.cargarPersona(request, response);
 		}
@@ -137,13 +137,13 @@ public class GestionarPersona extends HttpServlet {
 	             firma = bos.toByteArray();
 	            //./CONVIERTE INPUTSTREAM EN BYTES[]
 	        }	
-	        InputStream inputStream2 = null; // input stream of the upload file
+	        //InputStream inputStream2 = null; // input stream of the upload file
 	        byte[] huella = null;
 	        
 	        Part filePart2 = request.getPart("txtHuella");
 	        
 	        System.out.println("Archivo File :"+filePart2);	        
-	        if (filePart2 != null) {
+	        /*if (filePart2 != null) {
 	            //prints out some information for debugging
 	          // System.out.println(filePart.getName());
 	           //System.out.println(filePart.getSize());
@@ -164,9 +164,21 @@ public class GestionarPersona extends HttpServlet {
 
 	             huella = bos.toByteArray();
 	            //./CONVIERTE INPUTSTREAM EN BYTES[]
-	        }	
-	        
+	        }	*/
+	           System.out.println("DNI : "+nDNI);
+	           System.out.println("DNI : "+nombre);
+	           System.out.println("DNI : "+apellidoP);
+	           System.out.println("DNI : "+apellidoM);
+	           System.out.println("DNI : "+sexo);
+	           System.out.println("DNI : "+fechaN);
+	           System.out.println("DNI : "+fono);
+	           System.out.println("DNI : "+direccion);
+	           System.out.println("DNI : "+email);
+	           System.out.println("DNI : "+distrito);
 				System.out.println("en bytes creo :"+foto);
+				System.out.println("en bytes creo :"+firma);
+				System.out.println("en bytes creo :"+huella);
+				
 				dao=fabrica.getPersona();
 				Persona emp = new Persona();
 				
@@ -202,8 +214,8 @@ public class GestionarPersona extends HttpServlet {
 		 String codEmp = request.getParameter("id");
 	        InputStream sImage;
 	        try{
-	        	Connection cn = new ConexionDB().getConexion(); 
-	        	PreparedStatement pst = cn.prepareStatement("SELECT firma FROM Persona where idPersona=?") ;
+	        	Connection cn = new ConexionSQL().getConexion(); 
+	        	PreparedStatement pst = cn.prepareStatement("SELECT firma FROM Persona where nDNI=?") ;
 	        	pst.setString(1, codEmp); 
 	        	ResultSet rs = pst.executeQuery(); 
 	            if(rs.next()){
@@ -230,8 +242,8 @@ public class GestionarPersona extends HttpServlet {
 		 String codEmp = request.getParameter("id");
 	        InputStream sImage;
 	        try{
-	        	Connection cn = new ConexionDB().getConexion(); 
-	        	PreparedStatement pst = cn.prepareStatement("SELECT huella FROM Persona where idPersona=?") ;
+	        	Connection cn = new ConexionSQL().getConexion(); 
+	        	PreparedStatement pst = cn.prepareStatement("SELECT huella FROM Persona where nDNI=?") ;
 	        	pst.setString(1, codEmp); 
 	        	ResultSet rs = pst.executeQuery(); 
 	            if(rs.next()){
@@ -258,8 +270,8 @@ public class GestionarPersona extends HttpServlet {
 		 String codEmp = request.getParameter("id");
 	        InputStream sImage;
 	        try{
-	        	Connection cn = new ConexionDB().getConexion(); 
-	        	PreparedStatement pst = cn.prepareStatement("SELECT foto FROM Persona where idPersona=?") ;
+	        	Connection cn = new ConexionSQL().getConexion(); 
+	        	PreparedStatement pst = cn.prepareStatement("SELECT foto FROM Persona where nDNI=?") ;
 	        	pst.setString(1, codEmp); 
 	        	ResultSet rs = pst.executeQuery(); 
 	            if(rs.next()){
@@ -367,13 +379,13 @@ public class GestionarPersona extends HttpServlet {
              firma = bos.toByteArray();
             //./CONVIERTE INPUTSTREAM EN BYTES[]
         }	
-        InputStream inputStream2 = null; // input stream of the upload file
+        //InputStream inputStream2 = null; // input stream of the upload file
         byte[] huella = null;
         
         Part filePart2 = request.getPart("txtHuella");
         
         System.out.println("Archivo File :"+filePart2);	        
-        if (filePart2 != null) {
+       /* if (filePart2 != null) {
             //prints out some information for debugging
           // System.out.println(filePart.getName());
            //System.out.println(filePart.getSize());
@@ -394,12 +406,12 @@ public class GestionarPersona extends HttpServlet {
 
              huella = bos.toByteArray();
             //./CONVIERTE INPUTSTREAM EN BYTES[]
-        }	
+        }	*/
         
 			System.out.println("en bytes creo :"+foto);
 			dao=fabrica.getPersona();
 			Persona emp = new Persona();
-			
+			System.out.println(" Sexo : " + sexo);
 			emp.setnDNI(nDNI);
 			emp.setNombre(nombre);
 			emp.setApeP(apellidoP);
@@ -416,7 +428,7 @@ public class GestionarPersona extends HttpServlet {
 			try {
 				dao.modificaPersona(emp);
 				System.out.println("Codigo" + emp.getnDNI());
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}		
 		

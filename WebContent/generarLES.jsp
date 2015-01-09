@@ -1,4 +1,3 @@
-	
 <%@page import="entidad.Utilitario"%>
 <%@page import="entidad.Cargo"%>
 <%@page import="entidad.Empleado"%>

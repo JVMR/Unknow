@@ -61,7 +61,6 @@ public class MySqlEmpleadoDao implements EmpleadoDao {
 		
 		int salida=-1;
 		try {
-			System.out.println(""+e.getFoto());
 			conn = new ConexionDB().getConexion();
 			String sql ="CALL SP_REGISTRAEMPLEADO(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);	

@@ -6,13 +6,27 @@ public class Les {
 	private String diagnostico;
 	private String fechaInicioDes;
 	private String fechaFinDes;
+	private int cantidad;
+	public int getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
 	private byte[] documento;
 	private String motivoLicencia;
 	private String descripcionMotivo;
 	private String fechaHora;
 	private String idEmpleado;
 	private String idEstado;
+	private String nomEmpleado;
 	
+	public String getNomEmpleado() {
+		return nomEmpleado;
+	}
+	public void setNomEmpleado(String nomEmpleado) {
+		this.nomEmpleado = nomEmpleado;
+	}
 	public String getIdLes() {
 		return idLes;
 	}

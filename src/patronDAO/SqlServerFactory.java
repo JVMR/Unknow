@@ -50,5 +50,11 @@ public class SqlServerFactory extends Factory{
 		return null;
 	}
 
+	@Override
+	public UtilitarioDao getUtilitario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
