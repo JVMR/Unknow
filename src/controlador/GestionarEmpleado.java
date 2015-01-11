@@ -192,37 +192,6 @@ public class GestionarEmpleado extends HttpServlet {
 		String usuario=request.getParameter("txtUsuario");
 		String psw=request.getParameter("txtPssword");
 		
-		
-		//FileInputStream MyStream= new FileInputStream(fotox); -IOUtils.toByteArray(MyStream)
-		InputStream inputStream = null; // input stream of the upload file
-        byte[] foto = null;
-        
-        Part filePart = request.getPart("txtFoto");
-        
-        System.out.println("Archivo File :"+filePart);	        
-        if (filePart != null) {
-            //prints out some information for debugging
-          // System.out.println(filePart.getName());
-           //System.out.println(filePart.getSize());
-            //System.out.println(filePart.getContentType());
-             
-            // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();
-            System.out.println("Salio esto : "+inputStream);
-            //CONVIERTE INPUTSTREAM EN BYTES[]
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] tmp = new byte[4096];
-            int ret = 0;
-
-            while((ret = inputStream.read(tmp)) > 0)
-            {
-                bos.write(tmp, 0, ret);
-            }
-
-             foto = bos.toByteArray();
-            //./CONVIERTE INPUTSTREAM EN BYTES[]
-        }	
-		
 			dao=fabrica.getEmpleado();
 			Empleado emp = new Empleado();
 			
@@ -236,7 +205,6 @@ public class GestionarEmpleado extends HttpServlet {
 			emp.setNumeroSeguroSocial(seguro);
 			emp.setIdCargo(cargo);
 			emp.setIdEstado(estado);
-			emp.setFoto(foto);
 			emp.setFechaIngreso(fechaI);
 			emp.setUsuario(usuario);
 			emp.setPsswrd(psw);

@@ -100,7 +100,7 @@ public class MySqlEmpleadoDao implements EmpleadoDao {
 		int salida=-1;
 		try {
 			conn = new ConexionDB().getConexion();
-			String sql ="CALL SP_ACTUALIZAEMPLEADO(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql ="CALL SP_ACTUALIZAEMPLEADO(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, e.getIdEmpleado());
 			pstm.setString(2, e.getnDNI());
@@ -112,10 +112,10 @@ public class MySqlEmpleadoDao implements EmpleadoDao {
 			pstm.setString(8, e.getNumeroSeguroSocial());
 			pstm.setString(9, e.getIdCargo());
 			pstm.setString(10, e.getIdEstado());
-			pstm.setBytes(11, e.getFoto());
-			pstm.setString(12, e.getFechaIngreso());
-			pstm.setString(13, e.getUsuario());
-			pstm.setString(14, e.getPsswrd());
+			//pstm.setBytes(11, e.getFoto());
+			pstm.setString(11, e.getFechaIngreso());
+			pstm.setString(12, e.getUsuario());
+			pstm.setString(13, e.getPsswrd());
 			salida=pstm.executeUpdate();
 			
 		} catch (Exception ex) {

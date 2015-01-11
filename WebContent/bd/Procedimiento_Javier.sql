@@ -82,7 +82,7 @@ BEGIN
     select gLES,gRES,eLES,eRES,vsrRES,lLES,lRES,mant,rprt from rol where idRol=rol;
 END$$ 
 DELIMITER ;
-#call SP_LISTAROL('Director de Ejecutivo');
+#call SP_LISTAROL('Encargado Eq Remuneración');
 ############################### EXISTE_LES ###################################################
 DROP PROCEDURE IF EXISTS SP_EXISTE_LES;
 DELIMITER $$
@@ -182,7 +182,7 @@ DELIMITER $$
 CREATE PROCEDURE SP_LISTACARGOXNOMBRE(nombre varchar(45))
 BEGIN
 	declare id char(6);
-    declare equipo varchar(10);
+    declare equipo varchar(20);
     select 'A fuera de Equipo' into equipo;
     select idCargo into id from cargo where descripcion=nombre;
 	if exists(select  c.descripcion,c.sueldo,uo.nombreUnidad from cargo c, unidadorganica uo where c.idCargo=uo.idCargo and c.idCargo=id) then
@@ -249,8 +249,8 @@ CREATE PROCEDURE SP_ACTUALIZAEMPLEADO(
   telefono char(11) ,
   seguroSocial char(11) ,
   idCargo char(6) ,
-  idestado int(11) ,
-  foto mediumblob,
+  idestado int(11) , 
+ #foto mediumblob,
   fechaIngreso date ,
   usuario varchar(45) ,
   password varchar(45))
@@ -266,7 +266,7 @@ SET
 `seguroSocial` = seguroSocial,
 `idCargo` =  idCargo,
 `idestado` = idestado,
-`foto` = foto,
+#`foto` = foto,
 `fechaIngreso` = fechaIngreso,
 `usuario` = usuario,
 `password` = password  

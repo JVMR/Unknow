@@ -1,3 +1,4 @@
+<%@page import="entidad.Menu"%>
 <%@ taglib uri="misLibrerias" prefix="cbo" %>
 <%@page import="entidad.Empleado"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -7,7 +8,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>INR | Empleado</title>
+        <title>INR | Persona</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
          <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -18,7 +19,9 @@
         <!-- Theme style -->
         <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="js/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
-        
+        <!-- Icono -->
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -33,7 +36,7 @@
     	if(empleado==null){
     		response.sendRedirect("index.jsp");
     	}else{    		
-    	
+    		Menu mnu= (Menu) session.getAttribute("MenuDinamico");
     		
     	%>
     
@@ -101,7 +104,7 @@
                     </div>                    
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li>
+                        <li >
                             <a href="bienvenido.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Bienvenido</span>
                             </a>
@@ -111,7 +114,7 @@
                                 <i class="fa fa-th"></i> <span>Perfil</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
                         	<a href="unidadOrganica.jsp">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>Unidad Orgánica</span>
@@ -122,7 +125,7 @@
                                 <li><a href="gestionarUnidadOrganica?operacion=listarUnidad"><i class="fa fa-angle-double-right"></i>Listar Unidad Organica</a></li>
                            </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
                             <a href="equipo.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Equipo</span>
@@ -135,7 +138,7 @@
 
                         </li>      
                               
-                        <li class="treeview">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
                             <a href="empleado.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Empleado</span>
@@ -147,7 +150,7 @@
                            </ul>
 
                         </li>   
-                        <li class="treeview active">
+                        <li class="treeview active" style="<%=mnu.getMant()%>">
 
                             <a href="empleado.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
@@ -161,7 +164,7 @@
 
                         </li>
                  
-                       <li class="treeview">
+                       <li class="treeview" style="<%=mnu.getgLES()%>">
                             <a href="LES.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>LES</span>
@@ -170,27 +173,33 @@
                             <ul class="treeview-menu">
 
                                 <li><a href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo() %>&id=<%=empleado.getIdEmpleado()%>"><i class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
-                                 <li><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LESs</a></li>
-								<li><a href="evaluarSolicitudLES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LESs</a></li>
+								<li style="<%=mnu.geteLES()%>"><a href="evaluarSolicitudLES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
 
                            </ul>
                         </li> 
-                     
-                        <li class="treeview">
+                     	<%
+                     	String mnuInactivo="display:block;";
+                     		if((mnu.getgRES().equals("display:none;")) && (mnu.getlRES().equals("display:none;")) && (mnu.geteRES().equals("display:none;")) && (mnu.getVsrRES().equals("display:none;"))){
+                     			mnuInactivo="display:none;";
+                     		}
+                     			%>
+                        <li class="treeview" style="<%=mnuInactivo%>">
                         	<a href="RES.jsp">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>RES</span>
                         		<i class="fa fa-angle-left pull-right"></i>
                         	</a>
                         	<ul class="treeview-menu">
-                                <li><a href="generarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
-                           		<li><a href="actualizarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
-                           	    <li><a href="consutaRes.jsp"><i class="fa fa-angle-double-right"></i>Consultar Solicitud RES</a></li>
+                                <li style="<%=mnu.getgRES()%>"><a href="generarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
+                                <li style="<%=mnu.getlRES()%>"><a href="consutaRes.jsp"><i class="fa fa-angle-double-right"></i>Consultar Solicitud RES</a></li>
+                                <li style="<%=mnu.geteRES()%>"><a href="evaluarRES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar RES</a></li>
+                                <li style="<%=mnu.getVsrRES()%>"><a href="visarRES.jsp"><i class="fa fa-angle-double-right"></i>Visar RES</a></li>
                            
-                           </ul>
-
+                           </ul>							
                         </li>
-                        <li class="treeview">
+                        
+                      <!--  <li class="treeview" >
                         	<a href="#">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>Descanso Médico</span>
@@ -199,7 +208,7 @@
                         	<ul class="treeview-menu">
                                 <li><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
                            </ul>
-                        </li>          
+                        </li>       -->       
 					</ul>
 
                        

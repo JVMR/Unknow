@@ -17,6 +17,9 @@
         <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <!-- Icono -->
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -178,28 +181,26 @@
                         </li> 
                      	<%
                      	String mnuInactivo="display:block;";
-                     	String mensaje="Esta afuera";
                      		if((mnu.getgRES().equals("display:none;")) && (mnu.getlRES().equals("display:none;")) && (mnu.geteRES().equals("display:none;")) && (mnu.getVsrRES().equals("display:none;"))){
                      			mnuInactivo="display:none;";
-                     			mensaje="llego Aqui";
                      		}
                      			%>
                         <li class="treeview" style="<%=mnuInactivo%>">
                         	<a href="RES.jsp">
                         		<i class="fa fa-bar-chart-o"></i>
-                        		<span><%=mensaje%></span>
+                        		<span>RES</span>
                         		<i class="fa fa-angle-left pull-right"></i>
                         	</a>
                         	<ul class="treeview-menu">
                                 <li style="<%=mnu.getgRES()%>"><a href="generarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
                                 <li style="<%=mnu.getlRES()%>"><a href="consutaRes.jsp"><i class="fa fa-angle-double-right"></i>Consultar Solicitud RES</a></li>
-                                <li style="<%=mnu.geteRES()%>"><a href="#"><i class="fa fa-angle-double-right"></i>Evaluar RES</a></li>
-                                <li style="<%=mnu.getVsrRES()%>"><a href="#"><i class="fa fa-angle-double-right"></i>Visar RES</a></li>
+                                <li style="<%=mnu.geteRES()%>"><a href="evaluarRES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar RES</a></li>
+                                <li style="<%=mnu.getVsrRES()%>"><a href="visarRES.jsp"><i class="fa fa-angle-double-right"></i>Visar RES</a></li>
                            
                            </ul>							
                         </li>
                         
-                        <li class="treeview" >
+                      <!--  <li class="treeview" >
                         	<a href="#">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>Descanso Médico</span>
@@ -208,7 +209,7 @@
                         	<ul class="treeview-menu">
                                 <li><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
                            </ul>
-                        </li>            
+                        </li>       -->       
 					</ul>
 
                        
