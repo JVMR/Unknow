@@ -1,5 +1,5 @@
 USE proyectolpii;
-
+##############################VALIDA_USUARIO#################################################
 DROP PROCEDURE IF EXISTS SP_VALIDAUSUARIO;
 DELIMITER $$
 CREATE PROCEDURE SP_VALIDAUSUARIO(usu varchar(45),pass varchar(45))
@@ -8,6 +8,81 @@ BEGIN
 	c.descripcion,e.foto,e.fechaIngreso,e.usuario,e.password FROM `empleado` e ,`cargo` c where e.idCargo=c.idCargo and e.usuario=usu and e.password=pass;
 END$$ 
 DELIMITER ;
+############################## LISTAROL #################################################
+DROP PROCEDURE IF EXISTS SP_LISTAROL;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAROL(idCar varchar(30))
+BEGIN
+	declare rol char(6);    
+    declare gLES varchar(15);
+    declare gRES varchar(15);
+    declare eLES varchar(15);
+    declare eRES varchar(15);
+    declare lLES varchar(15);
+    declare lRES varchar(15);
+    declare mant varchar(15);
+    declare rprt varchar(15);
+    declare vsrRES varchar(15);
+    select idRol into rol from cargo where descripcion=idCar;
+    #GESTIONAR LES
+    if(select gestionarLES from rol where idRol=rol)=1 then
+		select 'display:block;' into gLES;
+	else
+		select 'display:none;' into gLES;
+    END IF; 
+    #GESTIONAR RES
+    if(select gestionarRES from rol where idRol=rol)=1 then
+		select 'display:block;' into gRES;
+	else
+		select 'display:none;' into gRES;
+    END IF; 
+    #VERIFICAR LES
+    if(select verificarLES from rol where idRol=rol)=1 then
+		select 'display:block;' into eLES;
+	else
+		select 'display:none;' into eLES;
+    END IF; 
+    #VERIFICAR RES
+    if(select verificarRES from rol where idRol=rol)=1 then
+		select 'display:block;' into eRES;
+	else
+		select 'display:none;' into eRES;
+    END IF; 
+    #VISAR RES
+    if(select visarRES from rol where idRol=rol)=1 then
+		select 'display:block;' into vsrRES;
+	else
+		select 'display:none;' into vsrRES;
+    END IF; 
+    #LISTAR LES
+    if(select listarRES from rol where idRol=rol)=1 then
+		select 'display:block;' into lLES;
+	else
+		select 'display:none;' into lLES;
+    END IF;
+    #LISTAR RES
+    if(select listarRES from rol where idRol=rol)=1 then
+		select 'display:block;' into lRES;
+	else
+		select 'display:none;' into lRES;
+    END IF;
+    #MANTENIMIENTO
+    if(select mantenimiento from rol where idRol=rol)=1 then
+		select 'display:block;' into mant;
+	else
+		select 'display:none;' into mant;
+    END IF; 
+    #REPORTE
+    if(select reporte from rol where idRol=rol)=1 then
+		select 'display:block;' into rprt;
+	else
+		select 'display:none;' into rprt;
+    END IF; 
+    # select gLES,gRES,eLES,eRES,lLES,lRES,mant,rprt,vsrRES from rol where idRol=rol;
+    select gLES,gRES,eLES,eRES,vsrRES,lLES,lRES,mant,rprt from rol where idRol=rol;
+END$$ 
+DELIMITER ;
+#call SP_LISTAROL('Director de Ejecutivo');
 ############################### EXISTE_LES ###################################################
 DROP PROCEDURE IF EXISTS SP_EXISTE_LES;
 DELIMITER $$
@@ -61,7 +136,7 @@ if not exists(select * from les where idEmpleado=id ) then
 end if;
 END$$ 
 DELIMITER ;
-call SP_EXISTE_LES('EM0001');
+#call SP_EXISTE_LES('EM0001');
 ############################### REGISTRAR-LES ###################################################
 DROP PROCEDURE IF EXISTS SP_GENERAR_LES;
 DELIMITER $$
@@ -120,8 +195,8 @@ BEGIN
     
 END$$ 
 DELIMITER ;
-CALL SP_LISTACARGOXNOMBRE('Director de Ejecutivo');
-CALL SP_LISTACARGOXNOMBRE('Jefe ECA');
+#CALL SP_LISTACARGOXNOMBRE('Director de Ejecutivo');
+#CALL SP_LISTACARGOXNOMBRE('Jefe ECA');
 ############################## REGISTRA-EMPLEADO  ##############################################
 DROP PROCEDURE IF exists SP_REGISTRAEMPLEADO;
 DELIMITER $$

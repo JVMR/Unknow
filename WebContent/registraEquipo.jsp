@@ -40,9 +40,13 @@
 <body class="skin-blue">
 	<!-- Recupero datos de empleado que ingreso -->
 	<%
-		Empleado empleado = (Empleado) session
-				.getAttribute("USUARIO_LOGEADO");
 	
+	Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");    
+		if(empleado==null){
+			response.sendRedirect("index.jsp");
+		}else{    		
+
+		
 		ArrayList<ListaCargoEquipo> tabla= new ArrayList<ListaCargoEquipo>();
 	%>
 
@@ -437,13 +441,8 @@
 
        }
   }
-
-  
-	
-	
-	
-	</script> 
-	
+</script> 
+	<%}%>	
 	
 	
 	

@@ -30,7 +30,12 @@
     <body class="skin-blue">
     	<!-- Recupero datos de empleado que ingreso -->
     	<%
-    		Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");
+    		Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");    
+    	if(empleado==null){
+    		response.sendRedirect("index.jsp");
+    	}else{    		
+    	
+    		
     	%>
     
         <!-- header logo: style can be found in header.less -->
@@ -377,5 +382,6 @@
             });
         </script>
 	<script src="js/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script> 
+	<%}%>
     </body>
 </html>

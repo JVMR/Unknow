@@ -35,9 +35,13 @@
 <body class="skin-blue">
 	<!-- Recupero datos de empleado que ingreso -->
 	<%
-		Empleado empleado = (Empleado) session
-				.getAttribute("USUARIO_LOGEADO");
-	%>
+    		Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");    
+    	if(empleado==null){
+    		response.sendRedirect("index.jsp");
+    	}else{    		
+    	
+    		
+    	%>
 
 	<!-- header logo: style can be found in header.less -->
 	<header class="header">
@@ -256,7 +260,7 @@
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="gestionarEquipo?operacion=cargarEquipo&id=${tbE.getIdEquipo()}" h><i class="fa fa-edit"></i> Modificar</a></li>
+                                                <li><a href="gestionarEquipo?operacion=cargarEquipo&id=${tbE.getIdEquipo()}"><i class="fa fa-edit"></i> Modificar</a></li>
                                                 <li><a href="gestionarEquipo?operacion=eliminarEquipo&id=${tbE.getIdEquipo()}"><i class="fa fa-times-circle"></i> Eliminar</a></li>
                                             </ul>
                                     </div>   
@@ -311,12 +315,9 @@
 			});
 		});
 	</script>
-
+<%}%>
 
 </body>
-</html>
-
-	</body>
 </html>
 	
 

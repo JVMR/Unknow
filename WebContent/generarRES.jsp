@@ -37,7 +37,12 @@
 	<body class="skin-blue">
 		<!-- Recupero datos de empleado que ingreso -->
     	<%
-    		Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");
+    		Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");    
+    	if(empleado==null){
+    		response.sendRedirect("index.jsp");
+    	}else{    		
+    	
+    		
     	%>
     	<%
     		Les objRes= (Les) request.getAttribute("daoLes");
@@ -318,6 +323,6 @@
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <!-- AdminLTE App -->
         <script src="js/AdminLTE/app.js" type="text/javascript"></script>
-         
+         <%}%>
 	</body>
 </html>

@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import patronDAO.Factory;
 import patronDAO.EmpleadoDao;
+import patronDAO.UtilitarioDao;
 import entidad.Empleado;
+import entidad.Menu;
 
 /**
  * Servlet implementation class ServletLogin
@@ -30,10 +32,13 @@ public class ServletLogin extends HttpServlet {
 		
 		Factory fabrica = Factory.getTipo(Factory.TIPO_MYSQL);
 		EmpleadoDao usuarioDao = fabrica.getEmpleado();
+		UtilitarioDao utiles=fabrica.getUtilitario();
 		Empleado usuario = null;
+		Menu mn=null;
 		
 		try {
 			usuario = usuarioDao.validaEmpleado(usu, pas);
+			mn=utiles.listaMenu(usuario.getIdCargo());
 			
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -51,6 +56,7 @@ public class ServletLogin extends HttpServlet {
 			
 			//se guarda en sesion el objeto que contiene los datos del usuario
 			session.setAttribute("USUARIO_LOGEADO", usuario);
+			session.setAttribute("MenuDinamico", mn);
 			
 			
 			//se ingresa a la intranet
