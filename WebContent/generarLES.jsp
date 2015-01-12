@@ -2,6 +2,8 @@
 <%@page import="entidad.Utilitario"%>
 <%@page import="entidad.Cargo"%>
 <%@page import="entidad.Empleado"%>
+<%@ taglib uri="http://displaytag.sf.net/el" prefix="display"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -26,6 +28,8 @@
         <!-- Icono -->
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link href="css/bootstrap-modal/bootstrap-modal-bs3patch.css" rel="stylesheet" />
+  		<link href="css/bootstrap-modal/bootstrap-modal.css" rel="stylesheet" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -424,8 +428,8 @@
                     			</div>
                     		</div>
                     		<div class="box-footer">
-                             	<button class="btn btn-primary" type="submit" >Enviar <i class="fa fa-arrow-circle-right"></i></button>  
-                           		<button class="btn btn-primary" type="button" >Cancelar <i class="fa fa-arrow-circle-right"></i></button>  
+                             	<button class="btn btn-primary" type="submit" >Enviar <i class="fa fa-arrow-circle-right"></i></button>
+                             	<button class="btn btn-primary" data-toggle="modal"  href="#lstLES" >Ver Historial <i class="fa fa-arrow-circle-right"></i></button>  
                             	<button class="btn btn-primary" type="button" >Vista Previa<i class="fa fa-arrow-circle-right"></i></button>  
                              </div><!-- Fin Box-Footer -->
                     	</form>                    
@@ -433,8 +437,52 @@
                 </section><!-- /.content -->                    
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-
-
+		<div id="lstLES" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h4 class="modal-title">Historial de LES generados</h4>
+			  </div>
+			  <div class="modal-body">
+			    <div class="box-body table-responsive" >
+                                
+                                <display:table name="lesCodigo" id="aux"  class="table table-bordered table-striped">
+                                	<display:column property="idLes" title="ID"></display:column> 
+                                	<display:column property="diagnostico" title="Diagnostico"></display:column>      
+                                	<display:column property="fechaInicioDes" title="F. Inicio"></display:column>
+                                	<display:column property="fechaFinDes" title="F. Fin"></display:column>  
+                                	<display:column property="motivoLicencia" title="Motivo"></display:column>  
+                                	<display:column property="descripcionMotivo" title="Descripcion"></display:column>  
+                                	<display:column property="fechaHora" title="F. Hora"></display:column> 
+                                	<display:column property="idEmpleado" title="Empleado"></display:column> 
+                                	<display:column title="Estado">
+                                			<c:choose>
+                                						<c:when test="${aux.getIdEstado().equals('Generado')}">
+                                						<span class="label label-primary">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Conforme')}">
+                                						<span class="label label-default">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Disconforme')}">
+                                						<span class="label label-warning">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Actualizado')}">
+                                						<span class="label label-info">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Desaprobado')}">
+                                						<span class="label label-danger">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Aprobado')}">
+                                						<span class="label label-success">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                			</c:choose> 
+                                	</display:column>                                    	    
+                                </display:table>
+                                </div>
+			    
+			    
+			    </div>
+			    
+		</div>
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
@@ -446,7 +494,8 @@
         <script src="js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
         <!-- date-range-picker -->
         <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-       
+        <script src="js/plugins/bootstrap-modal/bootstrap-modalmanager.js"></script>
+   		<script src="js/plugins/bootstrap-modal/bootstrap-modal.js"></script>
 		<script type="text/javascript">
 		$(function() {	
 			

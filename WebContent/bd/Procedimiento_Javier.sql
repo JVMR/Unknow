@@ -155,7 +155,7 @@ declare id char(6);
 declare num char(4);
 declare idEst int;
 select idLES into id from les  order by idLES desc limit 1;
-select cast((substring(id,3,4)) as unsigned) + 1 into num;
+select cast((substring(id,4,3)) as unsigned) + 1 into num;
 
 if (select count(*) from les where idLES=id)=0  then 
     select 'LES001' into id;	
@@ -234,7 +234,7 @@ VALUES
 (id,dni,nom,apellidoP,apellidoM,  fechaNacimiento ,  telefono ,  seguroSocial ,  idCargo ,  idestado ,  foto ,  fechaIngreso ,  usuario ,  password );
 END$$ 
 DELIMITER ;
-#CALL SP_REGISTRAEMPLEADO('70236561','Javier','Javier', 'Javier', '1996/12/12', '123456789', '12345678912', 'CA013', 1, null, '1996/12/12','usu0','usu');
+#CALL SP_REGISTRAEMPLEADO('70236561','Javier','Javier', 'Javier', '1996/12/12', '123456789', '12345678912', 'C0000', 1, null, '1996/12/12','usu0','usu');
 
 ############################## ACTUALIZA-EMPLEADO  ##############################################
 DROP PROCEDURE IF exists SP_ACTUALIZAEMPLEADO;
@@ -301,4 +301,14 @@ begin
 SELECT idEmpleado,nDNI,nombre,apellidoP,apellidoM,fechaNacimiento,telefono,seguroSocial,idCargo,idestado,fechaIngreso,usuario,password FROM `empleado` where `idEmpleado`=id;
 END$$ 
 DELIMITER ;
-
+############################## LISTA-LESXCODIGO  ##############################################
+DROP PROCEDURE IF exists SP_LISTALESXCODIGO;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTALESXCODIGO(id char(6))	
+begin
+SELECT l.idLes, l.diagnostico, l.fechaInicioDes, l.fechafindes, l.motivolicencia, l.descripcionmotivo,l.fechaHora, 
+concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM) as 'Empleado',et.descripcion 
+FROM `les` l ,`empleado` e, `estado` et where l.idEmpleado = e.idEmpleado and l.idestado=et.idestado and e.idEmpleado=id;
+END$$ 
+DELIMITER ;
+#call SP_LISTALESXCODIGO('EM0001');

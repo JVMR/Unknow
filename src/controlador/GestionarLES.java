@@ -127,6 +127,15 @@ public class GestionarLES extends HttpServlet {
 		utl=fabrica.getUtilitario();
 		Utilitario ul= utl.listaUtil(codigo);				
 		Cargo obj=dao.listaCargoxNombre(nombre);
+		les=fabrica.getLes();
+		List<Les> data=null;
+		
+		try {
+			data=les.listaLesxCodigo(codigo);
+			request.setAttribute("lesCodigo", data);
+		} catch (SQLException e) {
+			
+		}
 		
 		request.setAttribute("daoCargo", obj);
 		request.setAttribute("daoUtil", ul);
