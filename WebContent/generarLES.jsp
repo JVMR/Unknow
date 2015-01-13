@@ -276,11 +276,11 @@
 			                                    			<div class="form-group">
 			                                    				<input type="hidden" name="id" value="<%=empleado.getIdEmpleado()%>">
 				                                      			<label>DNI :</label>
-				                                      			<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" value="<%=empleado.getnDNI()%>" disabled>
+				                                      			<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" id="txtDNI" value="<%=empleado.getnDNI()%>" disabled>
 				                                            </div>
 				                                      	    <div class="form-group">
 				                                      			<label>Nombre y Apellido:</label>
-				                                      			<input type="text" class="form-control" placeholder="Ingrese nombre completo" name="txtNombre" value="<%=empleado.getNombresEmpleado()%>&nbsp;<%=empleado.getApellidoPaterno() %>" disabled>
+				                                      			<input type="text" class="form-control" placeholder="Ingrese nombre completo" name="txtNombre" id="txtNombre" value="<%=empleado.getNombresEmpleado()%>&nbsp;<%=empleado.getApellidoPaterno() %>" disabled>
 				                                            </div>
 				                                            <div class="form-group">
 				                                      			<label>Fecha Nacimiento :</label>
@@ -288,7 +288,7 @@
 				                                            		<div class="input-group-addon">
 				                                                		<i class="fa fa-calendar"></i>
 				                                            		</div>                                            		
-				                                            		<input type="text" class="form-control"  name="txtFechaN" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask value="<%=empleado.getFechaNacimiento()%>" disabled/>
+				                                            		<input type="text" class="form-control"  name="txtFechaN" id="txtFechaN" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask value="<%=empleado.getFechaNacimiento()%>" disabled/>
 				                                            		
 				                                       			  </div><!-- /.input group -->
 				                                            </div>
@@ -298,7 +298,7 @@
 				                                           			 <div class="input-group-addon">
 				                                               			<i class="fa fa-phone"></i>
 				                                           			 </div>
-				                                           			 <input type="text" class="form-control" name="txtFono" data-inputmask='"mask": "999-999-999"' data-mask value="<%=empleado.getTelefono()%>" disabled/>
+				                                           			 <input type="text" class="form-control" name="txtFono" id="txtFono" data-inputmask='"mask": "999-999-999"' data-mask value="<%=empleado.getTelefono()%>" disabled/>
 				                                        		</div><!-- /.input group -->
 				                                            </div>
 				                                            <div class="form-group">
@@ -307,7 +307,7 @@
 				                                           			 <div class="input-group-addon">
 				                                               			<i class="fa fa-info"></i>
 				                                           			 </div>
-				                                           			 <input type="text" class="form-control" name="txtSeguroSocial" data-inputmask='"mask": "99999999999"' data-mask value="<%=empleado.getNumeroSeguroSocial()%>" disabled/>
+				                                           			 <input type="text" class="form-control" name="txtSeguroSocial" id="txtSeguroSocial" data-inputmask='"mask": "99999999999"' data-mask value="<%=empleado.getNumeroSeguroSocial()%>" disabled/>
 				                                        		</div><!-- /.input group -->                                      			
 				                                            </div>
 			                                    	</div>
@@ -326,19 +326,19 @@
 			                                    	<div class="col-md-8">
 			                                    		<div class="form-group">
                                       						<label>Unidad Organica :</label>
-                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" value="<%=objCar.getNombreCargo()%>" disabled> 
+                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" id="txtUnidad" value="<%=objCar.getNombreCargo()%>" disabled> 
                                             			</div>
                                             			<div class="form-group">
                                       						<label>Equipo :</label>
-                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" value="<%=objCar.getIdRol()%>" disabled>
+                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" id="txtEquipo"  value="<%=objCar.getIdRol()%>" disabled>
                                             			</div>
                                             			<div class="form-group">
                                       						<label>Nombre del Cargo :</label>
-                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" value="<%=objCar.getIdCargo()%>" disabled>
+                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" id="txtCargo" value="<%=objCar.getIdCargo()%>" disabled>
                                             			</div>
                                             			<div class="form-group">
                                       						<label>Sueldo :</label>
-                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" value="<%=objCar.getSueldo()%>" disabled>
+                                      						<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" id="txtSueldo" value="<%=objCar.getSueldo()%>" disabled>
                                             			</div>
                                     					<div class="form-group">
                                       						<label>Fecha de Ingreso:</label>
@@ -346,7 +346,7 @@
 				                                            		<div class="input-group-addon">
 				                                                		<i class="fa fa-calendar"></i>
 				                                            		</div>                                            		
-				                                            		<input type="text" class="form-control"  name="txtFechaN" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask value="<%=empleado.getFechaIngreso()%>" disabled/>
+				                                            		<input type="text" class="form-control"  id="txtFechaI" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask value="<%=empleado.getFechaIngreso()%>" disabled/>
 				                                            		
 				                                       			  </div><!-- /.input group -->                                      						
                                             			</div>
@@ -427,10 +427,17 @@
 			                        </div>
                     			</div>
                     		</div>
+                    		<% 
+                    			String estado="display:inline;";
+                    		if (objUtil.getFlag().equals("display:none;")){
+                    			estado="display:none;";
+                    		}
+                    		%>
                     		<div class="box-footer">
-                             	<button class="btn btn-primary" type="submit" >Enviar <i class="fa fa-arrow-circle-right"></i></button>
-                             	<button class="btn btn-primary" data-toggle="modal"  href="#lstLES" >Ver Historial <i class="fa fa-arrow-circle-right"></i></button>  
-                            	<button class="btn btn-primary" type="button" >Vista Previa<i class="fa fa-arrow-circle-right"></i></button>  
+                             	<button class="btn btn-primary" type="submit" style="<%=estado%>" >Enviar <i class="fa fa-arrow-circle-right"></i></button>
+                             	<button class="btn btn-primary" data-toggle="modal"  href="#lstLES" style="display:inline;">Ver Historial <i class="fa fa-arrow-circle-right"></i></button> 
+                             	<button class="btn btn-primary" data-toggle="modal"  href="#VistaPrev" style="display:inline;">VISTA PREVIAAAA <i class="fa fa-arrow-circle-right"></i></button>  
+                            	<button class="btn btn-primary" type="button" id="Vista" style="<%=estado%>">Vista Previa<i class="fa fa-arrow-circle-right"></i></button>  
                              </div><!-- Fin Box-Footer -->
                     	</form>                    
                     </div> 
@@ -483,6 +490,15 @@
 			    </div>
 			    
 		</div>
+		<div id="VistaPrev" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
+			 <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h4 class="modal-title">Historial de LES generados</h4>
+			  </div>
+			   <div class="modal-body">
+			   <iframe class="preview-pane" type="application/pdf" id="VisorPDF" width="100%" height="650"  style="position:relative;z-index:999"></iframe>
+			   </div> 
+		</div>
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
@@ -496,46 +512,10 @@
         <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
         <script src="js/plugins/bootstrap-modal/bootstrap-modalmanager.js"></script>
    		<script src="js/plugins/bootstrap-modal/bootstrap-modal.js"></script>
-		<script type="text/javascript">
-		$(function() {	
-			
-			$('#reservation').daterangepicker({format: 'DD/MM/YYYY'});				
-			$('.applyBtn').click(function(){	
-				var f1 =document.getElementsByName("daterangepicker_start")[0].value;
-				var f2=document.getElementsByName("daterangepicker_end")[0].value;
-				var sFecha1=f1.split("/");
-				var sFecha2=f2.split("/");
-				var dtFecha1=new Date(sFecha1[2]+"/"+sFecha1[1]+"/"+sFecha1[0]);
-				var dtFecha2=new Date(sFecha2[2]+"/"+sFecha2[1]+"/"+sFecha2[0]);
-				var dif = dtFecha2 - dtFecha1;
-				var dias = Math.floor(dif / (1000 * 60 * 60 * 24)); 
-			    $("#fecha1").attr('value',sFecha1[2]+"/"+sFecha1[1]+"/"+sFecha1[0]);	
-			    $("#fecha2").attr('value',sFecha2[2]+"/"+sFecha2[1]+"/"+sFecha2[0]);
-			    $("#cantidad").attr('value',dias);
-			    $("#cantidad1").attr('value',dias);
-			});
-			
-                        
-			 $("#datemask2").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
-             
-             $("[data-mask]").inputmask();
-			 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                 checkboxClass: 'icheckbox_minimal',
-                 radioClass: 'iradio_minimal'
-             });
-             //Red color scheme for iCheck
-             $('input[type="checkbox"].minimal-blue, input[type="radio"].minimal-blue').iCheck({
-                 checkboxClass: 'icheckbox_minimal-blue',
-                 radioClass: 'iradio_minimal-blue'
-             });
-             //Flat red color scheme for iCheck
-             $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
-                 checkboxClass: 'icheckbox_flat-blue',
-                 radioClass: 'iradio_flat-blue'
-             });
-		});
-		
-		</script>
+   		<script type="text/javascript" src="js/plugins/jsPDF/base64.js"></script>
+		<script type="text/javascript" src="js/plugins/jsPDF/sprintf.js"></script>
+		<script type="text/javascript" src="js/plugins/jspdf.js"></script>
+		<script type="text/javascript" src="js/javier.js"></script>
 		<%}%>
     </body>
 </html>
