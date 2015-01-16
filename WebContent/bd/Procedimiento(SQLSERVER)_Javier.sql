@@ -85,3 +85,19 @@ create proc listaPersonaxCodigo
 as
 	select * from persona where nDNI=@nDNI
 go
+if OBJECT_ID('listaProvxDep') is not null
+	drop proc listaProvxDep
+go
+create proc listaProvxDep
+(@dep int)
+as
+	select idProv,provincia from PROVINCIA where idDepa=@dep
+go
+if OBJECT_ID('listaDistxProv') is not null
+	drop proc listaDistxProv
+go
+create proc listaDistxProv
+(@prov int)
+as
+	select idDist,distrito from DISTRITO where idProv=@prov
+go

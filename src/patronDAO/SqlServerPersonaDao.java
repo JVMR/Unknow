@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.ConexionSQL;
+import entidad.Distrito;
 import entidad.Persona;
+import entidad.Provincia;
 
 public class SqlServerPersonaDao implements PersonaDao{
 
@@ -200,6 +202,72 @@ public class SqlServerPersonaDao implements PersonaDao{
 		}
 		
 		return obj;
+	}
+
+	@Override
+	public List<Provincia> listarProvinciaPorDept(int codigo) {
+		List<Provincia> data = new ArrayList<Provincia>();
+		Provincia bean = null;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs  = null;
+		try {
+			conn = new ConexionSQL().getConexion();
+			String sql = "{CALL listaProvxDep(?)}";
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, codigo);
+			rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				bean = new Provincia();
+				bean.setIdProv(rs.getInt(1));
+				bean.setProvincia(rs.getString(2));
+				data.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!= null)rs.close();
+				if(pstm!= null)pstm.close();
+				if(conn!= null)conn.close();
+			} catch (SQLException e) {
+			}
+		}
+		return data;
+	}
+
+	@Override
+	public List<Distrito> listarDistritoPorProv(int codigo) {
+		List<Distrito> data = new ArrayList<Distrito>();
+		 Distrito bean = null;
+			Connection conn = null;
+			PreparedStatement pstm = null;
+			ResultSet rs  = null;
+			try {
+				conn = new ConexionSQL().getConexion();
+				String sql = "{CALL listaDistxProv(?)}";
+				pstm = conn.prepareStatement(sql);
+				pstm.setInt(1, codigo);
+				rs = pstm.executeQuery();
+
+				while (rs.next()) {
+					bean = new Distrito();
+					bean.setIdDist(rs.getInt(1));
+					bean.setDistrito(rs.getString(2));
+					data.add(bean);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs!= null)rs.close();
+					if(pstm!= null)pstm.close();
+					if(conn!= null)conn.close();
+				} catch (SQLException e) {
+				}
+			}
+			return data;
 	}
 
 }

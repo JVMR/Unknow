@@ -32,7 +32,23 @@
 				<required>true</required>	
 		</attribute>		
 	</tag>	
-
+	<tag>
+		<name>cboDinamicoSQL</name>
+		<tagclass>util.ComboDinamicoSQL</tagclass>
+		<bodycontent>empty</bodycontent>
+		<attribute>
+				<name>nombre</name>
+				<required>true</required>	
+		</attribute>
+		<attribute>
+				<name>sql</name>
+				<required>true</required>	
+		</attribute>
+		<attribute>
+				<name>id</name>
+				<required>true</required>	
+		</attribute>		
+	</tag>
 	<tag>
 		<name>cboValor</name>
 		<tagclass>util.ComboValor</tagclass>

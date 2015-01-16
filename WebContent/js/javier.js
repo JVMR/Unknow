@@ -34,44 +34,51 @@ $(function() {
                  radioClass: 'iradio_flat-blue'
              });
              $('#Vista').click(function(){
-            	 var dni=$('#txtDNI').val();
+            	var dni=$('#txtDNI').val();
             	var nomEmp= $('#txtNombre').val();
             	var cargo= $('#txtCargo').val();
             	var unidad= $('#txtUnidad').val();
             	var equipo= $('#txtEquipo').val();
             	var fechaNac= $('#txtFechaN').val();
-            	var celular= $('#txtNombre').val();
-            	var seguroS= $('#txtNombre').val();
+            	var celular= $('#txtFono').val();
+            	var seguroS= $('#txtSeguroSocial').val();
             	var sueldo= $('#txtSueldo').val();
-            	var motivo= $('#txtNombre').val();
+            	var motivo= $('#cboLicencia').val();
             	var fecha= $('#txtFechaI').val();
-            	var diagnostico= $('#txtNombre').val();
-            	var sueldo= $('#txtNombre').val();
+            	var diagnostico= $('#Diagnostico').val();
+            	var fechaDesc= $('#reservation').val();
+            	var cantidad= $('#cantidad').val();
+            	var descripcion= $('#txtLicencia').val();
+            	
             	doc = new jsPDF();
            		doc.addPage();
            		
+
+           		doc.text(20, 20, 'LICENCIA POR ENFERMEDAD SUBSIDIADA');
            		//Empleado
-           		doc.setFontSize(18);
-           		doc.setFontType("bold");
-           		doc.text(20, 20, 'Datos del Empleado');
-           		doc.setLineWidth(1);
-           		doc.line(20, 21, 80, 21);
-           		doc.setFontSize(14);
-           		doc.text(20, 30, 'Nombre del Empleado : '+nomEmp);
-           		doc.text(20, 40, 'Fecha de Nacimiento : '+fechaNac);
-           		doc.text(20, 50, 'Numero Celular : '+celular);
-           		doc.text(20, 60, 'Seguro Social : '+seguroS);
+           		doc.text(20, 40, 'Datos del Empleado');
+           		doc.text(23, 50, 'Nombre del Empleado   : '+nomEmp);
+           		doc.text(23, 57, 'Fecha de Nacimiento   : '+fechaNac);
+           		doc.text(23, 64, 'Numero Celular    : '+celular);
+           		doc.text(23, 71, 'Seguro Social    : '+seguroS);
            		
            		//Detalle Cargo
-           		/*doc.setFontType("bold");
-           		doc.text(60, 20, 'Datos del Cargo');
-           		doc.setLineWidth(1);
-           		doc.line(60, 21, 80, 21);           		
-           		doc.text(60, 30, 'Nombre del Empleado : '+unidad);*/
-           		//doc.text(60, 40, 'Nombre del Empleado : '+equipo);
-           		/*doc.text(60, 50, 'Nombre del Empleado : '+cargo);
-           		doc.text(60, 60, 'Nombre del Empleado : '+sueldo);*/
+           		doc.text(20, 81, 'Datos del Trabajo');         		
+           		doc.text(23, 91, 'Unidad Organica   : '+unidad);
+           		doc.text(23, 98, 'Equipo    : '+equipo);
+           		doc.text(23, 105, 'Cargo    : '+cargo);
+           		doc.text(23, 112, 'Sueldo :  S/.  '+sueldo);
            		
+           		//Descanso Medico
+           		doc.text(20, 122, 'Descanso Medico');         		
+           		doc.text(23, 132, 'Descanso Medico  : '+diagnostico);
+           		doc.text(23, 139, 'Rango de Fecha   : '+fechaDesc);
+           		doc.text(23, 146, 'Dias Subsidiados    : '+cantidad);
+           		
+           		//Descripcion Solicitud
+           		doc.text(20, 156, 'Descripcion Solicitud');         		
+           		doc.text(23, 166, 'Motivo Licencia   : '+motivo);
+           		doc.text(23, 173, 'Descripcion    : '+descripcion);
            		
            		// Making Data URI
            		var out = doc.output();

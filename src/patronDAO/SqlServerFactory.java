@@ -17,7 +17,7 @@ public class SqlServerFactory extends Factory{
 	@Override
 	public ComboDao getCombo() {
 		// TODO Auto-generated method stub
-		return null;
+		return new SqlServerComboDao();
 	}
 
 	@Override

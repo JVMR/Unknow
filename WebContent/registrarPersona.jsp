@@ -310,27 +310,19 @@
                                           <div class="col-md-5">
                                           		<div class="form-group">
 													<label>Departamento : </label>
-													<select class='form-control' name='cboSexo'>
-	                                      				<option value='-1'>[Seleccione]</option>
-	                                      				<option value='Masculino'>Masculino</option>
-	                                      				<option value='Femenino'>Femenino</option>
-                                      			    </select>
-	                                   			</div>
+	                                      				<cbo:cboDinamicoSQL sql="SQL_DEPARTAMENTO" nombre="cboDepartamento" id="nDepartamento"/>
+                                      			</div>
 	                                   			<div class="form-group">
 	                                      			<label>Provincia : </label>
-	                                      			<select class='form-control' name='cboSexo'>
-	                                      				<option value='-1'>[Seleccione]</option>
-	                                      				<option value='Masculino'>Masculino</option>
-	                                      				<option value='Femenino'>Femenino</option>
-                                      			    </select>
+	                                      			<select class='form-control' name ="cboProvincia" id ="nProvincia">
+								                        <option selected="selected">[Seleccione Provincia]</option>
+								                    </select>
 	                                   			</div>
 	                                   			<div class="form-group">
 	                                   				<label>Distrito : </label>
-	                                      			<select class='form-control' name='cboDistrito'>
-	                                      				<option value='1101'>[Seleccione]</option>
-	                                      				<option value='1101'>Masculino</option>
-	                                      				<option value='1101'>Femenino</option>
-                                      			    </select>
+	                                      			<select class='form-control' name ="cboDistrito" id ="nDistrito">
+								                        <option selected="selected">[Seleccione Distrito]</option>
+								                    </select>
                                            		 </div>
                                            		  <div class="row">   
                                            		     <div class="col-md-9">
@@ -425,7 +417,7 @@
         <script src="js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
         <script src="js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
         <script src="js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-       
+       	<script src = "js/CargaCombo/ajax.js"></script>
         <script type="text/javascript">
             $(function() {        
             	

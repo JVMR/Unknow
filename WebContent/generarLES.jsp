@@ -280,7 +280,7 @@
 				                                            </div>
 				                                      	    <div class="form-group">
 				                                      			<label>Nombre y Apellido:</label>
-				                                      			<input type="text" class="form-control" placeholder="Ingrese nombre completo" name="txtNombre" id="txtNombre" value="<%=empleado.getNombresEmpleado()%>&nbsp;<%=empleado.getApellidoPaterno() %>" disabled>
+				                                      			<input type="text" class="form-control" placeholder="Ingrese nombre completo" name="txtNombre" id="txtNombre" value="<%=empleado.getNombresEmpleado()%> <%=empleado.getApellidoPaterno() %>" disabled>
 				                                            </div>
 				                                            <div class="form-group">
 				                                      			<label>Fecha Nacimiento :</label>
@@ -408,7 +408,7 @@
 			                                    	<div class="col-md-11">
 			                                    		<div class="form-group">
                                       						<label>Motivo de Licencia :</label>
-                                      						<select class="form-control" name="cboLicencia">
+                                      						<select class="form-control" name="cboLicencia" id="cboLicencia">
 				                                                <option value="-1">[Seleccione]</option>
 				                                                <option value="Enfermedad Común">Enfermedad Común</option>
 				                                                <option value="Neoplásica">Neoplásica</option>
@@ -417,7 +417,7 @@
                                             			</div>
                                             			<div class="form-group">
                                       						<label>Descripcion :</label>
-                                      						<textarea class="form-control" rows="7" placeholder="Descripcion ..." name="txtDescripcionLicencia"></textarea>
+                                      						<textarea class="form-control" rows="7" placeholder="Descripcion ..." name="txtDescripcionLicencia" id="txtLicencia"></textarea>
                                             			</div>
                                             			
 			                                    	</div>
@@ -436,7 +436,7 @@
                     		<div class="box-footer">
                              	<button class="btn btn-primary" type="submit" style="<%=estado%>" >Enviar <i class="fa fa-arrow-circle-right"></i></button>
                              	<button class="btn btn-primary" data-toggle="modal"  href="#lstLES" style="display:inline;">Ver Historial <i class="fa fa-arrow-circle-right"></i></button> 
-                             	<button class="btn btn-primary" data-toggle="modal"  href="#VistaPrev" style="display:inline;">VISTA PREVIAAAA <i class="fa fa-arrow-circle-right"></i></button>  
+                             	<button class="btn btn-primary" data-toggle="modal" id="mVista"  href="#VistaPrev" style="display:inline;">VISTA PREVIAAAA <i class="fa fa-arrow-circle-right"></i></button>  
                             	<button class="btn btn-primary" type="button" id="Vista" style="<%=estado%>">Vista Previa<i class="fa fa-arrow-circle-right"></i></button>  
                              </div><!-- Fin Box-Footer -->
                     	</form>                    
@@ -490,10 +490,10 @@
 			    </div>
 			    
 		</div>
-		<div id="VistaPrev" class="modal fade" tabindex="-1" data-width="760" style="display: none;">
+		<div id="VistaPrev" class="modal fade" tabindex="-1" data-width="900" style="display: none;">
 			 <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			    <h4 class="modal-title">Historial de LES generados</h4>
+			    <h4 class="modal-title">Vista Previa : </h4>
 			  </div>
 			   <div class="modal-body">
 			   <iframe class="preview-pane" type="application/pdf" id="VisorPDF" width="100%" height="650"  style="position:relative;z-index:999"></iframe>

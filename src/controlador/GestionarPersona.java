@@ -3,6 +3,7 @@ package controlador;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,9 @@ import javax.servlet.http.Part;
 import patronDAO.Factory;
 import patronDAO.PersonaDao;
 import util.ConexionSQL;
+import entidad.Distrito;
 import entidad.Persona;
+import entidad.Provincia;
 
 /**
  * Servlet implementation class GestionarPersona
@@ -63,8 +66,41 @@ public class GestionarPersona extends HttpServlet {
 		}
 		if(operacion.equals("eliminarPersona")){
 			this.eliminarPersona(request, response);
-		}		
+		}
+		if(operacion.equals("listarDistrito")){
+			this.listarDistrito(request, response);
+		}
+		if(operacion.equals("listarProvincia")){
+			this.listarProvincia(request, response);
+		}
 		
+	}
+	protected void listarDistrito(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+        int codigoProv = Integer.parseInt(request.getParameter("codigoProv"));
+        System.out.println("el codigo de la provincia es : "+codigoProv);
+        dao=fabrica.getPersona();
+        List<Distrito> lp = dao.listarDistritoPorProv(codigoProv);
+        StringBuilder sb = new StringBuilder("");
+        for(Distrito pr: lp){
+            sb.append(pr.getIdDist() + "-" + pr.getDistrito()+ ":");
+            
+        }
+        out.write(sb.toString());
+
+}
+	protected void listarProvincia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 	PrintWriter out = response.getWriter();
+        int codigoDep = Integer.parseInt(request.getParameter("codigoDep"));
+        System.out.println("el codigo de pais es : "+codigoDep);
+        dao=fabrica.getPersona();
+        List<Provincia> lp = dao.listarProvinciaPorDept(codigoDep);
+        StringBuilder sb = new StringBuilder("");
+        for(Provincia pr: lp){
+            sb.append(pr.getIdProv()+ "-" + pr.getProvincia() + ":");            
+        }
+        out.write(sb.toString());
+	
 	}
 	protected void registraPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
