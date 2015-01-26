@@ -231,32 +231,46 @@
 					<div class="row">
 						<!-- left column -->
 						<div class="col-md-11" style="padding-left: 80px">
-
-
 							<div class="box-header">
 								<h3 class="box-title">Datos de Unidad Orgánica u Oficina</h3>
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form role="form" name="unidad" action="gestionarUnidadOrganica" id="registrarUnidad">
+							<form  action="gestionarUnidadOrganica"  id="registrarUnidad" role="registrarUnidad">
+							<!-- <input type="hidden" name="operacion" value="registrarUnidad">  -->
+							<input type="hidden" name="operacion" value="registrarUnidad"> 
 							<div class="box-body">
-								<input type="hidden" name="operacion" value="registrarUnidad">
-								<div class="form-group has-success">
+							
+
+							<!-- contenedor de errores -->
+								<div class="col-md-12">
+									<div class="errorHandler alert alert-danger no-display" style="display: none;">
+										<i class="fa fa-times-circle-o"></i> Ud. tiene algunos errores en el formulario. Por favor revisar los campos.
+									</div>
+									<div class="successHandler alert alert-success no-display" style="display: none;">
+										<i class="fa fa-check"></i> La validacion de campos es correcta!
+									</div>
+								</div>  
+							
+							
+								
+								<div class="form-group">
 									<label for="txtNombreUnidad">Nombre de Unidad</label> <input
-										type="text" class="form-control required" id="txtNombreUnidad"
+										type="text" class="form-control" id="txtNombreUnidad"
 										name="txtNombreUnidad" 
 										placeholder="Ingrese Nombre de Unidad u Oficina">
 								</div>
 								<div class="form-group">
 									<label for="txtDescripcionUnidad">Descripción</label> <input
-										type="text" class="form-control required" id="txtDescripcionUnidad"
+										type="text" class="form-control" id="txtDescripcionUnidad"
 										name="txtDescripcionUnidad"
 										placeholder="Ingrese una descripción">
 								</div>
 								<br>
-							</div>
-
-							<div class="col-md-6">
+								
+								
+								
+								<div class="col-md-6">
 								<div class="box-header">
 									<h3 class="box-title">
 										Cargos <small>Agregar datos del cargo encargado de la Unidad Orgánica</small>
@@ -266,14 +280,14 @@
 
 								<div class="form-group">
 									<label for="txtNombreCargo">Nombre de Cargo</label> <input
-										type="text" class="form-control" id="txtNombreCargo"
-										name="txtNombreCargo">
+										type="text" class="form-control" id="txtNombreCargo" readonly="readonly"
+										name="txtNombreCargo" value="Encargado de">
 								</div>
-								<div class="form-group required">
+								<div class="form-group">
 									<label for="txtSueldo">Sueldo del Cargo</label>
 									<div class="input-group">
 										<span class="input-group-addon">$</span> <input
-											class="form-control" type="text" name="txtSueldo"></input> <span
+											class="form-control" type="text" name="txtSueldo" id="txtSueldo"></input> <span
 											class="input-group-addon">.00</span>
 									</div>
 								</div>
@@ -292,7 +306,7 @@
 									<div class="col-lg-6">
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" name="chkGestionarLES">
+												type="checkbox" name="chkGestionarLES" id="chkGestionarLES">
 											</span> <input type="text" class="form-control"
 												name="txtGestionarLES"
 												value="Gestionar Licencia de Enfermedad Subsidiada"
@@ -302,30 +316,26 @@
 
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" name="chkGestionarRES">
+												type="checkbox" name="chkGestionarRES" id="chkGestionarRES">
 											</span><input type="text" class="form-control"
 												name="txtGestionarRES" value="Gestionar Resolucion de LES"
 												readonly="readonly">
 										</div>
 										<br>
-										<!-- /input-group -->
+
 
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" name="chkVerificarLES">
+												type="checkbox" name="chkVerificarLES" id="chkVerificarLES">
 											</span> <input type="text" class="form-control"
 												name="txtVerificarLES" value="Verificar LES"
 												readonly="readonly">
 										</div>
 										<br>
-
-
-									</div>
-
-									<div class="col-lg-6">
+										
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" name="chkVerificarRES">
+												type="checkbox" name="chkVerificarRES" id="chkVerificarRES">
 											</span> <input type="text" class="form-control"
 												name="txtVerificarRES" value="Verificar RES"
 												readonly="readonly">
@@ -334,18 +344,47 @@
 
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" name="chkMantenimiento">
+												type="checkbox" name="chkVisarRES" id="chkVisarRES">
+											</span> <input type="text" class="form-control"
+												name="txtVisarRES" value="Visar RES"
+												readonly="readonly">
+										</div>
+										<br>
+
+										
+
+									</div>
+
+									<div class="col-lg-6">
+									<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkListarLES" id="chkListarLES">
+											</span> <input type="text" class="form-control"
+												name="txtListarLES" value="Listar LES"
+												readonly="readonly">
+										</div>
+										<br>
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkListarRES" id="chkListarRES">
+											</span> <input type="text" class="form-control"
+												name="txtListarRES" value="Listar RES"
+												readonly="readonly">
+									</div>
+										<br>
+
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkMantenimiento" id="chkMantenimiento">
 											</span> <input type="text" class="form-control"
 												name="txtMantenimiento" value="Mantenimiento"
 												readonly="readonly">
 										</div>
 										<br>
-										<!-- /input-group -->
-
 
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" name="chkReportes">
+												type="checkbox" name="chkReportes" id="chkReportes">
 											</span> <input type="text" class="form-control" name="txtReportes"
 												value="Reportes" readonly="readonly">
 										</div>
@@ -357,9 +396,18 @@
 								<!-- /.row -->
 
 							</div>
+								
+								
+								
+								
+								
+								
+							</div>
+
+							
 							<div class="box-footer" align="center">
 							<button type="submit" class="btn btn-primary">Grabar
-								Nueva Unidad</button>
+								Nueva Unidad<i class="fa fa-arrow-circle-right"></i></button>
 							</div>
 						</form>
 
@@ -386,64 +434,43 @@
 
 
 	<!-- jQuery 2.0.2 -->
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- AdminLTE App -->
 	<script src="js/AdminLTE/app.js" type="text/javascript"></script>
 	<!-- DATA TABES SCRIPT -->
-	<script src="js/plugins/datatables/jquery.dataTables.js"
-		type="text/javascript"></script>
-	<script src="js/plugins/datatables/dataTables.bootstrap.js"
-		type="text/javascript"></script>
+	<script src="js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+	<script src="js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
 	<!-- Jquery validate -->
 	<script src="js/jquery_validacion/jquey.js" type="text/javascript"></script>
 	<script src="js/jquery_validacion/jquery.validate.js" type="text/javascript"></script>
+	<script src="js/jquery_validacion/jquery.validate.min.js"></script>
 	<script src="js/jquery_validacion/messages_es.js" type="text/javascript"></script>
-
-
-
+	
+	<!-- Validación del formulario-->
+	<script src="js/jquery_validacion/form-RegistraUnidad.js"></script>
+	
 	<script type="text/javascript">
-	$().ready(function() {
-		$("#registrarUnidad").validate({
-			lang: 'es'
-		});
-	});
-	
-	
 	$(function(){
-		$('#registrarUnidad').validate({
-		rules :{
-		txtNombreUnidad : {
-		required : true, //para validar campo vacio
-		},
-		txtDescripcionUnidad : {
-		required : true,
-		minlength : 15, //para validar campo con minimo 3 caracteres
-		maxlength : 45 //para validar campo con maximo 9 caracteres
-		},
-		txtSueldo : {
-		required : true,
-		number : true //para validar campo solo numeros
-		}
-		},
-		messages : {
-		txtNombreUnidad :{
-			required : "El nombre de la unidad orgánica es obligatorio",
-		},
-		txtDescripcionUnidad:{
-			required : "Falta ingresar la función de esta unidad",
-			minlength : "La descripcion debe tener un minimo de 15 caracteres.",
-			maxlength : "La descripcion debe tener un máximo de 45 caracteres."
-		},
-		txtSueldo:{
-			required : "Falta ingresar el sueldo a ganar del Encargado de la unidad",
-			number: "Ingrese numéros validos para el sueldo"
-		}
-		}
-		});
+		var nomUnidad;
+		var nomCargo;
+		var txt;
+		var txt2;
+		var espacio=" ";
+			$('#txtNombreUnidad').blur(function(){
+				nomUnidad = document.getElementById("txtNombreUnidad").value;
+				txt=nomUnidad.substr(0,200);
+				
+				nomCargo = document.getElementById("txtNombreCargo").value;
+				txt2=nomCargo.substr(0,20);
+				txt2=txt2.concat(espacio);
+				
+				$("#txtNombreCargo").attr('value',txt2.concat(txt));
+			});
+			FormValidator.init();	
 	});
+	
 	
 	</script>
 </body>

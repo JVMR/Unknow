@@ -237,23 +237,35 @@
 		String estilo04="";
 		String estilo05="";
 		String estilo06="";
+		String estilo07="";
+		String estilo08="";
+		String estilo09="";
 		if(listadoUnidad.getGestionarLES()==1){
 			estilo01="class="+"minimal"+" checked";
 		}
 		if(listadoUnidad.getGestionarRES()==1){
 			estilo02="class="+"minimal"+" checked";
 		}
-		if(listadoUnidad.getVerficarLES()==1){
+		if(listadoUnidad.getVerificarLES()==1){
 			estilo03="class="+"minimal"+" checked";
 		}
 		if(listadoUnidad.getVerificarRES()==1){
 			estilo04="class="+"minimal"+" checked";
 		}
-		if(listadoUnidad.getMantenimiento()==1){
+		if(listadoUnidad.getVisarRES()==1){
 			estilo05="class="+"minimal"+" checked";
 		}
-		if(listadoUnidad.getReporte()==1){
+		if(listadoUnidad.getListarLES()==1){
 			estilo06="class="+"minimal"+" checked";
+		}
+		if(listadoUnidad.getListarRES()==1){
+			estilo07="class="+"minimal"+" checked";
+		}
+		if(listadoUnidad.getMantenimiento()==1){
+			estilo08="class="+"minimal"+" checked";
+		}
+		if(listadoUnidad.getReporte()==1){
+			estilo09="class="+"minimal"+" checked";
 		}
 		%>
 		
@@ -269,8 +281,20 @@
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form role="form" name="unidad" action="gestionarUnidadOrganica">
+							<form role="modificaUnidad" id="modificaUnidad" action="gestionarUnidadOrganica">
 							<div class="box-body">
+							
+							<!-- contenedor de errores -->
+								<div class="col-md-12">
+									<div class="errorHandler alert alert-danger no-display" style="display: none;">
+										<i class="fa fa-times-circle-o"></i> Ud. tiene algunos errores en el formulario. Por favor revisar los campos.
+									</div>
+									<div class="successHandler alert alert-success no-display" style="display: none;">
+										<i class="fa fa-check"></i> La validacion de campos es correcta!
+									</div>
+								</div>  
+							
+							
 								<input type="hidden" name="operacion" value="modificarUnidad">
 								<div class="form-group">
 									<label for="txtIdUnidadOrganica">Código de Unidad</label> <input
@@ -303,7 +327,7 @@
 								<input type="hidden" name="idCargo" value="<%=listadoUnidad.getIdCargo()%>">
 								<div class="form-group">
 									<label for="txtNombreCargo">Nombre de Cargo</label> <input
-										type="text" class="form-control" name="txtNombreCargo" 
+										type="text" class="form-control" name="txtNombreCargo" readonly="readonly"
 										placeholder="Ingrese Nombre"
 										value="<%=listadoUnidad.getNombreCargo()%>">
 								</div>
@@ -357,11 +381,7 @@
 												readonly="readonly">
 										</div>
 										<br>
-
-
-									</div>
-
-									<div class="col-lg-6">
+										
 										<div class="input-group">
 											<span class="input-group-addon"> <input
 												type="checkbox" <%=estilo04%>  name="chkVerificarRES">
@@ -370,10 +390,41 @@
 												readonly="readonly">
 										</div>
 										<br>
+										
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" <%=estilo05%> name="chkVisarRES" id="chkVisarRES">
+											</span> <input type="text" class="form-control"
+												name="txtVisarRES" value="Visar RES"
+												readonly="readonly">
+										</div>
+										<br>
+
+
+
+									</div>
+
+									<div class="col-lg-6">
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" <%=estilo06%> name="chkListarLES" id="chkListarLES">
+											</span> <input type="text" class="form-control"
+												name="txtListarLES" value="Listar LES"
+												readonly="readonly">
+										</div>
+										<br>
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" <%=estilo07%> name="chkListarRES" id="chkListarRES">
+											</span> <input type="text" class="form-control"
+												name="txtListarRES" value="Listar RES"
+												readonly="readonly">
+									</div>
+										<br>
 
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" <%=estilo05%>  name="chkMantenimiento">
+												type="checkbox" <%=estilo08%>  name="chkMantenimiento">
 											</span> <input type="text" class="form-control"
 												name="txtMantenimiento" value="Mantenimiento"
 												readonly="readonly">
@@ -384,7 +435,7 @@
 
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="checkbox" <%=estilo06%>  name="chkReportes">
+												type="checkbox" <%=estilo09%>  name="chkReportes">
 											</span> <input type="text" class="form-control" name="txtReportes"
 												value="Reportes" readonly="readonly">
 										</div>
@@ -436,8 +487,34 @@
 	<script src="js/plugins/datatables/dataTables.bootstrap.js"
 		type="text/javascript"></script>
 	<!-- funciones propias -->
-	<script src="js/romario.js" type="text/javascript"></script>
+		<!-- Validación del formulario-->
+	<script src="js/jquery_validacion/form-ModificaUnidad.js"></script>
 
+	
+	<script type="text/javascript">
+	$(function(){
+		var nomUnidad;
+		var nomCargo;
+		var txt;
+		var txt2;
+		var espacio=" ";
+			$('#txtNombreUnidad').blur(function(){
+				nomUnidad = document.getElementById("txtNombreUnidad").value;
+				txt=nomUnidad.substr(0,200);
+				
+				nomCargo = document.getElementById("txtNombreCargo").value;
+				txt2=nomCargo.substr(0,50);
+				txt2=txt2.concat(espacio);
+				
+				$("#txtNombreCargo").attr('value',txt2.concat(txt));
+			});
+			FormValidator.init();	
+	});
+	
+	
+	</script>
+	
+	
 	
 		</body>
 		</html>

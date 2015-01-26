@@ -25,7 +25,7 @@ public class MySqlUnidadOrganicaDao implements UnidadOrganicaDao{
 		int salida=-1;
 		try {
 			conn = new ConexionDB().getConexion();
-			String sql ="CALL SP_REGISTRA_UNIDADORGANICA(?,?,?,?,?,?,?,?,?,?)";
+			String sql ="CALL SP_REGISTRA_UNIDADORGANICA(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);	
 			pstm.setString(1, unidadOrganica.getDescripcionUnidad());
 			pstm.setString(2, unidadOrganica.getNombreUnidad());
@@ -33,10 +33,13 @@ public class MySqlUnidadOrganicaDao implements UnidadOrganicaDao{
 			pstm.setDouble(4, cargo.getSueldo());
 			pstm.setInt(5, rol.getGestionarLES());
 			pstm.setInt(6, rol.getGestionarRES());
-			pstm.setInt(7, rol.getVerficarLES());
+			pstm.setInt(7, rol.getVerificarLES());
 			pstm.setInt(8, rol.getVerificarRES());
-			pstm.setInt(9, rol.getMantenimiento());
-			pstm.setInt(10, rol.getReporte());
+			pstm.setInt(9, rol.getVisarRES());
+			pstm.setInt(10, rol.getListarLES());
+			pstm.setInt(11, rol.getListarRES());
+			pstm.setInt(12, rol.getMantenimiento());
+			pstm.setInt(13, rol.getReporte());
 			
 			salida=pstm.executeUpdate();
 			
@@ -64,7 +67,7 @@ public class MySqlUnidadOrganicaDao implements UnidadOrganicaDao{
 		int salida=-1;
 		try {
 			conn = new ConexionDB().getConexion();
-			String sql ="CALL SP_MODIFICA_UNIDADORGANICA(?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql ="CALL SP_MODIFICA_UNIDADORGANICA(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);	
 			pstm.setString(1, unidadOrganica.getIdUnidadOrganica());
 			pstm.setString(2, unidadOrganica.getDescripcionUnidad());
@@ -74,10 +77,13 @@ public class MySqlUnidadOrganicaDao implements UnidadOrganicaDao{
 			pstm.setDouble(6, cargo.getSueldo());
 			pstm.setInt(7, rol.getGestionarLES());
 			pstm.setInt(8, rol.getGestionarRES());
-			pstm.setInt(9, rol.getVerficarLES());
+			pstm.setInt(9, rol.getVerificarLES());
 			pstm.setInt(10, rol.getVerificarRES());
-			pstm.setInt(11, rol.getMantenimiento());
-			pstm.setInt(12, rol.getReporte());
+			pstm.setInt(11, rol.getVisarRES());
+			pstm.setInt(12, rol.getListarLES());
+			pstm.setInt(13, rol.getListarRES());
+			pstm.setInt(14, rol.getMantenimiento());
+			pstm.setInt(15, rol.getReporte());
 			
 			salida=pstm.executeUpdate();
 			
@@ -191,10 +197,13 @@ public class MySqlUnidadOrganicaDao implements UnidadOrganicaDao{
 				obj.setSueldo(rs.getDouble(6));
 				obj.setGestionarLES(rs.getInt(7));
 				obj.setGestionarRES(rs.getInt(8));
-				obj.setVerficarLES(rs.getInt(9));
+				obj.setVerificarLES(rs.getInt(9));
 				obj.setVerificarRES(rs.getInt(10));
-				obj.setMantenimiento(rs.getInt(11));
-				obj.setReporte(rs.getInt(12));
+				obj.setVisarRES(rs.getInt(11));
+				obj.setListarLES(rs.getInt(12));
+				obj.setListarRES(rs.getInt(13));
+				obj.setMantenimiento(rs.getInt(14));
+				obj.setReporte(rs.getInt(15));
 			
 			}	
 		} catch (Exception ex) {

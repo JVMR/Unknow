@@ -269,7 +269,7 @@
 									</div>
 									<br>
 									<div >
-											<iframe src="tablaListaCargoXEquipo.jsp" style=" width: 1000px; height: 600px; " >
+											<iframe src="tablaListaCargoXEquipo.jsp" style=" width: 1200px; height: 600px; " >
 						
 											</iframe>
 									</div>

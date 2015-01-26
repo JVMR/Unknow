@@ -46,17 +46,20 @@ public class MySqlEquipoDao implements EquipoDao{
 			idEquipo=rs.getString(1);
 			
 			//se registra el cargo junto con rol
-			String sql02="SELECT F_REGISTRA_CARGO_ROL_DE_EQUIPO(?,?,?,?,?,?,?,?)";
+			String sql02="SELECT F_REGISTRA_CARGO_ROL_DE_EQUIPO(?,?,?,?,?,?,?,?,?,?,?)";
 			pstm02=conn.prepareStatement(sql02);
 			for (ListaCargoEquipo listaCargoEquipo : arrayList) {
 				pstm02.setString(1, listaCargoEquipo.getNombreCargo());
 				pstm02.setDouble(2, listaCargoEquipo.getSueldo());
 				pstm02.setInt(3, listaCargoEquipo.getGestionarLES());
 				pstm02.setInt(4, listaCargoEquipo.getGestionarRES());
-				pstm02.setInt(5, listaCargoEquipo.getVerficarLES());
+				pstm02.setInt(5, listaCargoEquipo.getVerificarLES());
 				pstm02.setInt(6, listaCargoEquipo.getVerificarRES());
-				pstm02.setInt(7, listaCargoEquipo.getMantenimiento());
-				pstm02.setInt(8, listaCargoEquipo.getReporte());
+				pstm02.setInt(7, listaCargoEquipo.getVisarRES());
+				pstm02.setInt(8, listaCargoEquipo.getListarLES());
+				pstm02.setInt(9, listaCargoEquipo.getListarRES());
+				pstm02.setInt(10, listaCargoEquipo.getMantenimiento());
+				pstm02.setInt(11, listaCargoEquipo.getReporte());
 				
 				rs02=pstm02.executeQuery();
 				rs02.next();
@@ -198,8 +201,11 @@ public class MySqlEquipoDao implements EquipoDao{
 				obj.setSueldo(rs.getDouble("sueldo"));
 				obj.setGestionarLES(rs.getInt("gestionarLES"));
 				obj.setGestionarRES(rs.getInt("gestionarRES"));
-				obj.setVerficarLES(rs.getInt("verificarLES"));
+				obj.setVerificarLES(rs.getInt("verificarLES"));
 				obj.setVerificarRES(rs.getInt("verificarRES"));
+				obj.setVisarRES(rs.getInt("visarRES"));
+				obj.setListarLES(rs.getInt("listarLES"));
+				obj.setListarRES(rs.getInt("listarRES"));
 				obj.setMantenimiento(rs.getInt("mantenimiento"));
 				obj.setReporte(rs.getInt("reporte"));
 				
@@ -275,7 +281,7 @@ public class MySqlEquipoDao implements EquipoDao{
 			rs=pstm.executeQuery();
 			
 			//se registra el cargo junto con rol
-			String sql02="SELECT F_REGISTRA_CARGO_ROL_DE_EQUIPO(?,?,?,?,?,?,?,?)";
+			String sql02="SELECT F_REGISTRA_CARGO_ROL_DE_EQUIPO(?,?,?,?,?,?,?,?,?,?,?)";
 			pstm02=conn.prepareStatement(sql02);
 			
 			for (ListaCargoEquipo listaCargoEquipo : arrayList) {
@@ -284,10 +290,13 @@ public class MySqlEquipoDao implements EquipoDao{
 					pstm02.setDouble(2, listaCargoEquipo.getSueldo());
 					pstm02.setInt(3, listaCargoEquipo.getGestionarLES());
 					pstm02.setInt(4, listaCargoEquipo.getGestionarRES());
-					pstm02.setInt(5, listaCargoEquipo.getVerficarLES());
+					pstm02.setInt(5, listaCargoEquipo.getVerificarLES());
 					pstm02.setInt(6, listaCargoEquipo.getVerificarRES());
-					pstm02.setInt(7, listaCargoEquipo.getMantenimiento());
-					pstm02.setInt(8, listaCargoEquipo.getReporte());
+					pstm02.setInt(7, listaCargoEquipo.getVisarRES());
+					pstm02.setInt(8, listaCargoEquipo.getListarLES());
+					pstm02.setInt(9, listaCargoEquipo.getListarRES());
+					pstm02.setInt(10, listaCargoEquipo.getMantenimiento());
+					pstm02.setInt(11, listaCargoEquipo.getReporte());
 					
 					rs02=pstm02.executeQuery();
 					rs02.next();
