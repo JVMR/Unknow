@@ -195,18 +195,7 @@
                         	<ul class="treeview-menu">
                                 <li><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
                            </ul>
-                        </li>   
-                        <li class="treeview">
-                        	<a href="#">
-                        		<i class="fa fa-bar-chart-o"></i>
-                        		<span>Reportes</span>
-                        		<i class="fa fa-angle-left pull-right"></i>
-                        	</a>
-                        	<ul class="treeview-menu">
-                                <li><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte Prueba</a></li>
-                                <li><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Prueba</a></li>
-                           </ul>
-                        </li>          
+                        </li>            
 					</ul>
 
                        
@@ -231,6 +220,14 @@
                 <!-- Main content -->
                 <section class="content">              
 
+					<div align="center" >
+				    <iframe frameborder="0"  height="1000" width="800" src="http://127.0.0.1:65041/viewer/preview?__report=C%3A\Users\Juan\Desktop\Reporte\Reportes_LP2\Reporte_Empleados.rptdesign&__format=html&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=C%3A\Users\Juan\Desktop\Reporte\Reportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.html&-481025689" ></iframe>
+					<br>
+					<h1>
+					<a href="http://127.0.0.1:65041/viewer/preview?__report=C%3A%5CUsers%5CJuan%5CDesktop%5CReporte%5CReportes_LP2%5CReporte_Empleados.rptdesign&__format=pdf&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=C%3A%5CUsers%5CJuan%5CDesktop%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.pdf&-814673907">Generar PDF</a>
+					</h1>      
+					</div>
+					          
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
@@ -242,6 +239,14 @@
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <!-- AdminLTE App -->
         <script src="js/AdminLTE/app.js" type="text/javascript"></script>
+        <!-- FLOT CHARTS -->
+        <script src="js/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+        <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+        <script src="js/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
+        <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+        <script src="js/plugins/flot/jquery.flot.pie.min.js" type="text/javascript"></script>
+        <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+        <script src="js/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
 
     </body>
 </html>
