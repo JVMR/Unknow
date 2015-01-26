@@ -55,9 +55,9 @@ public class GestionarPersona extends HttpServlet {
 		if(operacion.equals("firmaPersona")){
 			this.firmaPersona(request, response);
 		}
-		/*if(operacion.equals("huellaPersona")){
+		if(operacion.equals("huellaPersona")){
 			this.huellaPersona(request, response);
-		}*/
+		}
 		if(operacion.equals("cargarPersona")){
 			this.cargarPersona(request, response);
 		}
@@ -142,7 +142,7 @@ public class GestionarPersona extends HttpServlet {
 	                bos.write(tmp, 0, ret);
 	            }
 
-	             foto = bos.toByteArray();
+	            foto = bos.toByteArray();
 	            //./CONVIERTE INPUTSTREAM EN BYTES[]
 	        }	
 	        InputStream inputStream1 = null; // input stream of the upload file
@@ -264,7 +264,7 @@ public class GestionarPersona extends HttpServlet {
 		                while((size = sImage.read(bytearray)) != -1 ){
 		                    response.getOutputStream().
 		                    write(bytearray,0,size);
-		                    System.out.println(""+sImage);
+		                    System.out.println("FIRMA : "+sImage);
 		                }
 	                }         
 	            }
@@ -292,7 +292,7 @@ public class GestionarPersona extends HttpServlet {
 		                while((size = sImage.read(bytearray)) != -1 ){
 		                    response.getOutputStream().
 		                    write(bytearray,0,size);
-		                    System.out.println(""+sImage);
+		                    System.out.println("HUELLA :   "+sImage);
 		                }
 	                }         
 	            }
@@ -320,7 +320,7 @@ public class GestionarPersona extends HttpServlet {
 		                while((size = sImage.read(bytearray)) != -1 ){
 		                    response.getOutputStream().
 		                    write(bytearray,0,size);
-		                    System.out.println(""+sImage);
+		                    System.out.println("FOTO : "+sImage);
 		                }
 	                }         
 	            }

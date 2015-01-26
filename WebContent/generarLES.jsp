@@ -1,3 +1,4 @@
+<%@page import="entidad.Les"%>
 <%@page import="entidad.Menu"%>
 <%@page import="entidad.Utilitario"%>
 <%@page import="entidad.Cargo"%>
@@ -181,8 +182,8 @@
                             <ul class="treeview-menu">
 
                                 <li class="active"><a href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo() %>&id=<%=empleado.getIdEmpleado()%>"><i class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
-                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LESs</a></li>
-								<li style="<%=mnu.geteLES()%>"><a href="evaluarSolicitudLES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+                               <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
+								<li style="<%=mnu.geteLES()%>"><a href="GestionarLES?operacion=evLes"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
 
                            </ul>
                         </li> 
@@ -241,6 +242,22 @@
 				<%
     			Cargo objCar= (Cargo) request.getAttribute("daoCargo");
 				Utilitario objUtil= (Utilitario) request.getAttribute("daoUtil");
+				Les ls=(Les) request.getAttribute("lesEstado");
+				String diagnostico="",dmot="",les="",mtv="",fechaI="",fechaF="",aviso="",letra="",opr="generarLES";
+				int cant=0;
+					if(ls!=null){
+						diagnostico=ls.getDiagnostico();
+						dmot=ls.getDescripcionMotivo();
+						fechaI=ls.getFechaInicioDes();
+						fechaF=ls.getFechaFinDes();
+						les=ls.getIdLes();
+						mtv=ls.getMotivoLicencia();
+						cant=ls.getCantidad();
+						aviso="has-warning";
+						letra="for='inputWarning'";
+						opr="modificarLES";
+					}
+							
     			%>
                 <!-- Main content -->
                 <section class="content">              
@@ -257,7 +274,7 @@
                     		</div>
                     	<form action=" GestionarLES" method="post" enctype="multipart/form-data">
                     		<div class="box-body">
-                    		<input type="hidden" name="operacion" value="generarLES" >
+                    		<input type="hidden" name="operacion" value="<%=opr%>" >
                     		  <div class="row">
                     		  <div class="col-md-9">
 												<div class="<%=objUtil.getClase()%>">
@@ -273,14 +290,16 @@
 			                                <div class="box-body">
 			                                    <div class="row"> 
 			                                    	<div class="col-md-8">
-			                                    			<div class="form-group">
-			                                    				<input type="hidden" name="id" value="<%=empleado.getIdEmpleado()%>">
+			                                    			<div class="form-group">			                                    			
+			                                    				<input type="hidden" name="idLES" value="<%=les%>">
+			                                    				<input type="hidden" name="id" value="<%=empleado.getIdEmpleado()%>">			                                    				
+			                                    				<input type="hidden" name="txtNombre" value="<%=empleado.getNombresEmpleado()%> <%=empleado.getApellidoPaterno() %>">
 				                                      			<label>DNI :</label>
 				                                      			<input type="text" class="form-control" placeholder="Ingrese tu numero de DNI" name="txtDNI" id="txtDNI" value="<%=empleado.getnDNI()%>" disabled>
 				                                            </div>
 				                                      	    <div class="form-group">
 				                                      			<label>Nombre y Apellido:</label>
-				                                      			<input type="text" class="form-control" placeholder="Ingrese nombre completo" name="txtNombre" id="txtNombre" value="<%=empleado.getNombresEmpleado()%> <%=empleado.getApellidoPaterno() %>" disabled>
+				                                      			<input type="text" class="form-control" placeholder="Ingrese nombre completo" name="txt" id="txtNombre" value="<%=empleado.getNombresEmpleado()%> <%=empleado.getApellidoPaterno() %>" disabled>
 				                                            </div>
 				                                            <div class="form-group">
 				                                      			<label>Fecha Nacimiento :</label>
@@ -315,6 +334,7 @@
 			                                </div><!-- /.box-body -->
 			                            </div><!-- /.box -->
 			                        </div>
+			                       
 			                        <div class="col-md-6">
 			                            <div class="box box-success" style="<%=objUtil.getFlag()%>">
 			                                <div class="box-header">
@@ -355,8 +375,10 @@
 			                                </div><!-- /.box-body -->
 			                            </div><!-- /.box -->
 			                        </div>
+			                         
 			                             <div class="col-md-6">
 			                            <div class="box box" style="<%=objUtil.getFlag()%>">
+			                            			                            
 			                                <div class="box-header">
 			                                    <i class="fa fa-book"></i>
 			                                    <h3 class="box-title">Descanso Medico</h3>
@@ -364,31 +386,31 @@
 			                                <div class="box-body">
 			                                    <div class="row"> 
 			                                    	<div class="col-md-10">
-			                                    		<div class="form-group">
-                                      						<label>Diagnostico Medico :</label>
-                                      						<input type="text" class="form-control" placeholder="Ingrese el diagnostico" id="Diagnostico" name="txtDiagnostico">
+			                                    		<div class="form-group <%=aviso%>">
+                                      						<label <%=letra %>> <i class="<%=objUtil.getIcono()%>"></i> Diagnostico Medico :</label>
+                                      						<input type="text" class="form-control" id="Diagnostico" name="txtDiagnostico" value="<%=diagnostico%>">
                                             			</div>
-                                            			<div class="form-group">
-					                                        <label>Rango de Fechas de Descanso:</label>
+                                            			<div class="form-group <%=aviso%>">
+					                                        <label <%=letra %>> <i class="<%=objUtil.getIcono()%>"></i> Rango de Fechas de Descanso:</label>
 					                                        <div class="input-group">
 					                                            <div class="input-group-addon">
 					                                                <i class="fa fa-calendar"></i>
 					                                            </div>
-					                                            <input type="text" class="form-control pull-right" id="reservation" name="rngFecha"/>
+					                                            <input type="text" class="form-control pull-right" id="reservation" name="rngFecha" />
 					                                        </div><!-- /.input group -->
 					                                    </div><!-- /.form group -->
-                                            			<div class="form-group">
-                                      						<label>Dias Subsidiados :</label>
-                                      						<input type="text" class="form-control" id="cantidad1" disabled>
-                                      						<input type="hidden" class="form-control" id="cantidad" name="txtDias">
+                                            			<div class="form-group <%=aviso%>">
+                                      						<label <%=letra %>><i class="<%=objUtil.getIcono()%>"></i> Dias Subsidiados :</label>
+                                      						<input type="text" class="form-control" id="cantidad1" value="<%=cant %>" disabled>
+                                      						<input type="hidden" class="form-control" id="cantidad" value="<%=cant %>" name="txtDias">
                                             			</div>
                                             			<div class="form-group">
                                             			 	<div class="form-group">
 					                                            <label for="exampleInputFile">Adjuntar Documento</label>
 					                                            <input type="file" id="exampleInputFile" name="txtDocumento">
 					                                        </div>
-					                                        <input type="hidden" class="form-control" id="fecha1" name="txtFecha1">
-					                                        <input type="hidden" class="form-control" id="fecha2" name="txtFecha2">
+					                                        <input type="hidden" class="form-control" id="fecha1" name="txtFecha1" value="<%=fechaI%>">
+					                                        <input type="hidden" class="form-control" id="fecha2" name="txtFecha2" value="<%=fechaF%>">
                                       						
                                             			</div>
                                     					
@@ -406,18 +428,34 @@
 			                                <div class="box-body">
 			                                    <div class="row"> 
 			                                    	<div class="col-md-11">
-			                                    		<div class="form-group">
+			                                    		<div class="form-group <%=aviso%>">
+			                                    		<% 
+			                                    			String sef="",sn="",sTBC="";
+					                                           if(mtv.equals("Enfermedad Común")){
+					                                        	   sef="selected";
+					                                           }else if(mtv.equals("Neoplásica")){
+					                                        	   sn="selected";
+					                                           }else if(mtv.equals("T.B.C")) {
+					                                        	   sTBC="selected";
+					                                           }else{
+					                                        	   sef="";
+					                                        	   sn="";
+					                                        	   sTBC="";
+					                                           }
+			                                    			%>			                                    		
                                       						<label>Motivo de Licencia :</label>
                                       						<select class="form-control" name="cboLicencia" id="cboLicencia">
 				                                                <option value="-1">[Seleccione]</option>
-				                                                <option value="Enfermedad Común">Enfermedad Común</option>
-				                                                <option value="Neoplásica">Neoplásica</option>
-				                                                <option value="T.B.C">T.B.C</option>
+				                                                <option value="Enfermedad Común" <%=sef %>>Enfermedad Común</option>
+				                                                <option value="Neoplásica" <%=sn %>>Neoplásica</option>
+				                                                <option value="T.B.C" <%=sTBC %>>T.B.C</option>
 				                                            </select>
                                             			</div>
-                                            			<div class="form-group">
-                                      						<label>Descripcion :</label>
-                                      						<textarea class="form-control" rows="7" placeholder="Descripcion ..." name="txtDescripcionLicencia" id="txtLicencia"></textarea>
+                                            			<div class="form-group <%=aviso%>">
+                                      						<label <%=letra %>> <i class="<%=objUtil.getIcono()%>"></i> Descripcion :</label>
+                                      						<textarea class="form-control" cols="2"rows="7" name="txtDescripcionLicencia" id="txtLicencia">
+                                      						<%=dmot %>						
+                                      						</textarea>
                                             			</div>
                                             			
 			                                    	</div>
@@ -428,6 +466,7 @@
                     			</div>
                     		</div>
                     		<% 
+									        
                     			String estado="display:inline;";
                     		if (objUtil.getFlag().equals("display:none;")){
                     			estado="display:none;";
@@ -436,7 +475,7 @@
                     		<div class="box-footer">
                              	<button class="btn btn-primary" type="submit" style="<%=estado%>" >Enviar <i class="fa fa-arrow-circle-right"></i></button>
                              	<button class="btn btn-primary" data-toggle="modal"  href="#lstLES" style="display:inline;">Ver Historial <i class="fa fa-arrow-circle-right"></i></button> 
-                             	<button class="btn btn-primary" data-toggle="modal" id="mVista"  href="#VistaPrev" style="display:inline;">VISTA PREVIAAAA <i class="fa fa-arrow-circle-right"></i></button>  
+                             	<button class="btn btn-primary" data-toggle="modal" id="mVista"  href="#VistaPrev" style="<%=estado%>">VISTA PREVIAAAA <i class="fa fa-arrow-circle-right"></i></button>  
                             	<button class="btn btn-primary" type="button" id="Vista" style="<%=estado%>">Vista Previa<i class="fa fa-arrow-circle-right"></i></button>  
                              </div><!-- Fin Box-Footer -->
                     	</form>                    
@@ -485,9 +524,7 @@
                                 	</display:column>                                    	    
                                 </display:table>
                                 </div>
-			    
-			    
-			    </div>
+                     </div>
 			    
 		</div>
 		<div id="VistaPrev" class="modal fade" tabindex="-1" data-width="900" style="display: none;">

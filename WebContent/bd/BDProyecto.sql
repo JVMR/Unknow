@@ -168,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `proyectoLPII`.`LES` (
   `fechaHora` DATETIME NULL,
   `idEmpleado` CHAR(6) NOT NULL,
   `idestado` INT NOT NULL,
+  `pdf` varchar(200) NOT NULL,
   PRIMARY KEY (`idLES`),
   INDEX `fk_LES_Asalariado1_idx` (`idEmpleado` ASC),
   INDEX `fk_LES_estado1_idx` (`idestado` ASC),

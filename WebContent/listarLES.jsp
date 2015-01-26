@@ -177,8 +177,8 @@
                             <ul class="treeview-menu">
 
                                 <li><a href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo() %>&id=<%=empleado.getIdEmpleado()%>"><i class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
-                                 <li class="active" style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LESs</a></li>
-								<li style="<%=mnu.geteLES()%>"><a href="evaluarSolicitudLES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+                                <li class="active" style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
+								<li style="<%=mnu.geteLES()%>"><a href="GestionarLES?operacion=evLes"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
 
                            </ul>
                         </li> 
@@ -291,7 +291,7 @@
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="gestionaLES?operacion=cargarLes&id=${aux.getIdLes()}"><i class="fa fa-edit"></i>Generar RES</a></li>
+                                                <li style="<%=mnu.getgRES()%>"><a href="gestionaLES?operacion=cargarLes&id=${aux.getIdLes()}"><i class="fa fa-edit"></i>Generar RES</a></li>
                                                 <li><a href="gestionaLES?operacion=cargarLes2&id=${aux.getIdLes()}"><i class="fa fa-edit"></i>Evaluar Descanso Médico</a></li>
                                             </ul>
                                         </div>   

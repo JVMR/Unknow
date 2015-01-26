@@ -369,7 +369,8 @@ INSERT INTO   DISTRITO   (  idDist  ,   distrito  ,   idProv  ) VALUES
 (1290, 'SANTIAGO DE SURCO', 127),
 (1291, 'SURQUILLO', 127),
 (1292, 'VILLA EL SALVADOR', 127),
-(1293, 'VILLA MARIA DEL TRIUNFO', 127)
+(1293, 'VILLA MARIA DEL TRIUNFO', 127)
+
 if object_id('PERSONA') is not null
 	drop table PERSONA
 go
@@ -391,5 +392,6 @@ idDist   int REFERENCES DISTRITO
 )
 go
 set dateformat dmy
+
 insert into persona values ('70236561','Javier','Huaman','Adama','Masculino','12/12/1996',
 '123456789','Jr noseque','abc@gmail.com',null,null,null,1293) 

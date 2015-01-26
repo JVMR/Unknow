@@ -101,3 +101,12 @@ create proc listaDistxProv
 as
 	select idDist,distrito from DISTRITO where idProv=@prov
 go
+if OBJECT_ID('ingresarHuella') is not null
+	drop proc ingresarHuella
+go
+create proc ingresarHuella
+(@huella image,
+@dni char(8))
+as
+	update PERSONA set huella=@huella where nDNI=@dni
+go

@@ -1,6 +1,8 @@
 <%@page import="entidad.Menu"%>
 <%@ taglib uri="misLibrerias" prefix="cbo"%>
 <%@page import="entidad.Empleado"%>
+<%@ taglib uri="http://displaytag.sf.net/el" prefix="display"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -28,6 +30,9 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<link href="css/nuestros/unidadorgánica.css" rel="stylesheet"
 			type="text/css">
+			
+		<link href="css/bootstrap-modal/bootstrap-modal-bs3patch.css" rel="stylesheet" />
+  		<link href="css/bootstrap-modal/bootstrap-modal.css" rel="stylesheet" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -178,8 +183,8 @@
                             <ul class="treeview-menu">
 
                                 <li><a href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo() %>&id=<%=empleado.getIdEmpleado()%>"><i class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
-                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LESs</a></li>
-								<li class="active" style="<%=mnu.geteLES()%>"><a href="evaluarSolicitudLES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
+								<li class="active" style="<%=mnu.geteLES()%>"><a href="GestionarLES?operacion=evLes"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
 
                            </ul>
                         </li> 
@@ -248,8 +253,9 @@
                         <div class="box-body">
                         <div class="form-group" align="center">
                         				<h4>Para la Evaluacion, primero consulte una Solicitud de Licencia Por Enfermedad Subsidiada</h4> 
-                                       <br>
-                                        <button class="btn btn-success btn-lg" >Buscar Solicitudes LES</button>
+                                       <br>                                       
+                             			<button class="btn btn-success btn-lg" data-toggle="modal"  href="#lstLES" style="display:inline;">Buscar Solicitudes LES <i class="fa fa-arrow-circle-right"></i></button> 
+                                        
                                     </div>
                         
                         </div>
@@ -259,7 +265,7 @@
 
                             <div class="box box-success">
                                 <div class="box-header">
-                                    <h3 class="box-title">Vista de Solicitud LES Codigo LE0001</h3>
+                                    <h3 class="box-title">Vista de Solicitud LES </h3>
                                 </div>
                                 <div class="box-body">
                                  
@@ -336,7 +342,43 @@
                         </div>
                         </div>
                     </div><!-- /.row -->         
-
+				<div id="lstLES" class="modal fade" tabindex="-1" data-width="780" style="display: none;">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h4 class="modal-title">LES a Evaluar</h4>
+			  </div>
+			  <div class="modal-body">
+			    	<div class="box-body table-responsive" >
+                                
+                                <display:table name="lesEstados" id="aux"  class="table table-bordered table-striped">
+                                	<display:column property="idLes" title="ID"></display:column> 
+                                	<display:column property="diagnostico" title="Diagnostico"></display:column>      
+                                	<display:column property="fechaInicioDes" title="F. Inicio"></display:column>
+                                	<display:column property="fechaFinDes" title="F. Fin"></display:column>  
+                                	<display:column property="motivoLicencia" title="Motivo"></display:column>  
+                                	<display:column property="descripcionMotivo" title="Descripcion"></display:column>  
+                                	<display:column property="fechaHora" title="F. Hora"></display:column> 
+                                	<display:column property="idEmpleado" title="Empleado"></display:column> 
+                                	<display:column title="Estado">
+                                			<c:choose>
+                                						<c:when test="${aux.getIdEstado().equals('Generado')}">
+                                						<span class="label label-primary">${aux.getIdEstado()}</span>
+                                						</c:when>                                						
+                                						<c:when test="${aux.getIdEstado().equals('Actualizado')}">
+                                						<span class="label label-info">${aux.getIdEstado()}</span>
+                                						</c:when>                               						
+                                						
+                                			</c:choose> 
+                                	</display:column>  
+                                	<display:column title="Operacion">            
+                                			<span class="btn btn-default btn-flat"> <a href="gestionaLES?operacion=EvaluarLes&id=${aux.getIdLes()}"><i class="fa fa-circle-o"></i>Evaluar</a></span>             
+                                            
+                                	</display:column>                                   	    
+                                </display:table>
+                                </div>
+                     </div>
+			    
+		</div>
 			</section>
 			<!-- /.content -->
 
@@ -355,6 +397,8 @@
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- AdminLTE App -->
 	<script src="js/AdminLTE/app.js" type="text/javascript"></script>
+	<script src="js/plugins/bootstrap-modal/bootstrap-modalmanager.js"></script>
+   		<script src="js/plugins/bootstrap-modal/bootstrap-modal.js"></script>
 	<!-- DATA TABES SCRIPT -->
 	<script src="js/plugins/datatables/jquery.dataTables.js"
 		type="text/javascript"></script>

@@ -14,6 +14,8 @@ import entidad.Les;
 import patronDAO.Factory;
 import patronDAO.LesDao;
 
+
+
 /**
  * Servlet implementation class ServletGestionaLES
  */
@@ -43,6 +45,9 @@ public class ServletGestionaLES extends HttpServlet {
 		if(operacion.equals("actualizarEstado")){
 			this.actualizarEstadoLes(request, response);
 		}
+		if (operacion.equals("EvaluarLes")) {
+			this.EvaluarLes(request, response);
+		}
 	}
 	
 	protected void listarLes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,6 +76,23 @@ public class ServletGestionaLES extends HttpServlet {
 		System.out.println("Diagnostico : "+obj.getDiagnostico());
 		request.setAttribute("daoLes", obj);
 		request.getRequestDispatcher("/generarRES.jsp").forward(request, response);
+	}
+	private void EvaluarLes(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String cod = request.getParameter("id");
+		Les obj = null;
+		try {
+			dao = fabrica.getLes();
+			obj = dao.LesxCodigo(cod);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (obj != null) {
+			request.setAttribute("daoLes", obj);
+			request.getRequestDispatcher("/evaluarunaSolicitudLES.jsp").forward(request, response);
+		}
+
 	}
 	protected void cargarLes2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cod= request.getParameter("id");

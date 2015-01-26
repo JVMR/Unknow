@@ -83,6 +83,7 @@ BEGIN
 END$$ 
 DELIMITER ;
 #call SP_LISTAROL('Encargado Eq Remuneración');
+
 ############################### EXISTE_LES ###################################################
 DROP PROCEDURE IF EXISTS SP_EXISTE_LES;
 DELIMITER $$
@@ -107,22 +108,29 @@ if exists(select * from les where idEmpleado=id and idestado=4 ) then
      select div_clase,icono,'Todavia no puedes generar una LES  : ',estado,flag;
 end if;
 if exists(select * from les where idEmpleado=id and idestado=5 ) then
-     select 'display:none;' into flag;
+     select 'display:block;' into flag;
      select e.descripcion into estado from les l,estado e where l.idestado=e.idestado and l.idEmpleado=id and e.idestado=5 ;
 	 select 'successHandler alert alert-warning no-display' into div_clase;
      select 'fa fa-warning' into icono;
      select div_clase,icono,'Debes de modificar LES  : ',estado,flag;
 end if;
-if exists(select * from les where idEmpleado=id and idestado=7 ) then
+if exists(select * from les where idEmpleado=id and idestado=6 ) then
+     select 'display:none;' into flag;
+     select e.descripcion into estado from les l,estado e where l.idestado=e.idestado and l.idEmpleado=id and e.idestado=6 ;
+	 select 'successHandler alert alert-warning no-display' into div_clase;
+     select 'fa fa-warning' into icono;
+     select div_clase,icono,'LES en proceso : ',estado,flag;
+end if;
+if exists(select * from les where idEmpleado=id and idestado=7 order by idLES desc limit 1 ) then
      select 'display:block;' into flag;
-     select e.descripcion into estado from les l,estado e where l.idestado=e.idestado and l.idEmpleado=id and e.idestado=7 ;	
-     select 'errorHandler alert alert-danger no-display' into div_clase;
+     select e.descripcion into estado from les l,estado e where l.idestado=e.idestado and l.idEmpleado=id and e.idestado=7 order by idLES desc limit 1 ;
+	 select 'errorHandler alert alert-danger no-display' into div_clase;
      select 'fa fa-times-circle-o' into icono;
      select div_clase,icono,'Puedes generar una LES ',estado,flag;
 end if;
-if exists(select * from les where idEmpleado=id and idestado=8 ) then
+if exists(select * from les where idEmpleado=id and idestado=8 order by idLES desc limit 1) then
      select 'display:block;' into flag;
-     select e.descripcion into estado from les l,estado e where l.idestado=e.idestado and l.idEmpleado=id and e.idestado=8 ;
+     select e.descripcion into estado from les l,estado e where l.idestado=e.idestado and l.idEmpleado=id and e.idestado=8 order by idLES desc limit 1 ;
 	 select 'successHandler alert alert-success no-display' into div_clase;
      select 'fa fa-check' into icono;   
      select div_clase,icono,'Puedes generar una LES ',estado,flag;
@@ -137,6 +145,56 @@ end if;
 END$$ 
 DELIMITER ;
 #call SP_EXISTE_LES('EM0001');
+############################### MODIFICAR-LES ###################################################
+DROP PROCEDURE IF EXISTS SP_MODIFICAR_LES;
+DELIMITER $$
+CREATE PROCEDURE SP_MODIFICAR_LES(
+idL char(6),
+	diagnostico VARCHAR(200) ,
+  fechaInicioDes DATE ,
+  fechaFinDes DATE ,
+  cantidad int,
+  motivoLicencia VARCHAR(45) ,
+   desc_motivoLicencia VARCHAR(45) ,
+  fechaHora datetime)
+begin
+declare idEst int;
+select idestado into idEst from estado where descripcion='Actualizado';
+UPDATE `les`
+SET
+`diagnostico` = diagnostico,
+`fechaInicioDes` = fechaInicioDes,
+`fechaFinDes` = fechaFinDes,
+`cantDias` = cantDias,
+`motivoLicencia` = motivoLicencia,
+`descripcionMotivo` = desc_motivoLicencia,
+`idEstado`=idEst,
+`fechaHora` = fechaHora
+WHERE `idLES` = idL; 
+END$$ 
+DELIMITER ;
+
+CALL `SP_MODIFICAR_LES`('LES002', 'ABC', '2015-01-10', '2015-01-20', 5, 'Enfermedad Común', 'JJJJJ','2015-01-19 05:28:37');
+
+############################### LISTAR-LES-ESTADO ###################################################
+DROP PROCEDURE IF EXISTS SP_LISTAR_LESXESTADO;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_LESXESTADO(
+estado varchar(45))
+begin
+select l.idLES, l.diagnostico,l.fechaInicioDes,l.fechaFinDes,l.cantDias,l.motivoLicencia,l.descripcionMotivo from les l, estado e where l.idestado=e.idestado and e.descripcion=estado;
+END$$ 
+DELIMITER ;
+############################### LISTAR-LES-x2ESTADOS ###################################################
+DROP PROCEDURE IF EXISTS SP_LISTAR_LESX2ESTADOS;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_LESX2ESTADOS(
+)
+begin
+select l.idLES, l.diagnostico,l.fechaInicioDes,l.fechaFinDes,l.cantDias,l.motivoLicencia,l.descripcionMotivo,concat(ep.nombre,' ',ep.apellidoP)'Empleado',e.descripcion from les l,empleado ep, estado e where l.idestado=e.idestado and l.idEmpleado=ep.idEmpleado and e.descripcion in ('Generado','Actualizado');
+END$$ 
+DELIMITER ;
+CALL SP_LISTAR_LESX2ESTADOS ();
 ############################### REGISTRAR-LES ###################################################
 DROP PROCEDURE IF EXISTS SP_GENERAR_LES;
 DELIMITER $$
@@ -149,7 +207,8 @@ CREATE PROCEDURE SP_GENERAR_LES(
   motivoLicencia VARCHAR(45) ,
    desc_motivoLicencia VARCHAR(45) ,
   fechaHora datetime,
-  idEmpleado CHAR(6))
+  idEmpleado CHAR(6),
+  pdf varchar(200))
 begin
 declare id char(6);
 declare num char(4);
@@ -168,8 +227,8 @@ else
  select concat('LES',num) into id;		
 end if;
 select idestado into idEst from estado where descripcion='Generado';
-INSERT INTO `les`(`idLES`,`diagnostico`,`fechaInicioDes`,`fechaFinDes`,`cantDias`,`documento`,`motivoLicencia`,`descripcionMotivo`,`fechaHora`,`idEmpleado`,`idestado`)
-VALUES (id,diagnostico,fechaInicioDes,fechaFinDes,cantidad,documento,motivoLicencia,desc_motivoLicencia,fechaHora,idEmpleado,idEst);
+INSERT INTO `les`(`idLES`,`diagnostico`,`fechaInicioDes`,`fechaFinDes`,`cantDias`,`documento`,`motivoLicencia`,`descripcionMotivo`,`fechaHora`,`idEmpleado`,`idestado`,`pdf`)
+VALUES (id,diagnostico,fechaInicioDes,fechaFinDes,cantidad,documento,motivoLicencia,desc_motivoLicencia,fechaHora,idEmpleado,idEst,pdf);
     
 END$$ 
 DELIMITER ;

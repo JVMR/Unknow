@@ -175,8 +175,8 @@
                             <ul class="treeview-menu">
 
                                 <li><a href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo() %>&id=<%=empleado.getIdEmpleado()%>"><i class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
-                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LESs</a></li>
-								<li style="<%=mnu.geteLES()%>"><a href="evaluarSolicitudLES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
+								<li style="<%=mnu.geteLES()%>"><a href="GestionarLES?operacion=evLes"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
 
                            </ul>
                         </li> 
@@ -379,6 +379,29 @@
 																		</div>
 																</div>												
 		                                      	         </div>
+		                                      	         <div class="col-md-6">
+		                                           		 <div class="form-group">
+						                                      	<label>Huella de la Persona:</label>
+					                                      		<div class="fileupload fileupload-new" data-provides="fileupload">
+																	<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="GestionarPersona?operacion=huellaPersona&id=<%=objPer.getnDNI()%>" alt="">
+																	</div>
+																	<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+																		<div>
+																			<span class="btn btn-info btn-file ">
+																				<span class="fileupload-new">
+																					 <i class="fa fa-fw fa-camera"></i>
+																					 Seleccione
+																				</span> 
+																				<span class="fileupload-exists"><i class="fa fa-fw fa-camera"></i> Cambiar</span>
+																				<input type="file" name="txtFoto">
+																			</span>
+																				<a href="#" class="btn fileupload-exists btn-info" data-dismiss="fileupload">
+																				<i class="fa fa-fw fa-times"></i> Remover
+																				</a>
+																		</div>
+																</div>												
+		                                      	         </div>
+		                                      	     </div>
 		                                      	        </div>
 		                                      	     </div>
 		                                      	         <!--   <div class="form-group">

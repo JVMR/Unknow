@@ -6,9 +6,16 @@ public class Les {
 	private String diagnostico;
 	private String fechaInicioDes;
 	private String fechaFinDes;
+	private String pdf;
 	private int cantidad;
 	public int getCantidad() {
 		return cantidad;
+	}
+	public String getPdf() {
+		return pdf;
+	}
+	public void setPdf(String pdf) {
+		this.pdf = pdf;
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
