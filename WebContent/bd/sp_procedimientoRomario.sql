@@ -13,6 +13,9 @@ gestionarLES01 tinyint(1),
 gestionarRES01 tinyint(1), 
 verificarLES01 tinyint(1) ,
 verificarRES01 tinyint(1) ,
+visarRES01 tinyint(1) ,
+listarLES01 tinyint(1) ,
+listarRES01 tinyint(1) ,
 mantenimiento01 tinyint(1) ,
 reporte01 tinyint(1)
 )
@@ -30,10 +33,10 @@ BEGIN
     
 	if exists(
 	select * from rol where gestionarLES=gestionarLES01 and gestionarRES=gestionarRES01 and verificarLES=verificarLES01 and 
-	verificarRES=verificarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01) then
+	verificarRES=verificarRES01 and visarRES=visarRES01 and listarLES=listarLES01 and listarRES=listarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01) then
 
 	select idRol into idRo from rol where gestionarLES=gestionarLES01 and gestionarRES=gestionarRES01 and verificarLES=verificarLES01 and 
-	verificarRES=verificarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01;
+	verificarRES=verificarRES01 and visarRES=visarRES01 and listarLES=listarLES01 and listarRES=listarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01;
 
 	else  
 	 
@@ -50,8 +53,8 @@ BEGIN
 			select concat('RL',num03) into idRo;
 		end if;
 		
-		INSERT INTO `Rol`(`idRol`,`gestionarLES`,`gestionarRES`,`verificarLES`,`verificarRES`,`mantenimiento`,`reporte`) 
-							 VALUES (idRo,gestionarLES01,gestionarRES01,verificarLES01,verificarRES01,mantenimiento01,reporte01);
+		INSERT INTO `Rol`(`idRol`,`gestionarLES`,`gestionarRES`,`verificarLES`,`verificarRES`,`visarRES`,`listarLES`,`listarRES`,`mantenimiento`,`reporte`) 
+							 VALUES (idRo,gestionarLES01,gestionarRES01,verificarLES01,verificarRES01,visarRES01,listarLES01,listarRES01,mantenimiento01,reporte01);
      
 	end if;
     
@@ -112,6 +115,9 @@ gestionarLES01 tinyint(1),
 gestionarRES01 tinyint(1), 
 verificarLES01 tinyint(1) ,
 verificarRES01 tinyint(1) ,
+visarRES01 tinyint(1) ,
+listarLES01 tinyint(1) ,
+listarRES01 tinyint(1) ,
 mantenimiento01 tinyint(1) ,
 reporte01 tinyint(1)
 )
@@ -122,10 +128,10 @@ declare num03 int unsigned default 0;
 
 	if exists(
 	select * from rol where gestionarLES=gestionarLES01 and gestionarRES=gestionarRES01 and verificarLES=verificarLES01 and 
-	verificarRES=verificarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01) then
+	verificarRES=verificarRES01 and visarRES=visarRES01 and listarLES=listarLES01 and listarRES=listarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01) then
 
 	select idRol into idRo from rol where gestionarLES=gestionarLES01 and gestionarRES=gestionarRES01 and verificarLES=verificarLES01 and 
-	verificarRES=verificarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01;
+	verificarRES=verificarRES01 and visarRES=visarRES01 and listarLES=listarLES01 and listarRES=listarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01;
 
 	else  
 	 
@@ -142,8 +148,8 @@ declare num03 int unsigned default 0;
 			select concat('RL',num03) into idRo;
 		end if;
 		
-		INSERT INTO `Rol`(`idRol`,`gestionarLES`,`gestionarRES`,`verificarLES`,`verificarRES`,`mantenimiento`,`reporte`) 
-							 VALUES (idRo,gestionarLES01,gestionarRES01,verificarLES01,verificarRES01,mantenimiento01,reporte01);
+		INSERT INTO `Rol`(`idRol`,`gestionarLES`,`gestionarRES`,`verificarLES`,`verificarRES`,`visarRES`,`listarLES`,`listarRES`,`mantenimiento`,`reporte`) 
+							 VALUES (idRo,gestionarLES01,gestionarRES01,verificarLES01,verificarRES01,visarRES01,listarLES01,listarRES01,mantenimiento01,reporte01);
      
 	end if;
 
@@ -212,7 +218,7 @@ DELIMITER $$
 CREATE PROCEDURE SP_LISTA_UNIDADORGANICAxCODIGO(id char(5))	
 begin
 SELECT u.idUnidadOrganica,u.nombreUnidad,u.descripcion,c.idCargo,c.descripcion,
-c.sueldo, r.gestionarLES,r.gestionarRES,r.verificarLES,r.verificarRES,r.mantenimiento,
+c.sueldo, r.gestionarLES,r.gestionarRES,r.verificarLES,r.verificarRES,r.visarRES,r.listarLES,r.listarRES,r.mantenimiento,
 r.reporte
  FROM unidadorganica u inner join cargo c
 on u.idCargo=c.idCargo inner join rol r 
@@ -269,10 +275,13 @@ CREATE FUNCTION F_REGISTRA_CARGO_ROL_DE_EQUIPO(
 nombreCargo varchar(45),
 suel double,
 gestionarLES01 tinyint(1),
-gestionarRES01 tinyint(1),
-verificarLES01 tinyint(1),
-verificarRES01 tinyint(1),
-mantenimiento01 tinyint(1),
+gestionarRES01 tinyint(1), 
+verificarLES01 tinyint(1) ,
+verificarRES01 tinyint(1) ,
+visarRES01 tinyint(1) ,
+listarLES01 tinyint(1) ,
+listarRES01 tinyint(1) ,
+mantenimiento01 tinyint(1) ,
 reporte01 tinyint(1)
 )
 RETURNS char(6)
@@ -287,10 +296,10 @@ BEGIN
     
 	if exists(
 	select * from rol where gestionarLES=gestionarLES01 and gestionarRES=gestionarRES01 and verificarLES=verificarLES01 and 
-	verificarRES=verificarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01) then
+	verificarRES=verificarRES01 and visarRES=visarRES01 and listarLES=listarLES01 and listarRES=listarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01) then
 
 	select idRol into idRo from rol where gestionarLES=gestionarLES01 and gestionarRES=gestionarRES01 and verificarLES=verificarLES01 and 
-	verificarRES=verificarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01;
+	verificarRES=verificarRES01 and visarRES=visarRES01 and listarLES=listarLES01 and listarRES=listarRES01 and mantenimiento=mantenimiento01 and reporte=reporte01;
 
 	else  
 		  ##### REGISTRO ROL
@@ -305,8 +314,8 @@ BEGIN
 			select concat('RL',num03) into idRo;
 		end if;
 		
-		INSERT INTO `Rol`(`idRol`,`gestionarLES`,`gestionarRES`,`verificarLES`,`verificarRES`,`mantenimiento`,`reporte`) 
-							 VALUES (idRo,gestionarLES01,gestionarRES01,verificarLES01,verificarRES01,mantenimiento01,reporte01);
+		INSERT INTO `Rol`(`idRol`,`gestionarLES`,`gestionarRES`,`verificarLES`,`verificarRES`,`visarRES`,`listarLES`,`listarRES`,`mantenimiento`,`reporte`) 
+							 VALUES (idRo,gestionarLES01,gestionarRES01,verificarLES01,verificarRES01,visarRES01,listarLES01,listarRES01,mantenimiento01,reporte01);
 	end if;
     
     ##### REGISTRO CARGO DE EQUIPOS
@@ -393,6 +402,7 @@ begin
 
 select d.idCargo 'idCargo', c.descripcion 'nomCargo',c.sueldo 'sueldo',r.gestionarLES 'gestionarLES',
 r.gestionarRES 'gestionarRES', r.verificarLES 'verificarLES',r.verificarRES 'verificarRES',
+r.visarRES 'visarRES',r.listarLES 'listarLES',r.listarRES 'listarRES',
 r.mantenimiento 'mantenimiento',r.reporte 'reporte' from cargo_equipo d inner join cargo c
 on d.idCargo=c.idCargo inner join rol r 
 on c.idRol=r.idRol

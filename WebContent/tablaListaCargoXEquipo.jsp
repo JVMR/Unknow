@@ -26,6 +26,11 @@
 <!-- DATA TABLES -->
 <link href="css/datatables/dataTables.bootstrap.css" rel="stylesheet"
 	type="text/css" />
+	
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
 <link href="css/nuestros/unidadorgánica.css" rel="stylesheet"
 	type="text/css">
@@ -33,7 +38,7 @@
 </head>
 <body>
 
-	<form role="form" name="equipo" action="gestionarEquipo" >
+	<form role="tablaListaCargoxEquipo"  id="tablaListaCargoxEquipo" action="gestionarEquipo"  >
 				<div class="box-body">
 								<div class="col-md-4">
 									<div class="box-header">
@@ -52,7 +57,7 @@
 										<label for="txtSueldo">Sueldo del Cargo</label>
 										<div class="input-group">
 											<span class="input-group-addon">$</span> <input
-												class="form-control" type="text" name="txtSueldo"></input> <span
+												class="form-control" type="text" name="txtSueldo" id="txtSueldo"></input> <span
 												class="input-group-addon">.00</span>
 										</div>
 									</div>
@@ -97,11 +102,7 @@
 													readonly="readonly">
 											</div>
 											<br>
-
-
-										</div>
-
-										<div class="col-md-6">
+											
 											<div class="input-group">
 												<span class="input-group-addon"> <input
 													type="checkbox" name="chkVerificarRES" id="chkVerificarRES">
@@ -110,6 +111,37 @@
 													readonly="readonly">
 											</div>
 											<br>
+											
+											<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkVisarRES" id="chkVisarRES">
+											</span> <input type="text" class="form-control"
+												name="txtVisarRES" value="Visar RES"
+												readonly="readonly">
+										</div>
+										<br>
+
+
+
+										</div>
+
+										<div class="col-md-6">
+											<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkListarLES" id="chkListarLES">
+											</span> <input type="text" class="form-control"
+												name="txtListarLES" value="Listar LES"
+												readonly="readonly">
+										</div>
+										<br>
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkListarRES" id="chkListarRES">
+											</span> <input type="text" class="form-control"
+												name="txtListarRES" value="Listar RES"
+												readonly="readonly">
+									</div>
+										<br>
 
 											<div class="input-group">
 												<span class="input-group-addon"> <input
@@ -151,8 +183,13 @@
                                	<display:column  title="ROL"></display:column>
                                	<display:column property="gestionarLES" title="GESTIONAR LES"></display:column>
                                	<display:column property="gestionarRES" title="GESTIONAR RES"></display:column>
-                               	<display:column property="verficarLES" title="VERIFICAR LES"></display:column>
+                               	<display:column property="verificarLES" title="VERIFICAR LES"></display:column>
                                	<display:column property="verificarRES" title="VERIFICAR RES"></display:column>
+                               	
+                               	<display:column property="visarRES" title="VISAR RES"></display:column>
+                               	<display:column property="listarLES" title="LISTAR LES"></display:column>
+                               	<display:column property="listarRES" title="LISTAR RES"></display:column>
+                               	
                                	<display:column property="mantenimiento" title="MANTENIMIENTO"></display:column>
                                	<display:column property="reporte" title="REPORTE"></display:column>
                               	<display:column title="OPERACIÓN">
@@ -192,5 +229,32 @@
 		type="text/javascript"></script>
 	<script src="js/plugins/datatables/dataTables.bootstrap.js"
 		type="text/javascript"></script>
+		
+	<script src="js/jquery_validacion/form-TablaListaCargoxEquipo.js"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+			FormValidator.init();
+			alert('llego')
+	});
+	
+	
+	 $(function() {
+		    $( "#dialog-confirm" ).dialog({
+		      resizable: false,
+		      height:140,
+		      modal: true,
+		      buttons: {
+		        "Delete all items": function() {
+		          $( this ).dialog( "close" );
+		        },
+		        Cancel: function() {
+		          $( this ).dialog( "close" );
+		        }
+		      }
+		    });
+		  });
+	
+	</script>
 </body>
 </html>

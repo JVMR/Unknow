@@ -40,7 +40,7 @@ public class GestionarLES extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	DateFormat fecha= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	DateFormat fecha1= new SimpleDateFormat("yyyy-MM-dd");
+	DateFormat fecha1= new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 	Factory fabrica= Factory.getTipo(Factory.TIPO_MYSQL);
 	CargoDao dao= null;
 	LesDao les= null;

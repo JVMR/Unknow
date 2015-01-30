@@ -199,6 +199,21 @@
                            
                            </ul>							
                         </li>
+                        <li class="treeview" style="<%=mnu.getRprt()%>">
+                            <a href="LES.jsp">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>REPORTE</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                 <li ><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte LES</a></li>
+								<li ><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
+								<li><a href="reporte3.jsp"><i class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
+
+                           </ul>
+                        </li> 
+                        
+                        
                         
                       <!--  <li class="treeview" >
                         	<a href="#">
@@ -223,8 +238,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Blank page
-                        <small>it all starts here</small>
+                        SISTEMA DE GESTION DE LICENCIA POR ENFERMEDAD SUBSIDIADOS
+                        <small></small>
                     </h1>
                     <ol class="breadcrumb">
                         <li class="active"><i class="fa fa-dashboard"></i>Home</li>

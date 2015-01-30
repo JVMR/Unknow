@@ -62,9 +62,9 @@
             <div class="margin text-center">
                 <span>Sign in using social networks</span>
                 <br/>
-                <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
-                <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
-                <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
+                <a href="https://www.facebook.com/INRNoili"><button class="btn bg-light-blue btn-circle"> <i  class="fa fa-facebook"></i> </button></a>
+                <a href="https://github.com/JVMR/Unknow"><button class="btn bg-aqua btn-circle"><i class="fa  fa-github"></i></button></a> 
+                <a href="https://plus.google.com/106514810474613431672/about?hl=es"><button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button></a> 
 
             </div>
         </div>

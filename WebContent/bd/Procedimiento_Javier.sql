@@ -11,7 +11,7 @@ DELIMITER ;
 ############################## LISTAROL #################################################
 DROP PROCEDURE IF EXISTS SP_LISTAROL;
 DELIMITER $$
-CREATE PROCEDURE SP_LISTAROL(idCar varchar(30))
+CREATE PROCEDURE SP_LISTAROL(idCar varchar(100))
 BEGIN
 	declare rol char(6);    
     declare gLES varchar(15);

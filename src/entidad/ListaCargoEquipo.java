@@ -3,19 +3,16 @@ package entidad;
 public class ListaCargoEquipo {
 	private String idCargo;
 	private int itemCargo;
-	public int getItemCargo() {
-		return itemCargo;
-	}
-	public void setItemCargo(int itemCargo) {
-		this.itemCargo = itemCargo;
-	}
 	private String nombreCargo;
 	private double sueldo;
 
 	private int gestionarLES;
 	private int gestionarRES;
-	private int verficarLES; 
+	private int verificarLES; 
 	private int verificarRES;
+	private int visarRES;
+	private int listarLES;
+	private int listarRES;
 	private int mantenimiento;
 	private int reporte;
 	public String getIdCargo() {
@@ -23,6 +20,12 @@ public class ListaCargoEquipo {
 	}
 	public void setIdCargo(String idCargo) {
 		this.idCargo = idCargo;
+	}
+	public int getItemCargo() {
+		return itemCargo;
+	}
+	public void setItemCargo(int itemCargo) {
+		this.itemCargo = itemCargo;
 	}
 	public String getNombreCargo() {
 		return nombreCargo;
@@ -48,17 +51,35 @@ public class ListaCargoEquipo {
 	public void setGestionarRES(int gestionarRES) {
 		this.gestionarRES = gestionarRES;
 	}
-	public int getVerficarLES() {
-		return verficarLES;
+	public int getVerificarLES() {
+		return verificarLES;
 	}
-	public void setVerficarLES(int verficarLES) {
-		this.verficarLES = verficarLES;
+	public void setVerificarLES(int verificarLES) {
+		this.verificarLES = verificarLES;
 	}
 	public int getVerificarRES() {
 		return verificarRES;
 	}
 	public void setVerificarRES(int verificarRES) {
 		this.verificarRES = verificarRES;
+	}
+	public int getVisarRES() {
+		return visarRES;
+	}
+	public void setVisarRES(int visarRES) {
+		this.visarRES = visarRES;
+	}
+	public int getListarLES() {
+		return listarLES;
+	}
+	public void setListarLES(int listarLES) {
+		this.listarLES = listarLES;
+	}
+	public int getListarRES() {
+		return listarRES;
+	}
+	public void setListarRES(int listarRES) {
+		this.listarRES = listarRES;
 	}
 	public int getMantenimiento() {
 		return mantenimiento;
@@ -72,6 +93,7 @@ public class ListaCargoEquipo {
 	public void setReporte(int reporte) {
 		this.reporte = reporte;
 	}
+	
 	
 	
 

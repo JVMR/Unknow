@@ -104,7 +104,7 @@
                     </div>                    
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li>
+                        <li >
                             <a href="bienvenido.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Bienvenido</span>
                             </a>
@@ -114,7 +114,7 @@
                                 <i class="fa fa-th"></i> <span>Perfil</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
                         	<a href="unidadOrganica.jsp">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>Unidad Orgánica</span>
@@ -125,7 +125,7 @@
                                 <li><a href="gestionarUnidadOrganica?operacion=listarUnidad"><i class="fa fa-angle-double-right"></i>Listar Unidad Organica</a></li>
                            </ul>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
                             <a href="equipo.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Equipo</span>
@@ -138,7 +138,7 @@
 
                         </li>      
                               
-                        <li class="treeview">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
                             <a href="empleado.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Empleado</span>
@@ -150,7 +150,7 @@
                            </ul>
 
                         </li>   
-                        <li class="treeview ">
+                        <li class="treeview" style="<%=mnu.getMant()%>">
 
                             <a href="empleado.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
@@ -164,7 +164,7 @@
 
                         </li>
                  
-                       <li class="treeview">
+                       <li class="treeview" style="<%=mnu.getgLES()%>">
                             <a href="LES.jsp">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>LES</span>
@@ -173,36 +173,55 @@
                             <ul class="treeview-menu">
 
                                 <li><a href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo() %>&id=<%=empleado.getIdEmpleado()%>"><i class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
-                                <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
+                                 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
 								<li style="<%=mnu.geteLES()%>"><a href="GestionarLES?operacion=evLes"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
 
                            </ul>
                         </li> 
-                     
-                        <li class="treeview">
+                     	<%
+                     	String mnuInactivo="display:block;";
+                     		if((mnu.getgRES().equals("display:none;")) && (mnu.getlRES().equals("display:none;")) && (mnu.geteRES().equals("display:none;")) && (mnu.getVsrRES().equals("display:none;"))){
+                     			mnuInactivo="display:none;";
+                     		}
+                     			%>
+                        <li class="treeview" style="<%=mnuInactivo%>">
                         	<a href="RES.jsp">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>RES</span>
                         		<i class="fa fa-angle-left pull-right"></i>
                         	</a>
                         	<ul class="treeview-menu">
-                                <li><a href="generarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
-                                <li><a href="actualizarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
-                                <li><a href="consutaRes.jsp"><i class="fa fa-angle-double-right"></i>Consultar Solicitud RES</a></li>
+                                <li style="<%=mnu.getgRES()%>"><a href="generarRES.jsp"><i class="fa fa-angle-double-right"></i>Generar Resolucion administrativa de LES</a></li>
+                                <li style="<%=mnu.getlRES()%>"><a href="consutaRes.jsp"><i class="fa fa-angle-double-right"></i>Consultar Solicitud RES</a></li>
+                                <li style="<%=mnu.geteRES()%>"><a href="evaluarRES.jsp"><i class="fa fa-angle-double-right"></i>Evaluar RES</a></li>
+                                <li style="<%=mnu.getVsrRES()%>"><a href="visarRES.jsp"><i class="fa fa-angle-double-right"></i>Visar RES</a></li>
                            
+                           </ul>							
+                        </li>
+                        <li class="treeview" style="<%=mnu.getRprt()%>">
+                            <a href="LES.jsp">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>REPORTE</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                 <li ><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte LES</a></li>
+								<li ><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
+								<li><a href="reporte3.jsp"><i class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
+								
                            </ul>
-
-                        </li>  
-                        <li class="treeview active">
+                        </li> 
+                        
+                      <!--  <li class="treeview" >
                         	<a href="#">
                         		<i class="fa fa-bar-chart-o"></i>
                         		<span>Descanso Médico</span>
                         		<i class="fa fa-angle-left pull-right"></i>
                         	</a>
                         	<ul class="treeview-menu">
-                                <li class="active"><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
+                                <li><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
                            </ul>
-                        </li>          
+                        </li>       -->       
 					</ul>
 
                        

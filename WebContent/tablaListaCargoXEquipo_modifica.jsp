@@ -100,11 +100,7 @@
 													readonly="readonly">
 											</div>
 											<br>
-
-
-										</div>
-
-										<div class="col-md-6">
+											
 											<div class="input-group">
 												<span class="input-group-addon"> <input
 													type="checkbox" name="chkVerificarRES" id="chkVerificarRES">
@@ -113,6 +109,37 @@
 													readonly="readonly">
 											</div>
 											<br>
+											
+											<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkVisarRES" id="chkVisarRES">
+											</span> <input type="text" class="form-control"
+												name="txtVisarRES" value="Visar RES"
+												readonly="readonly">
+										</div>
+										<br>
+
+
+
+										</div>
+
+										<div class="col-md-6">
+											<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkListarLES" id="chkListarLES">
+											</span> <input type="text" class="form-control"
+												name="txtListarLES" value="Listar LES"
+												readonly="readonly">
+										</div>
+										<br>
+										<div class="input-group">
+											<span class="input-group-addon"> <input
+												type="checkbox" name="chkListarRES" id="chkListarRES">
+											</span> <input type="text" class="form-control"
+												name="txtListarRES" value="Listar RES"
+												readonly="readonly">
+									</div>
+										<br>
 
 											<div class="input-group">
 												<span class="input-group-addon"> <input
@@ -157,8 +184,13 @@
                                	<display:column  title="ROL"></display:column>
                                	<display:column property="gestionarLES" title="GESTIONAR LES"></display:column>
                                	<display:column property="gestionarRES" title="GESTIONAR RES"></display:column>
-                               	<display:column property="verficarLES" title="VERIFICAR LES"></display:column>
+                               	<display:column property="verificarLES" title="VERIFICAR LES"></display:column>
                                	<display:column property="verificarRES" title="VERIFICAR RES"></display:column>
+                               	
+                               	<display:column property="visarRES" title="VISAR RES"></display:column>
+                               	<display:column property="listarLES" title="LISTAR LES"></display:column>
+                               	<display:column property="listarRES" title="LISTAR RES"></display:column>
+                               	
                                	<display:column property="mantenimiento" title="MANTENIMIENTO"></display:column>
                                	<display:column property="reporte" title="REPORTE"></display:column>
                               	<display:column title="OPERACIÓN">

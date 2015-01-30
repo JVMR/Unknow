@@ -110,6 +110,7 @@ public class MySqlLesDao implements LesDao {
 				obj.setIdEmpleado(rs.getString(8));
 				obj.setNomEmpleado(rs.getString(9));
 				obj.setPdf(rs.getString(10));
+				System.out.println("Autores : Jvan, Romario, Javier, Miguel");
 				}	
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -139,7 +140,7 @@ public class MySqlLesDao implements LesDao {
 			pstm.setString(1, l.getIdLes());
 			pstm.setString(2, l.getIdEstado());
 			salida=pstm.executeUpdate();
-			
+			System.out.println("Autores : Jvan, Romario, Javier, Miguel");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally{
@@ -180,6 +181,7 @@ public class MySqlLesDao implements LesDao {
 				obj.setIdEmpleado(rs.getString(8));
 				obj.setIdEstado(rs.getString(9));				
 				data.add(obj);
+				System.out.println("Autores : Jvan, Romario, Javier, Miguel");
 			}	
 		} catch (Exception ex) {
 			ex.printStackTrace();

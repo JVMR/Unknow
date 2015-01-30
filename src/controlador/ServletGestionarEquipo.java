@@ -157,8 +157,12 @@ public class ServletGestionarEquipo extends HttpServlet {
 		int gestionarRES=0;
 		int verificarLES=0;
 		int verificarRES=0;
+		int visarRES=0;
+		int listarLES=0;
+		int listarRES=0;
 		int mantenimiento=0;
 		int reporte=0;
+
 		
 		String nombrecargo=request.getParameter("txtNombreCargo");
 		String sueldo=request.getParameter("txtSueldo");
@@ -167,6 +171,9 @@ public class ServletGestionarEquipo extends HttpServlet {
 		String chkGestionarRES=request.getParameter("chkGestionarRES");
 		String chkVerificarLES=request.getParameter("chkVerificarLES");
 		String chkVerificarRES=request.getParameter("chkVerificarRES");
+		String chkVisarRES = request.getParameter("chkVisarRES");
+		String chkListarLES = request.getParameter("chkListarLES");
+		String chkListarRES = request.getParameter("chkListarRES");
 		String chkMantenimiento=request.getParameter("chkMantenimiento");
 		String chkReportes=request.getParameter("chkReportes");
 		
@@ -182,6 +189,15 @@ public class ServletGestionarEquipo extends HttpServlet {
 		if(chkVerificarRES != null){
 			verificarRES=1;
 		}
+		if (chkVisarRES != null) {
+			visarRES=1;
+		}
+		if (chkListarLES != null) {
+			listarLES=1;
+		}
+		if (chkListarRES != null) {
+			listarRES=1;
+		}
 		if(chkMantenimiento != null){
 			mantenimiento=1;
 		}
@@ -195,8 +211,11 @@ public class ServletGestionarEquipo extends HttpServlet {
 		cargoEquipo.setSueldo(Double.parseDouble(sueldo));
 		cargoEquipo.setGestionarLES(gestionarLES);
 		cargoEquipo.setGestionarRES(gestionarRES);
-		cargoEquipo.setVerficarLES(verificarLES);
+		cargoEquipo.setVerificarLES(verificarLES);
 		cargoEquipo.setVerificarRES(verificarRES);
+		cargoEquipo.setVisarRES(visarRES);
+		cargoEquipo.setListarLES(listarLES);
+		cargoEquipo.setListarRES(listarRES);
 		cargoEquipo.setMantenimiento(mantenimiento);
 		cargoEquipo.setReporte(reporte);
 		
@@ -352,6 +371,9 @@ public class ServletGestionarEquipo extends HttpServlet {
 		int gestionarRES=0;
 		int verificarLES=0;
 		int verificarRES=0;
+		int visarRES=0;
+		int listarLES=0;
+		int listarRES=0;
 		int mantenimiento=0;
 		int reporte=0;
 		
@@ -362,6 +384,9 @@ public class ServletGestionarEquipo extends HttpServlet {
 		String chkGestionarRES=request.getParameter("chkGestionarRES");
 		String chkVerificarLES=request.getParameter("chkVerificarLES");
 		String chkVerificarRES=request.getParameter("chkVerificarRES");
+		String chkVisarRES = request.getParameter("chkVisarRES");
+		String chkListarLES = request.getParameter("chkListarLES");
+		String chkListarRES = request.getParameter("chkListarRES");
 		String chkMantenimiento=request.getParameter("chkMantenimiento");
 		String chkReportes=request.getParameter("chkReportes");
 		
@@ -377,6 +402,15 @@ public class ServletGestionarEquipo extends HttpServlet {
 		if(chkVerificarRES != null){
 			verificarRES=1;
 		}
+		if (chkVisarRES != null) {
+			visarRES=1;
+		}
+		if (chkListarLES != null) {
+			listarLES=1;
+		}
+		if (chkListarRES != null) {
+			listarRES=1;
+		}
 		if(chkMantenimiento != null){
 			mantenimiento=1;
 		}
@@ -390,7 +424,9 @@ public class ServletGestionarEquipo extends HttpServlet {
 		cargoEquipo.setSueldo(Double.parseDouble(sueldo));
 		cargoEquipo.setGestionarLES(gestionarLES);
 		cargoEquipo.setGestionarRES(gestionarRES);
-		cargoEquipo.setVerficarLES(verificarLES);
+		cargoEquipo.setVerificarLES(verificarLES);
+		cargoEquipo.setListarLES(listarLES);
+		cargoEquipo.setListarRES(listarRES);
 		cargoEquipo.setVerificarRES(verificarRES);
 		cargoEquipo.setMantenimiento(mantenimiento);
 		cargoEquipo.setReporte(reporte);

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>INR | Equipo</title>
+<title>Registro de Equipos</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -30,9 +30,7 @@
 
 <link href="css/nuestros/unidadorgánica.css" rel="stylesheet"
 	type="text/css">
-<!-- Icono -->
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -43,14 +41,13 @@
 <body class="skin-blue">
 	<!-- Recupero datos de empleado que ingreso -->
 	<%
-	
-	Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");    
-		if(empleado==null){
-			response.sendRedirect("index.jsp");
-		}else{ 
-			ArrayList<ListaCargoEquipo> tabla= new ArrayList<ListaCargoEquipo>();
-			Menu mnu= (Menu) session.getAttribute("MenuDinamico");
-	%>
+    		Empleado empleado= (Empleado) session.getAttribute("USUARIO_LOGEADO");    
+    	if(empleado==null){
+    		response.sendRedirect("index.jsp");
+    	}else{    		
+    		Menu mnu= (Menu) session.getAttribute("MenuDinamico");
+    		
+    	%>
 
 
 	<!-- header logo: style can be found in header.less -->
@@ -113,7 +110,7 @@
                         </div>
                     </div>                    
                     <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
+                   <ul class="sidebar-menu">
                         <li >
                             <a href="bienvenido.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Bienvenido</span>
@@ -208,6 +205,19 @@
                            
                            </ul>							
                         </li>
+                        <li class="treeview" style="<%=mnu.getRprt()%>">
+                            <a href="LES.jsp">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>REPORTE</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                 <li ><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte LES</a></li>
+								<li ><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
+								<li><a href="reporte3.jsp"><i class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
+								
+                           </ul>
+                        </li> 
                         
                       <!--  <li class="treeview" >
                         	<a href="#">
@@ -281,7 +291,7 @@
 									</div>
 									<br>
 									<div >
-											<iframe src="tablaListaCargoXEquipo.jsp" style=" width: 1000px; height: 600px; " >
+											<iframe src="tablaListaCargoXEquipo.jsp" style=" width: 1200px; height: 600px; " >
 						
 											</iframe>
 									</div>
@@ -449,9 +459,18 @@
 
        }
   }
-</script> 
-	<%}%>	
+
+  
 	
+	
+	
+	</script> 
+	
+	<%   		
+    		
+    	}
+    		
+    	%>
 	
 	
 </body>

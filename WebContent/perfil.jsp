@@ -200,16 +200,19 @@
                            </ul>							
                         </li>
                         
-                      <!--  <li class="treeview" >
-                        	<a href="#">
-                        		<i class="fa fa-bar-chart-o"></i>
-                        		<span>Descanso Médico</span>
-                        		<i class="fa fa-angle-left pull-right"></i>
-                        	</a>
-                        	<ul class="treeview-menu">
-                                <li><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
+                       <li class="treeview" style="<%=mnu.getRprt()%>">
+                            <a href="LES.jsp">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>REPORTE</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                 <li ><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte LES</a></li>
+								<li ><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
+								<li><a href="reporte3.jsp"><i class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
+								
                            </ul>
-                        </li>       -->       
+                        </li>      
 					</ul>
 
                        
@@ -230,32 +233,18 @@
             </div><!-- /.headline -->
             
             <!-- User name -->
-            <div class="lockscreen-name">John Doe</div>
+            <div class="lockscreen-name"><%=empleado.getNombresEmpleado() %>&nbsp;<%=empleado.getApellidoPaterno() %></div>
+            <div class="lockscreen-name"><%=empleado.getUsuario() %></div>
             
             <!-- START LOCK SCREEN ITEM -->
             <div class="lockscreen-item">
                 <!-- lockscreen image -->
                 <div class="lockscreen-image">
-                    <img src="img/avatar5.png" alt="user image"/>
-                </div>
-                <!-- /.lockscreen-image -->
+                    <img src="GestionarEmpleado?operacion=fotoEmpleado&id=<%=empleado.getIdEmpleado() %>" alt="user image"/>
+                </div> 
+                </div><!-- /.lockscreen-item -->
 
-                <!-- lockscreen credentials (contains the form) -->
-                <div class="lockscreen-credentials">   
-
-                    <div class="input-group">
-                        <input type="password" class="form-control" placeholder="password" />
-                        <div class="input-group-btn">
-                            <button class="btn btn-flat"><i class="fa fa-arrow-right text-muted"></i></button>
-                        </div>
-                    </div>
-                </div><!-- /.lockscreen credentials -->
-
-            </div><!-- /.lockscreen-item -->
-
-            <div class="lockscreen-link">
-                <a href="login.html">Or sign in as a different user</a>
-            </div>            
+                       
         </div><!-- /.center -->             
 
                 </section><!-- /.content -->

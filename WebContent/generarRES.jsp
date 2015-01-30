@@ -48,7 +48,7 @@
     		Les objRes= (Les) request.getAttribute("daoLes");
     	 DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd"); %>
         <!-- header logo: style can be found in header.less -->
-       <header class="header">
+       <header class="header"><!-- Inicio del encabezado  -->
             <a href="bienvenido.jsp" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 INR
@@ -68,20 +68,22 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span><%=empleado.getNombresEmpleado() %>&nbsp;<%=empleado.getApellidoPaterno() %>&nbsp;<%=empleado.getApellidoMaterno() %><i class="caret"></i></span>
+                                <span><%=empleado.getNombresEmpleado() %>&nbsp;<%=empleado.getApellidoPaterno() %><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <img src="img/avatar3.png" class="img-circle" alt="User Image" />
-                                    <p><%=empleado.getNombresEmpleado() %>&nbsp;<%=empleado.getApellidoPaterno() %>&nbsp;<%=empleado.getApellidoMaterno() %><br/>
+                                    <img src="GestionarEmpleado?operacion=fotoEmpleado&id=<%=empleado.getIdEmpleado() %>" class="img-circle" alt="User Image" />
+
+                                    <p><%=empleado.getNombresEmpleado() %>&nbsp;<%=empleado.getApellidoPaterno() %> <br/>
+
                                         <%=empleado.getIdCargo() %>
                                         <small>Asalariado desde <%=empleado.getFechaIngreso() %></small>
                                     </p>
                                 </li>                                
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="paginas/perfil.jsp" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="perfil.jsp" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="logout" class="btn btn-default btn-flat">Salir</a>
@@ -92,7 +94,7 @@
                     </ul>
                 </div>
             </nav>
-        </header>	
+        </header>
                 <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
            <aside class="left-side sidebar-offcanvas"> <!-- Inicio del Menu -->               
@@ -206,16 +208,19 @@
                            </ul>							
                         </li>
                         
-                      <!--  <li class="treeview" >
-                        	<a href="#">
-                        		<i class="fa fa-bar-chart-o"></i>
-                        		<span>Descanso Médico</span>
-                        		<i class="fa fa-angle-left pull-right"></i>
-                        	</a>
-                        	<ul class="treeview-menu">
-                                <li><a href="consultarDM.jsp"><i class="fa fa-angle-double-right"></i>Evaluar Descanso Médico</a></li>
+                      <li class="treeview" style="<%=mnu.getRprt()%>">
+                            <a href="LES.jsp">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>REPORTE</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                 <li ><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte LES</a></li>
+								<li ><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
+								<li><a href="reporte3.jsp"><i class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
+								
                            </ul>
-                        </li>       -->       
+                        </li>      
 					</ul>
 
                        
@@ -259,11 +264,11 @@
                                       <!-- <div class="form-group"> -->  
                                      
        										
-       	<form action="gestionarRES" style="border :1px;border-style: solid;padding-left:50px;">
+       	<form action="gestionarRES" style="padding-left:50px;">
        	<input type="hidden" value="registraRES" name="operacion" >
           		<div class="form-group">
                  	<label>A  :</label>   
-                       	<input type="text" class="form-control" placeholder="Escriba ..."  value="Miguel Llamoca Llamoca" >
+                       	<input type="text" class="form-control" placeholder="Escriba ..."  value="Romario Vargas Jacinto" >
                 </div>
                <div class="form-group">
                		<label>De  :</label>               	
