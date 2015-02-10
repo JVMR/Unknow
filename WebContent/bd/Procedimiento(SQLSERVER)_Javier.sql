@@ -85,3 +85,28 @@ create proc listaPersonaxCodigo
 as
 	select * from persona where nDNI=@nDNI
 go
+if OBJECT_ID('listaProvxDep') is not null
+	drop proc listaProvxDep
+go
+create proc listaProvxDep
+(@dep int)
+as
+	select idProv,provincia from PROVINCIA where idDepa=@dep
+go
+if OBJECT_ID('listaDistxProv') is not null
+	drop proc listaDistxProv
+go
+create proc listaDistxProv
+(@prov int)
+as
+	select idDist,distrito from DISTRITO where idProv=@prov
+go
+if OBJECT_ID('ingresarHuella') is not null
+	drop proc ingresarHuella
+go
+create proc ingresarHuella
+(@huella image,
+@dni char(8))
+as
+	update PERSONA set huella=@huella where nDNI=@dni
+go

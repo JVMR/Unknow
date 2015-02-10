@@ -60,7 +60,7 @@ DROP PROCEDURE IF exists SP_LESxCODIGO;
 DELIMITER $$
 CREATE PROCEDURE SP_LESxCODIGO(id char(6))	
 begin
-SELECT l.idLes, l.diagnostico, l.fechaInicioDes, l.fechafindes, l.motivolicencia, l.descripcionmotivo,l.fechaHora,l.idEmpleado, concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM) as 'Empleado'FROM `les` l join `empleado` e on l.idEmpleado = e.idEmpleado  where l.idLes=id;
+SELECT l.idLes, l.diagnostico, l.fechaInicioDes, l.fechafindes, l.motivolicencia, l.descripcionmotivo,l.fechaHora,l.idEmpleado, concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM),l.pdf as 'Empleado'FROM `les` l join `empleado` e on l.idEmpleado = e.idEmpleado  where l.idLes=id;
 END$$ 
 DELIMITER ;
 #CALL SP_LESxCODIGO('LE0001');

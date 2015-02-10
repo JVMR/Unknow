@@ -1,5 +1,5 @@
 var FormValidator = function () {   
-    var runValidator2 = function (){
+    var runValidator2 = function () {
         var form1 = $('#ingresaEmpleado');
         var errorHandler1 = $('.errorHandler', form1);
         var successHandler1 = $('.successHandler', form1);
