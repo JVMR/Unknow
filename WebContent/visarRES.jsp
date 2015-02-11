@@ -1,17 +1,16 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="entidad.Les"%>
 <%@page import="entidad.Menu"%>
 <%@ taglib uri="misLibrerias" prefix="cbo"%>
 <%@page import="entidad.Empleado"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://displaytag.sf.net/el" prefix="display"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>INR | Evaluar Solicitud LES</title>
+<title>INR | Visar RES</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -29,8 +28,12 @@
 <!-- Icono -->
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-<link href="css/nuestros/unidadorgÃ¡nica.css" rel="stylesheet"
+<link href="css/nuestros/unidadorgánica.css" rel="stylesheet"
 	type="text/css">
+
+<link href="css/bootstrap-modal/bootstrap-modal-bs3patch.css"
+	rel="stylesheet" />
+<link href="css/bootstrap-modal/bootstrap-modal.css" rel="stylesheet" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,15 +51,6 @@
 			response.sendRedirect("index.jsp");
 		} else {
 			Menu mnu = (Menu) session.getAttribute("MenuDinamico");
-			Les objLes= (Les) request.getAttribute("daoLes");
-	    	 DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
-	    	 DateFormat df1 = DateFormat.getDateInstance(DateFormat.FULL);
-	    	 String fec = df1.format(new Date());
-	    	 Date fechaini= fecha.parse(objLes.getFechaInicioDes());
-	    	 Date fechafin= fecha.parse(objLes.getFechaFinDes());
-	    	 
-	    	 String fecini = df1.format(fechafin);
-	    	 String fecfin = df1.format(fechaini);
 	%>
 
 
@@ -133,7 +127,7 @@
 					</a></li>
 					<li class="treeview" style="<%=mnu.getMant()%>"><a
 						href="unidadOrganica.jsp"> <i class="fa fa-bar-chart-o"></i> <span>Unidad
-								OrgÃ¡nica</span> <i class="fa fa-angle-left pull-right"></i>
+								Orgánica</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a href="registraUnidadOrganica.jsp"><i
@@ -173,14 +167,22 @@
 									class="fa fa-angle-double-right"></i> Listar Persona</a></li>
 						</ul></li>
 
-					<li class="treeview active" style="<%=mnu.getgLES()%>"><a
+					<li class="treeview" style="<%=mnu.getgLES()%>"><a
 						href="LES.jsp"> <i class="fa fa-bar-chart-o"></i> <span>LES</span>
 							<i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 
-							 <li style="<%=mnu.getlLES()%>"><a href="GestionarLES?operacion=listarLes"><i class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
-							<li class="active" style="<%=mnu.geteLES()%>"><a href="GestionarLES?operacion=evLes"><i class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+							<li><a
+								href="GestionarLES?operacion=listarCargoxNombre&nom=<%=empleado.getIdCargo()%>&id=<%=empleado.getIdEmpleado()%>"><i
+									class="fa fa-angle-double-right"></i>Gestionar LES</a></li>
+							<li style="<%=mnu.getlLES()%>"><a
+								href="GestionarLES?operacion=listarLes"><i
+									class="fa fa-angle-double-right"></i>Consultar Solicitud LES</a></li>
+							<li class="active" style="<%=mnu.geteLES()%>"><a
+								href="GestionarLES?operacion=evLes"><i
+									class="fa fa-angle-double-right"></i>Evaluar Solicitud LES</a></li>
+
 						</ul></li>
 					<%
 						String mnuInactivo = "display:block;";
@@ -191,7 +193,7 @@
 								mnuInactivo = "display:none;";
 							}
 					%>
-					<li class="treeview" style="<%=mnuInactivo%>"><a
+					<li class="treeview active" style="<%=mnuInactivo%>"><a
 						href="RES.jsp"> <i class="fa fa-bar-chart-o"></i> <span>RES</span>
 							<i class="fa fa-angle-left pull-right"></i>
 					</a>
@@ -203,24 +205,25 @@
 									class="fa fa-angle-double-right"></i>Consultar Solicitud RES</a></li>
 							<li style="<%=mnu.geteRES()%>"><a href="evaluarRES.jsp"><i
 									class="fa fa-angle-double-right"></i>Evaluar RES</a></li>
-							<li style="<%=mnu.getVsrRES()%>"><a href="visarRES.jsp"><i
-									class="fa fa-angle-double-right"></i>Visar RES</a></li>
+							<li class="active" style="<%=mnu.getVsrRES()%>"><a
+								href="visarRES.jsp"><i class="fa fa-angle-double-right"></i>Visar
+									RES</a></li>
 
 						</ul></li>
 
-					 <li class="treeview" style="<%=mnu.getRprt()%>">
-                            <a href="LES.jsp">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>REPORTE</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                 <li ><a href="reporte.jsp"><i class="fa fa-angle-double-right"></i>Reporte LES</a></li>
-								<li ><a href="reporte2.jsp"><i class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
-								<li><a href="reporte3.jsp"><i class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
-								
-                           </ul>
-                        </li> 
+					<li class="treeview" style="<%=mnu.getRprt()%>"><a
+						href="LES.jsp"> <i class="fa fa-bar-chart-o"></i> <span>REPORTE</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a href="reporte.jsp"><i
+									class="fa fa-angle-double-right"></i>Reporte LES</a></li>
+							<li><a href="reporte2.jsp"><i
+									class="fa fa-angle-double-right"></i>Reporte Empleado</a></li>
+							<li><a href="reporte3.jsp"><i
+									class="fa fa-angle-double-right"></i>Reporte Unidad Organica</a></li>
+
+						</ul></li>
 				</ul>
 
 
@@ -234,40 +237,53 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Evaluacion de Solicitudes LES<small>Aprobacion, conforme o
-						desaprobaciÃ³n de solicitudes</small>
+					Visar Resoluciones de LES<small>Evaluar Resoluciones de LES
+					</small>
 				</h1>
 				<!-- Modificar al crear nuevos -->
 				<ol class="breadcrumb">
 					<li><a href="bienvenido.jsp"><i class="fa fa-dashboard"></i>
 							Home</a></li>
-					<li><a href="unidadOrganica.jsp">Unidad Organica</a></li>
-					<li class="active">Registrar Unidad OrgÃ¡nica</li>
+					<li><a href="unidadOrganica.jsp">RES</a></li>
+					<li class="active">Visar RES</li>
 				</ol>
 			</section>
 
 			<!-- Main content -->
 			<!-- ############################################################################################################################################ -->
 			<section class="content">
-				<form action="">
-				<input type="hidden" value="actualizarEstado" name="operacion" >
-				<div class="row">					
-					
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="box box-success">
+							<div class="box-body">
+								<div class="form-group" align="center">
+									<h4>Para la Visación, primero consulte una Resolución de
+										Licencia Por Enfermedad Subsidiada aprobada por el Director de
+										Personal</h4>
+									<br>
+									<button class="btn btn-success btn-lg" data-toggle="modal"
+										href="#lstLES" style="display: inline;">
+										Buscar Resoluciones de LES <i class="fa fa-arrow-circle-right"></i>
+									</button>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
 					<div class="col-md-8">
 
 						<div class="box box-success">
 							<div class="box-header">
-								<h3 class="box-title" >Vista de Solicitud LES Codigo <%= objLes.getIdLes() %></h3>
+								<h3 class="box-title">Vista de Resolución de LES</h3>
 							</div>
 							<div class="box-body">
 
 								<div class="form-group">
-									<label>Vista de Solicitud</label>
-
-									<iframe src="<%=objLes.getPdf() %>" class="preview-pane" type="application/pdf" id="VisorPDF" width="670" height="650"  style="position:relative;z-index:999"></iframe>
-	
-
-									<div id="editor" ></div>
+									<label>Vista de Resolución</label>
+									<textarea class="form-control" rows="50"
+										placeholder="Enter ..."></textarea>
 								</div>
 							</div>
 							<!-- /.box-body -->
@@ -284,11 +300,10 @@
 							</div>
 							<div class="box-body">
 								<!-- Date range -->
-								
 								<div class="form-group">
 									<label>Comentarios</label>
 									<textarea class="form-control" rows="20"
-										placeholder="Escribe los puntos errados de esta solicitud ..." name="txtEvaluacion"></textarea>
+										placeholder="Escribe los puntos errados de esta Resolución ..."></textarea>
 								</div>
 
 
@@ -322,32 +337,84 @@
 					<div class="col-md-12">
 						<div class="box box-success">
 							<div class="box-body">
-								<div class="form-group" align="left">
+								<div class="form-group" align="center">
 
-										
-										
-										<input type="radio" value="8" name="rdEstado">     <label>Aprobado</label>
-										<br>
-										<input type="radio" value="4" name="rdEstado">     <label>Conforme</label>
-										<br>
-										<input type="radio" value="5" name="rdEstado">     <label>Disconforme</label>
-										<br>
-										<br>
-										
-									<div align="center">
-									<input type="hidden" value="<%=objLes.getIdLes() %>" name="txtIdLes" >
-									<button type="submit" class="btn btn-primary">Grabar RevisiÃ³n</button>
-										
+									<!-- 	<div class="input-group">
+											<span class="input-group-addon"> <input name="optionsRadios" id="optionsRadios1"
+												type="checkbox">
+											</span> <input type="text" class="form-control" value="Aprobado"
+												readonly="readonly">
+										</div>
+										<div class="input-group">
+											<span class="input-group-addon"> <input name="optionsRadios" id="optionsRadios2"
+												type="checkbox">
+											</span> <input type="text" class="form-control" value="Desaprobado"
+												readonly="readonly" onclick="">
+										</div> -->
+									<div class="input-group">
+										<span class="input-group-addon"><input type="radio"
+											name="optionsRadios" id="optionsRadios1" value="option1"></span>
+										<input type="text" class="form-control" value="Visar"
+											readonly="readonly">
 									</div>
-									
-								</div>	
+									<div class="input-group">
+										<span class="input-group-addon"><input type="radio"
+											name="optionsRadios" id="optionsRadios1" value="option2"></span>
+										<input type="text" class="form-control" value="Rechazar"
+											readonly="readonly">
+									</div>
+									<br>
+									<button class="btn btn-success btn-lg">Grabar
+										Revisión</button>
+								</div>
 
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /.row -->
-				</form>
+				<div id="lstLES" class="modal fade" tabindex="-1" data-width="780"
+					style="display: none;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">LES a Evaluar</h4>
+					</div>
+					<div class="modal-body">
+						<div class="box-body table-responsive">
+
+							<display:table name="lesEstados" id="aux"
+								class="table table-bordered table-striped">
+								<display:column property="idLes" title="ID"></display:column>
+								<display:column property="diagnostico" title="Diagnostico"></display:column>
+								<display:column property="fechaInicioDes" title="F. Inicio"></display:column>
+								<display:column property="fechaFinDes" title="F. Fin"></display:column>
+								<display:column property="motivoLicencia" title="Motivo"></display:column>
+								<display:column property="descripcionMotivo" title="Descripcion"></display:column>
+								<display:column property="fechaHora" title="F. Hora"></display:column>
+								<display:column property="idEmpleado" title="Empleado"></display:column>
+								<display:column title="Estado">
+									<c:choose>
+										<c:when test="${aux.getIdEstado().equals('Generado')}">
+											<span class="label label-primary">${aux.getIdEstado()}</span>
+										</c:when>
+										<c:when test="${aux.getIdEstado().equals('Actualizado')}">
+											<span class="label label-info">${aux.getIdEstado()}</span>
+										</c:when>
+
+									</c:choose>
+								</display:column>
+								<display:column title="Operacion">
+									<span class="btn btn-default btn-flat"> <a
+										href="gestionaLES?operacion=EvaluarLes&id=${aux.getIdLes()}"><i
+											class="fa fa-circle-o"></i>Evaluar</a></span>
+
+								</display:column>
+							</display:table>
+						</div>
+					</div>
+
+				</div>
 			</section>
 			<!-- /.content -->
 
@@ -366,6 +433,8 @@
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- AdminLTE App -->
 	<script src="js/AdminLTE/app.js" type="text/javascript"></script>
+	<script src="js/plugins/bootstrap-modal/bootstrap-modalmanager.js"></script>
+	<script src="js/plugins/bootstrap-modal/bootstrap-modal.js"></script>
 	<!-- DATA TABES SCRIPT -->
 	<script src="js/plugins/datatables/jquery.dataTables.js"
 		type="text/javascript"></script>
@@ -373,9 +442,23 @@
 		type="text/javascript"></script>
 	<!-- funciones propias -->
 	<script src="js/romario.js" type="text/javascript"></script>
-	<script src="js/stuart.js" type="text/javascript"></script>
+
 	<script type="text/javascript">
 		// Example:
+			
+		$(document).ready(function(){
+			
+			
+			
+			
+		});
+			
+		function rechazar(){
+			
+		}
+	
+	
+	
 		$(document).ready(function() {
 			$('textarea').autosize();
 		});
@@ -403,21 +486,6 @@
 			form.intereses[1].disabled = true;
 			form.intereses[2].disabled = true;
 		}
-		
-		var doc = new jsPDF();
-		var specialElementHandlers = {
-		    '#editor': function (element, renderer) {
-		        return true;
-		    }
-		};
-
-		$('#cmd').click(function () {
-		    doc.fromHTML($('#content').html(), 15, 15, {
-		        'width': 170,
-		            'elementHandlers': specialElementHandlers
-		    });
-		    doc.save('sample-file.pdf');
-		});
 	</script>
 	<%
 		}

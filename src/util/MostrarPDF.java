@@ -23,7 +23,7 @@ import entidad.Les;
 public class MostrarPDF {
 	public String createPdf(Les objLes,String nombre,String narchivo){
 		//Ruta del archivo, esto es dentro del proyecto Netbeans
-		  String archivo= "D:/Documentos/ECLIPSE/ProyectoLPII_ap/Unknow/WebContent/doc/"+narchivo+".pdf";
+		  String archivo= "D:/workspace_LP2/Unknow/WebContent/doc/"+narchivo+".pdf";
 	    /*Declaramos documento como un objeto Document
 	     *Asignamos el tamaño de hoja y los margenes 
 	    */    

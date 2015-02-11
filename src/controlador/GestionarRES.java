@@ -32,6 +32,17 @@ public class GestionarRES extends HttpServlet {
 		if(operacion.equals("registraRES")){
 			this.registraRES(request, response);
 		}
+		//Romario-VisarRES
+		if(operacion.equals("visarRES")){
+			this.visarRES(request,response);
+		}
+	}
+
+	private void visarRES(HttpServletRequest request,HttpServletResponse response) {
+		dao=fabrica.getRes();
+		
+		
+		
 	}
 
 	protected void registraRES(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
