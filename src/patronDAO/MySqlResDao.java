@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
+
 import util.ConexionDB;
+import entidad.Asalariado_RES;
 import entidad.Res;
 
 public class MySqlResDao implements ResDao{
@@ -153,6 +156,116 @@ public class MySqlResDao implements ResDao{
 			}
 		}
 		
+		return salida;
+	}
+
+	@Override
+	public ArrayList<Res> listarVisaRES() throws SQLException {
+		
+		Connection conn=null;
+		PreparedStatement pstm01=null, pstm02=null;
+		ResultSet rs01=null, rs02=null;
+		ArrayList<Res> data= new ArrayList<Res>();
+		Res res=null;
+		ArrayList<Integer> listacodRES= new ArrayList<Integer>();
+		
+		try {
+			conn = new ConexionDB().getConexion();
+			
+			String sql01="select idRES from asa_res";
+			pstm01=conn.prepareStatement(sql01);
+			rs01=pstm01.executeQuery();
+			while(rs01.next()){
+				listacodRES.add(rs01.getInt(1));
+				System.out.println("dentro del for para igualar codigo :" +listacodRES);
+				//int c = rs01.getInt(1);
+				//System.out.println("dentro del for para igualar codigo :" + rs01.getString(1));
+				
+			/*	for (Integer cod : listacodRES) {
+					if(cod!=c){
+						listacodRES.add(c);
+						System.out.println("Este codigo dentro de listado: "+c);
+					}
+					
+				}		*/
+			}
+			
+			
+			
+			for (Integer cod : listacodRES) {
+				String sql02="CALL SP_LISTA_VISAR_RES(?)";
+				pstm02= conn.prepareStatement(sql02);
+				pstm02.setInt(1, cod);
+				
+				rs02=pstm02.executeQuery();
+				System.out.println("Valores del resulset : "+rs02);
+				
+				while(rs02.next()){
+					if(rs02.getString(1).startsWith("E")){
+						
+					}else{
+						res = new Res();
+						res.setIdRes(rs02.getString(1));
+						res.setNombreAprobador(rs02.getString(2));
+						res.setFechaAprobada(rs02.getString(3));
+						data.add(res);
+					}
+					}	
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			try {
+				if(rs01!=null) rs01.close();
+				if(rs02!=null) rs02.close();
+				if(pstm01!=null) pstm01.close();
+				if(pstm02!=null) pstm02.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		
+		return data;
+	}
+
+	@Override
+	public int actualizaEstado(Res res, Asalariado_RES asalariado_RES) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstm= null, pstm02=null;
+		
+		int salida = -1;
+		
+		try {
+			conn = new ConexionDB().getConexion();
+			String sql= "call SP_ACTUALIZA_ESTADO_RES(?,?)";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, res.getIdRes());
+			pstm.setString(2, res.getIdEstado());
+			salida=pstm.executeUpdate();
+			if(res.getIdEstado().equals("9")){
+				String sql02="insert into asa_res(`idAsalariado`,`idRES`,`fechaAprob`) values(?,?,?);";
+				pstm02 = conn.prepareStatement(sql02);
+				pstm02.setString(1, asalariado_RES.getIdAsalariado());
+				pstm02.setInt(2, asalariado_RES.getIdRES());
+				pstm02.setString(3, asalariado_RES.getFechaAprob());
+				
+				salida=pstm02.executeUpdate();
+			}
+			
+			
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(pstm!=null) pstm.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		return salida;
 	}
 

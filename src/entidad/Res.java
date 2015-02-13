@@ -12,6 +12,9 @@ public class Res {
 	private String idEstado;
 	private String idAsalariado;
 	
+	private String fechaAprobada;
+	private String nombreAprobador;
+	
 	public String getIdRes() {
 		return idRes;
 	}
@@ -66,5 +69,22 @@ public class Res {
 	public void setIdAsalariado(String idAsalariado) {
 		this.idAsalariado = idAsalariado;
 	}
+	public String getFechaAprobada() {
+		return fechaAprobada;
+	}
+	public void setFechaAprobada(String fechaAprobada) {
+		this.fechaAprobada = fechaAprobada;
+	}
+	public String getNombreAprobador() {
+		return nombreAprobador;
+	}
+	public void setNombreAprobador(String nombreAprobador) {
+		this.nombreAprobador = nombreAprobador;
+	}
+	
+	
+	
+
+	
 	
 }

@@ -494,3 +494,40 @@ DELIMITER ;
 
 #call SP_ELIMINA_EQUIPO('EQ0013');
 
+###################################################### LISTA DE RES #################################################################
+
+DROP PROCEDURE IF EXISTS SP_LISTA_VISAR_RES;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTA_VISAR_RES(id int)
+begin
+	declare num01 int unsigned default 0;
+    
+		IF (select count(idRes) from asa_res where idRes=id)=1 then
+			SELECT a.idRES,e.nombre,a.fechaAprob FROM asa_res a inner join empleado e
+			on a.idAsalariado=e.idEmpleado;
+		else
+			select idAsalariado from asa_res where idRES=id;
+        end if;
+END$$
+DELIMITER ;
+
+#call SP_LISTA_VISAR_RES('1');
+
+####################################################  ACTUALIZA ESTADO DE RES ##############################################################
+
+
+DROP PROCEDURE IF EXISTS  SP_ACTUALIZA_ESTADO_RES;
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZA_ESTADO_RES(codRES int , codEstado int) 
+begin 
+	
+    UPDATE res 
+    set 
+    idestado = codEstado
+    where idRES=codRES;
+
+end$$
+DELIMITER ;
+
+#call SP_ACTUALIZA_ESTADO_RES('1','2');
+
