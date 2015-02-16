@@ -110,6 +110,8 @@ public class MySqlLesDao implements LesDao {
 				obj.setIdEmpleado(rs.getString(8));
 				obj.setNomEmpleado(rs.getString(9));
 				obj.setPdf(rs.getString(10));
+				obj.setCantidad(rs.getInt(11));
+				obj.setError(rs.getString(12));
 				System.out.println("Autores : Jvan, Romario, Javier, Miguel");
 				}	
 		} catch (Exception ex) {
@@ -218,6 +220,7 @@ public class MySqlLesDao implements LesDao {
 				obj.setCantidad(rs.getInt(5));
 				obj.setMotivoLicencia(rs.getString(6));
 				obj.setDescripcionMotivo(rs.getString(7));
+				obj.setError(rs.getString(8));
 			}	
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -302,5 +305,32 @@ public class MySqlLesDao implements LesDao {
 		}
 		
 		return data;
+	}
+
+	@Override
+	public void modificaErrorLes(Les obj) throws SQLException {
+		Connection conn= null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			conn = new ConexionDB().getConexion();
+			String sql ="CALL SP_ERRORLES(?,?)";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, obj.getIdLes());
+			pstm.setString(2, obj.getError());
+			pstm.executeUpdate();
+			System.out.println("Se lleno este dato : "+obj.getError());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally{
+			try {
+				if(rs!= null) rs.close();
+				if(pstm!= null) pstm.close();
+				if(conn!= null) conn.close();
+			} catch (Exception e2) {
+			}
+		}
+		
+		
 	}
 }

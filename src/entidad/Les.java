@@ -7,12 +7,19 @@ public class Les {
 	private String fechaInicioDes;
 	private String fechaFinDes;
 	private String pdf;
+	private String error;
 	private int cantidad;
 	public int getCantidad() {
 		return cantidad;
 	}
 	public String getPdf() {
 		return pdf;
+	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
 	}
 	public void setPdf(String pdf) {
 		this.pdf = pdf;

@@ -246,7 +246,8 @@
     			Cargo objCar= (Cargo) request.getAttribute("daoCargo");
 				Utilitario objUtil= (Utilitario) request.getAttribute("daoUtil");
 				Les ls=(Les) request.getAttribute("lesEstado");
-				String diagnostico="",dmot="",les="",mtv="",fechaI="",fechaF="",aviso="",letra="",opr="generarLES";
+				String diagnostico="",dmot="",les="",mtv="",fechaI="",fechaF="",opr="generarLES";
+				String ad="",adm="",afecha="",amot="",lad="",ladm="",lafecha="",lamot="",iad="",iadm="",iafecha="",iamot="";
 				int cant=0;
 					if(ls!=null){
 						diagnostico=ls.getDiagnostico();
@@ -256,9 +257,46 @@
 						les=ls.getIdLes();
 						mtv=ls.getMotivoLicencia();
 						cant=ls.getCantidad();
-						aviso="has-warning";
-						letra="for='inputWarning'";
 						opr="modificarLES";
+								
+						String errores = ls.getError();
+						String[] arrayErrores = errores.split(",");
+						ad=arrayErrores[0];
+						if(ad.equals("has-success")){
+							lad="for='inputSuccess'";
+							iad="fa fa-check"; 
+						}
+						else{
+							lad="for='inputWarning'";
+							iad="fa fa-warning"; 
+						}
+						adm=arrayErrores[1];
+						if(adm.equals("has-success")){
+							ladm="for='inputSuccess'";
+							iadm="fa fa-check"; 
+						}
+						else{
+							ladm="for='inputWarning'";
+							iadm="fa fa-warning"; 
+						}
+						afecha=arrayErrores[2];
+						if(afecha.equals("has-success")){
+							lafecha="for='inputSuccess'";
+							iafecha="fa fa-check"; 
+						}
+						else{
+							lafecha="for='inputWarning'";
+							iafecha="fa fa-warning"; 
+						}
+						amot= arrayErrores[3];
+						if(amot.equals("has-success")){
+							lamot="for='inputSuccess'";
+							iamot="fa fa-check"; 
+						}
+						else{
+							lamot="for='inputWarning'";
+							iamot="fa fa-warning"; 
+						}
 					}
 							
     			%>
@@ -389,21 +427,21 @@
 			                                <div class="box-body">
 			                                    <div class="row"> 
 			                                    	<div class="col-md-10">
-			                                    		<div class="form-group <%=aviso%>">
-                                      						<label <%=letra %>> <i class="<%=objUtil.getIcono()%>"></i> Diagnostico Medico :</label>
+			                                    		<div class="form-group <%=ad%>">
+                                      						<label <%=lad %>> <i class="<%=iad%>"></i> Diagnostico Medico :</label>
                                       						<input type="text" class="form-control" id="Diagnostico" name="txtDiagnostico" value="<%=diagnostico%>">
                                             			</div>
-                                            			<div class="form-group <%=aviso%>">
-					                                        <label <%=letra %>> <i class="<%=objUtil.getIcono()%>"></i> Rango de Fechas de Descanso:</label>
+                                            			<div class="form-group <%=afecha%>">
+					                                        <label <%=lafecha %>> <i class="<%=iafecha%>"></i> Rango de Fechas de Descanso:</label>
 					                                        <div class="input-group">
 					                                            <div class="input-group-addon">
 					                                                <i class="fa fa-calendar"></i>
 					                                            </div>
-					                                            <input type="text" class="form-control pull-right" id="reservation" name="rngFecha" />
+					                                            <input type="text" class="form-control pull-right" id="reservation" name="rngFecha" value="<%=fechaI%>-<%=fechaF%>" />
 					                                        </div><!-- /.input group -->
 					                                    </div><!-- /.form group -->
-                                            			<div class="form-group <%=aviso%>">
-                                      						<label <%=letra %>><i class="<%=objUtil.getIcono()%>"></i> Dias Subsidiados :</label>
+                                            			<div class="form-group <%=afecha%>">
+                                      						<label <%=lafecha %>><i class="<%=iafecha%>"></i> Dias Subsidiados :</label>
                                       						<input type="text" class="form-control" id="cantidad1" value="<%=cant %>" disabled>
                                       						<input type="hidden" class="form-control" id="cantidad" value="<%=cant %>" name="txtDias">
                                             			</div>
@@ -431,7 +469,7 @@
 			                                <div class="box-body">
 			                                    <div class="row"> 
 			                                    	<div class="col-md-11">
-			                                    		<div class="form-group <%=aviso%>">
+			                                    		<div class="form-group <%=amot%>">
 			                                    		<% 
 			                                    			String sef="",sn="",sTBC="";
 					                                           if(mtv.equals("Enfermedad Común")){
@@ -446,7 +484,7 @@
 					                                        	   sTBC="";
 					                                           }
 			                                    			%>			                                    		
-                                      						<label>Motivo de Licencia :</label>
+                                      						<label <%=lamot %>><i class="<%=iamot%>"></i>Motivo de Licencia :</label>
                                       						<select class="form-control" name="cboLicencia" id="cboLicencia">
 				                                                <option value="-1">[Seleccione]</option>
 				                                                <option value="Enfermedad Común" <%=sef %>>Enfermedad Común</option>
@@ -454,8 +492,8 @@
 				                                                <option value="T.B.C" <%=sTBC %>>T.B.C</option>
 				                                            </select>
                                             			</div>
-                                            			<div class="form-group <%=aviso%>">
-                                      						<label <%=letra %>> <i class="<%=objUtil.getIcono()%>"></i> Descripcion :</label>
+                                            			<div class="form-group <%=adm%>">
+                                      						<label <%=ladm %>> <i class="<%=iadm%>"></i> Descripcion :</label>
                                       						<textarea class="form-control" cols="2"rows="7" name="txtDescripcionLicencia" id="txtLicencia">
                                       						<%=dmot %>						
                                       						</textarea>

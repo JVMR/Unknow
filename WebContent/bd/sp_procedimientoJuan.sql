@@ -60,7 +60,7 @@ DROP PROCEDURE IF exists SP_LESxCODIGO;
 DELIMITER $$
 CREATE PROCEDURE SP_LESxCODIGO(id char(6))	
 begin
-SELECT l.idLes, l.diagnostico, l.fechaInicioDes, l.fechafindes, l.motivolicencia, l.descripcionmotivo,l.fechaHora,l.idEmpleado, concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM),l.pdf as 'Empleado'FROM `les` l join `empleado` e on l.idEmpleado = e.idEmpleado  where l.idLes=id;
+SELECT l.idLes, l.diagnostico, l.fechaInicioDes, l.fechafindes, l.motivolicencia, l.descripcionmotivo,l.fechaHora,l.idEmpleado, concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM),l.pdf,l.cantDias,l.corregir as 'Empleado'FROM `les` l join `empleado` e on l.idEmpleado = e.idEmpleado  where l.idLes=id;
 END$$ 
 DELIMITER ;
 #CALL SP_LESxCODIGO('LE0001');
@@ -85,6 +85,22 @@ begin
 UPDATE `les`
 SET
 `idestado` = IdEst
+where 
+`idLES` = idL;
+END$$ 
+DELIMITER ;
+
+#call SP_ACTUALIZARLES('LE0001','8')
+
+################################### ACTUALIZAR ERROR LES #############################################
+
+DROP PROCEDURE IF exists SP_ERRORLES;
+DELIMITER $$
+CREATE PROCEDURE SP_ERRORLES(idL CHAR(6),corr varchar(100))
+begin
+UPDATE `les`
+SET
+`corregir` = corr
 where 
 `idLES` = idL;
 END$$ 

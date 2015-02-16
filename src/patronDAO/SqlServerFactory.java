@@ -56,5 +56,11 @@ public class SqlServerFactory extends Factory{
 		return null;
 	}
 
+	@Override
+	public EmailDAO getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

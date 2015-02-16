@@ -182,7 +182,7 @@ DELIMITER $$
 CREATE PROCEDURE SP_LISTAR_LESXESTADO(
 estado varchar(45))
 begin
-select l.idLES, l.diagnostico,l.fechaInicioDes,l.fechaFinDes,l.cantDias,l.motivoLicencia,l.descripcionMotivo from les l, estado e where l.idestado=e.idestado and e.descripcion=estado;
+select l.idLES, l.diagnostico,l.fechaInicioDes,l.fechaFinDes,l.cantDias,l.motivoLicencia,l.descripcionMotivo,l.corregir from les l, estado e where l.idestado=e.idestado and e.descripcion=estado;
 END$$ 
 DELIMITER ;
 ############################### LISTAR-LES-x2ESTADOS ###################################################

@@ -58,6 +58,12 @@ public class MySqlFactory extends Factory{
 		return new MySqlUtilitarioDao();
 	}
 
+	@Override
+	public EmailDAO getEmail() {
+		// TODO Auto-generated method stub
+		return new MySqlEmailDao();
+	}
+
 
 	
 	

@@ -15,4 +15,5 @@ public interface LesDao {
 	public Les listaLesxEstado(String estado) throws SQLException;
 	public int ActualizaEstado(Les l) throws SQLException;
 	public List<Les> listaLesxCodigo(String codigo) throws SQLException;
+	public void modificaErrorLes(Les obj) throws SQLException;
 }

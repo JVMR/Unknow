@@ -18,6 +18,7 @@ public abstract class Factory {
 
 	public abstract LesDao getLes();
 	public abstract ResDao getRes();
+	public abstract EmailDAO getEmail();
 
 	
 	public static Factory getTipo(int tipo){

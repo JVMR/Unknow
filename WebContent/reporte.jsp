@@ -225,10 +225,10 @@
                 <section class="content">              
 
 				<div align="center" >
-				    <iframe frameborder="0"  height="1000" width="800" src="http://127.0.0.1:60580/viewer/preview?__report=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2%5CReporte_LES.rptdesign&__format=html&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.html&2065640776" ></iframe>
+				    <iframe frameborder="0"  height="1000" width="800" src="http://127.0.0.1:60719/viewer/preview?__report=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2%5CReporte_LES.rptdesign&__format=html&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.html&1255916871" ></iframe>
 					<br>
 					<h1>
-					<a href="http://127.0.0.1:60580/viewer/preview?__report=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2%5CReporte_LES.rptdesign&__format=pdf&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.pdf&1900427402">Generar PDF</a>
+					<a href="http://127.0.0.1:60719/viewer/preview?__report=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2%5CReporte_LES.rptdesign&__format=pdf&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.pdf&-440503529">Generar PDF</a>
 					</h1>  
 				</div>
 					

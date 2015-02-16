@@ -225,10 +225,10 @@
                 <section class="content">              
 
 				<div align="center" >
-				    <iframe frameborder="0"  height="1000" width="800" src="http://127.0.0.1:60580/viewer/preview?__report=C%3A%5CUsers%5CAmilcar%5CDesktop%5CReportes_LP2%5CReporte_UnidadOrganica.rptdesign&__format=html&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=C%3A%5CUsers%5CAmilcar%5CDesktop%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.html&-1615558465" ></iframe>
+				    <iframe frameborder="0"  height="1000" width="800" src="http://127.0.0.1:60719/viewer/preview?__report=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2%5CReporte_UnidadOrganica.rptdesign&__format=html&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.html&1244766016" ></iframe>
 					<br>
 					<h1>
-					<a href="http://127.0.0.1:60580/viewer/preview?__report=C%3A%5CUsers%5CAmilcar%5CDesktop%5CReportes_LP2%5CReporte_UnidadOrganica.rptdesign&__format=pdf&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=C%3A%5CUsers%5CAmilcar%5CDesktop%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.pdf&992999416">Generar PDF</a>
+					<a href="http://127.0.0.1:60719/viewer/preview?__report=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2%5CReporte_UnidadOrganica.rptdesign&__format=pdf&__svg=true&__locale=es_PE&__timezone=America%2FBogota&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=D%3A%5CDocumentos%5CECLIPSE%5CReporte%5CReportes_LP2&__dpi=96&__emitterid=org.eclipse.birt.report.engine.emitter.pdf&1062354148">Generar PDF</a>
 					</h1>  
 				</div>
 					
