@@ -14,7 +14,7 @@ public class Res {
 	
 	private String fechaAprobada;
 	private String nombreAprobador;
-	
+	private String pdf;
 	public String getIdRes() {
 		return idRes;
 	}
@@ -81,10 +81,10 @@ public class Res {
 	public void setNombreAprobador(String nombreAprobador) {
 		this.nombreAprobador = nombreAprobador;
 	}
-	
-	
-	
-
-	
-	
+	public String getPdf() {
+		return pdf;
+	}
+	public void setPdf(String pdf) {
+		this.pdf = pdf;
+	}
 }

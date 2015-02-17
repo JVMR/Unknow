@@ -503,15 +503,15 @@ begin
 	declare num01 int unsigned default 0;
     
 		IF (select count(idRes) from asa_res where idRes=id)=1 then
-			SELECT a.idRES,e.nombre,a.fechaAprob FROM asa_res a inner join empleado e
-			on a.idAsalariado=e.idEmpleado;
+			SELECT a.idRES,concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM) as nombre,a.fechaAprob FROM asa_res a inner join empleado e
+			on a.idAsalariado=e.idEmpleado where a.idRES=id;
 		else
 			select idAsalariado from asa_res where idRES=id;
         end if;
 END$$
 DELIMITER ;
 
-#call SP_LISTA_VISAR_RES('1');
+#call SP_LISTA_VISAR_RES('2');
 
 ####################################################  ACTUALIZA ESTADO DE RES ##############################################################
 

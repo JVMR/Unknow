@@ -169,6 +169,9 @@ public class MySqlResDao implements ResDao{
 		Res res=null;
 		ArrayList<Integer> listacodRES= new ArrayList<Integer>();
 		
+		data.clear();
+		listacodRES.clear();
+		int i=0;
 		try {
 			conn = new ConexionDB().getConexion();
 			
@@ -177,7 +180,7 @@ public class MySqlResDao implements ResDao{
 			rs01=pstm01.executeQuery();
 			while(rs01.next()){
 				listacodRES.add(rs01.getInt(1));
-				System.out.println("dentro del for para igualar codigo :" +listacodRES);
+				
 				//int c = rs01.getInt(1);
 				//System.out.println("dentro del for para igualar codigo :" + rs01.getString(1));
 				
@@ -190,9 +193,12 @@ public class MySqlResDao implements ResDao{
 				}		*/
 			}
 			
-			
+			System.out.println("dentro del for para igualar codigo :" +listacodRES);
 			
 			for (Integer cod : listacodRES) {
+				
+				
+				
 				String sql02="CALL SP_LISTA_VISAR_RES(?)";
 				pstm02= conn.prepareStatement(sql02);
 				pstm02.setInt(1, cod);
@@ -211,6 +217,8 @@ public class MySqlResDao implements ResDao{
 						data.add(res);
 					}
 					}	
+				i++;
+				System.out.println("NUmero de vueltas del for: "+i);
 			}
 			
 		} catch (Exception e) {
@@ -222,12 +230,16 @@ public class MySqlResDao implements ResDao{
 				if(pstm01!=null) pstm01.close();
 				if(pstm02!=null) pstm02.close();
 				if(conn!=null) conn.close();
+				
+				i=0;
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}
 		}
 		
 		return data;
+		
+		
 	}
 
 	@Override

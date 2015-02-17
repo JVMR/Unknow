@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -86,15 +87,26 @@ public class GestionarRES extends HttpServlet {
 		String cod=request.getParameter("id");
 		Res res= null;
 		
+		PrintWriter out = response.getWriter();
+		StringBuilder sb = new StringBuilder("");
+		
 		try {
 			dao = fabrica.getRes();
 			res = dao.ResxCodigo(cod);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("ResaEvaluar", res);
-		request.getRequestDispatcher("/visarRES.jsp").forward(request, response);
+		sb.append(res.getFechaGenerado()+"/");
+		sb.append(res.getReferencia()+"/");
+		sb.append(res.getDescriptor()+"/");
+		sb.append(res.getObjetoConsulta()+"/");
+		sb.append(res.getAnalisis()+"/");
+		sb.append(res.getIdLes()+"/");
+		sb.append(res.getIdAsalariado()+"/");
+		
+		out.write(sb.toString());	
 	}
 
 	private void listaVisarRES(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {

@@ -37,6 +37,11 @@
 		<link href="css/bootstrap-modal/bootstrap-modal-bs3patch.css" rel="stylesheet" />
   		<link href="css/bootstrap-modal/bootstrap-modal.css" rel="stylesheet" />
 
+		<!-- para jspdf -->
+  		<script type="text/javascript" src="examples/js/jquery/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="examples/js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+		<script type="text/javascript" src="dist/jspdf.debug.js"></script>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -284,7 +289,7 @@
                                  
                                   <div class="form-group">
                                             <label>Vista de Solicitud</label>
-                                            <textarea class="form-control" rows="50" placeholder="Enter ..."></textarea>
+                                            <iframe frameborder="0" width="700" height="900"></iframe> 
                                      </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -300,7 +305,7 @@
                                     <!-- Date range -->
                                     <div class="form-group">
                                             <label>Comentarios</label>
-                                            <textarea class="form-control" rows="20" placeholder="Escribe los puntos errados de esta solicitud ..."></textarea>
+                                            <textarea id="error" class="form-control" rows="20" placeholder="Escribe los puntos errados de esta solicitud ..."></textarea>
                                      </div>
 
                                     
@@ -392,7 +397,7 @@
                                 			</c:choose> 
                                 	</display:column>  -->
                                 	<display:column title="Operacion">            
-                                			<span class="btn btn-default btn-flat"> <a href="GestionarRES?operacion=visarRES&id=${aux.getIdRes()}"><i class="fa fa-circle-o"></i>Evaluar</a></span>             
+                                			<span class="btn btn-default btn-flat"> <a onclick="visar(${aux.getIdRes()})"><i class="fa fa-circle-o"></i>Evaluar</a></span>            
                                             
                                 	</display:column>                                   	    
                                 </display:table>
@@ -427,7 +432,7 @@
 	<script src="js/plugins/datatables/dataTables.bootstrap.js"
 		type="text/javascript"></script>
 	<!-- funciones propias -->
-	<script src="js/romario.js" type="text/javascript"></script>
+	<script src="js/VisarRES/ajax.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 	// Example:
@@ -461,6 +466,12 @@
 	form.intereses[2].disabled = true;
 	}
 	    
+	
+	
+	
+	
+	
+	
 	
 	</script>
 	<%}%>
