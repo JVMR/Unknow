@@ -56,20 +56,14 @@ public class MySqlResDao implements ResDao{
 		Res obj =  null;
 		try {
 			conn = new ConexionDB().getConexion();
-			String sql ="CALL SP_LISTARESxCODIGO(?)";
+			String sql ="CALL SP_RESxCODIGO(?)";
 			pstm = conn.prepareStatement(sql);	
 			pstm.setString(1, codigo);	
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				obj = new Res();
 				obj.setIdRes(rs.getString(1));
-				obj.setReferencia(rs.getString(2));
-				obj.setDescriptor(rs.getString(3));
-				obj.setObjetoConsulta(rs.getString(4));
-				obj.setAnalisis(rs.getString(5));
-				obj.setFechaGenerado(rs.getString(6));
-				obj.setIdLes(rs.getString(7));
-				obj.setIdAsalariado(rs.getString(8));
+				obj.setPdf(rs.getString(2));
 				}	
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -214,6 +208,7 @@ public class MySqlResDao implements ResDao{
 						res.setIdRes(rs02.getString(1));
 						res.setNombreAprobador(rs02.getString(2));
 						res.setFechaAprobada(rs02.getString(3));
+						res.setIdEstado(rs02.getString(4));
 						data.add(res);
 					}
 					}	
@@ -243,31 +238,24 @@ public class MySqlResDao implements ResDao{
 	}
 
 	@Override
-	public int actualizaEstado(Res res, Asalariado_RES asalariado_RES) throws SQLException {
+	public int actualizaEstado(String idRES,String idAprobador,int idEstado,String pdf,String fecha) throws SQLException {
 		Connection conn = null;
-		PreparedStatement pstm= null, pstm02=null;
+		PreparedStatement pstm= null;
 		
 		int salida = -1;
 		
 		try {
 			conn = new ConexionDB().getConexion();
-			String sql= "call SP_ACTUALIZA_ESTADO_RES(?,?)";
+			String sql= "call SP_ACTUALIZA_ESTADO_VISADO_RES(?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, res.getIdRes());
-			pstm.setString(2, res.getIdEstado());
+			pstm.setString(1, idRES);
+			pstm.setString(2, idAprobador);
+			pstm.setInt(3, idEstado);
+			pstm.setString(4, pdf);
+			pstm.setString(5, fecha);
+			
 			salida=pstm.executeUpdate();
-			if(res.getIdEstado().equals("9")){
-				String sql02="insert into asa_res(`idAsalariado`,`idRES`,`fechaAprob`) values(?,?,?);";
-				pstm02 = conn.prepareStatement(sql02);
-				pstm02.setString(1, asalariado_RES.getIdAsalariado());
-				pstm02.setInt(2, asalariado_RES.getIdRES());
-				pstm02.setString(3, asalariado_RES.getFechaAprob());
-				
-				salida=pstm02.executeUpdate();
-			}
 			
-			
-						
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

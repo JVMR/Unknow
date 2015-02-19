@@ -503,31 +503,57 @@ begin
 	declare num01 int unsigned default 0;
     
 		IF (select count(idRes) from asa_res where idRes=id)=1 then
-			SELECT a.idRES,concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM) as nombre,a.fechaAprob FROM asa_res a inner join empleado e
-			on a.idAsalariado=e.idEmpleado where a.idRES=id;
+			SELECT a.idRES,concat(e.nombre,' ',e.apellidoP,' ',e.apellidoM) as nombre,a.fechaAprob,es.descripcion FROM asa_res a inner join empleado e
+			on a.idAsalariado=e.idEmpleado inner join res r on r.idRES=a.idRES inner join estado es on r.idestado=es.idestado
+            where a.idRES=id;
 		else
 			select idAsalariado from asa_res where idRES=id;
         end if;
 END$$
 DELIMITER ;
 
-#call SP_LISTA_VISAR_RES('2');
+#call SP_LISTA_VISAR_RES('1');
 
-####################################################  ACTUALIZA ESTADO DE RES ##############################################################
+####################################################### VISAR RES POR CODIGO ###############################################################
 
-
-DROP PROCEDURE IF EXISTS  SP_ACTUALIZA_ESTADO_RES;
+DROP PROCEDURE IF EXISTS SP_RESxCODIGO;
 DELIMITER $$
-CREATE PROCEDURE SP_ACTUALIZA_ESTADO_RES(codRES int , codEstado int) 
-begin 
-	
-    UPDATE res 
-    set 
-    idestado = codEstado
-    where idRES=codRES;
+CREATE PROCEDURE SP_RESxCODIGO(codRES int)
+BEGIN 
+    SELECT idRES, pdf FROM Res where idRES=codRES;
+END$$ 
+DELIMITER ;
+
+#call SP_RESxCODIGO(2);
+
+
+####################################################  ACTUALIZA ESTADO DE RES EN EL VISADO ##############################################################
+
+
+DROP PROCEDURE IF EXISTS  SP_ACTUALIZA_ESTADO_VISADO_RES;
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZA_ESTADO_VISADO_RES(codRES int , idAprobador varchar(6),codEstado int, pdf02 longblob,fecha varchar(19)) 
+begin     
+	if codEstado=9 then
+    
+		UPDATE res 
+		set 
+		idestado = codEstado,
+		pdf=pdf02
+		where idRES=codRES;
+		
+		insert into asa_res(`idAsalariado`,`idRES`,`fechaAprob`) values(idAprobador,codRES,fecha);
+		
+    else
+		UPDATE res 
+		set 
+		idestado = codEstado
+		where idRES=codRES;
+    end if;
 
 end$$
 DELIMITER ;
 
-#call SP_ACTUALIZA_ESTADO_RES('1','2');
+
+
 

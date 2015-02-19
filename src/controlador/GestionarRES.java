@@ -46,34 +46,35 @@ public class GestionarRES extends HttpServlet {
 		if(operacion.equals("visarRES")){
 			this.visarRES(request,response);
 		}
-		if(operacion.equals("actualizarEstado")){
-			this.actualizarEstado(request,response);
+		if(operacion.equals("actualizarEstadoVisado")){
+			this.actualizarEstadoVisado(request,response);
 		}
 	}
 
-	private void actualizarEstado(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+	private void actualizarEstadoVisado(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		String idRES = request.getParameter("txtIdRES");
 		String idEstado = request.getParameter("rdEstado");
 		String idAsalariadoAprobador=request.getParameter("txtIdEmpleado");
+		String pdf=request.getParameter("pdf");
 		
-		dao = fabrica.getRes();
-		
-		Res res = new Res();
-		res.setIdRes(idRES);
-		res.setIdEstado(idEstado);
+		System.out.println(idRES);
+		System.out.println(idEstado);
+		System.out.println(idAsalariadoAprobador);
+		System.out.println(pdf);
 		
 		//fecha  de la operación
-		DateFormat fechaOperacion = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String fechaOperacion=fecha.format(new Date());
 		
-		Asalariado_RES asalariado_RES = new Asalariado_RES();
-		asalariado_RES.setFechaAprob(fechaOperacion.format(new Date()));
-		asalariado_RES.setIdAsalariado(idAsalariadoAprobador);
-		asalariado_RES.setIdRES(Integer.parseInt(idRES));
-		
+		dao = fabrica.getRes();
+		int salida=0;
 		
 		try {
-			dao.actualizaEstado(res,asalariado_RES);
-			System.out.println("Código de RES actualizado: "+res.getIdRes()+"y codigo de estado"+res.getIdEstado());
+			salida=dao.actualizaEstado(idRES, idAsalariadoAprobador, Integer.parseInt(idEstado), pdf, fechaOperacion);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,6 +86,19 @@ public class GestionarRES extends HttpServlet {
 	private void visarRES(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		
 		String cod=request.getParameter("id");
+		Res res=null;
+		try {
+			dao = fabrica.getRes();
+			res = dao.ResxCodigo(cod);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("ResaEvaluar", res);
+		//request.getRequestDispatcher("/visarRES.jsp").forward(request, response);
+		listaVisarRES(request, response);
+		
+	/*	String cod=request.getParameter("id");
 		Res res= null;
 		
 		PrintWriter out = response.getWriter();
@@ -106,7 +120,7 @@ public class GestionarRES extends HttpServlet {
 		sb.append(res.getIdLes()+"/");
 		sb.append(res.getIdAsalariado()+"/");
 		
-		out.write(sb.toString());	
+		out.write(sb.toString());	*/
 	}
 
 	private void listaVisarRES(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {

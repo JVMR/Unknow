@@ -2,8 +2,8 @@ function visar(id){
 	
 	 $.ajax({
            type: 'GET',
-           url: 'GestionarRES?operacion=visarRES',
-           data: 'id='+id,
+           url: 'GestionarRES?operacion=actualizarEstadoVisado',
+           data: 'idRES='+id+'&idAprobador='+id+'$idEstado',
            statusCode: {
                404: function() {
                    console.log('Pagina no encontrada');
@@ -153,19 +153,19 @@ function visar(id){
 
 						doc.setFont("helvetica");
 						doc.setFontType("normal");
-						doc.setFontSize(12);
-						doc.text(20, 250, '-----------------------------------------' );
-						doc.text(20, 255, 'Director de Personal : ' );
-						doc.text(20, 260, 'DNI : ' );
+						doc.setFontSize(10);
+						doc.text(20, 255, '-------------------------------------------------------------------' );
+						doc.text(20, 260, 'Director de Personal : ' );
+						doc.text(20, 265, 'DNI : ' );
 
 						doc.setFont("helvetica");
 						doc.setFontType("normal");
-						doc.setFontSize(12);
-						doc.text(125, 250, '-----------------------------------------' );
-						doc.text(125, 255, 'Director Ejecutivo : ' );
-						doc.text(125, 260, 'DNI : ' );
+						doc.setFontSize(10);
+						doc.text(125, 255, '-------------------------------------------------------------------');
+						doc.text(125, 260, 'Director Ejecutivo : ' );
+						doc.text(125, 265, 'DNI : ' );
 
-   				doc.addImage(imgData, 'JPEG', 125, 222, 25, 25);
+   				doc.addImage(imgData, 'JPEG', 30, 227, 25, 25);
    				
    				var string = doc.output('datauristring');
    				
@@ -177,7 +177,7 @@ function visar(id){
            	
 					
 
-   				getImageFromUrl('firma01.jpg', createPDF);
+   				getImageFromUrl('firma02.jpg', createPDF);
    				
    				$('#lstRES').modal({
    					show: 'false'
@@ -189,3 +189,65 @@ function visar(id){
 	
 	
 }
+
+
+
+'==================================================================================================='
+
+
+function firma(){
+	alert('hola');
+	
+          	var getImageFromUrl = function(url, callback) {
+          		var img = new Image(), data, ret = {
+          			data: null,
+          			pending: true
+          		};
+          		
+          		img.onError = function() {
+          			throw new Error('Cannot load image: "'+url+'"');
+          		};
+          		img.onload = function() {
+          			var canvas = document.createElement('canvas');
+          			document.body.appendChild(canvas);
+          			canvas.width = img.width;
+          			canvas.height = img.height;
+
+          			var ctx = canvas.getContext('2d');
+          			ctx.drawImage(img, 0, 0);
+          			// Grab the image as a jpeg encoded in base64, but only the data
+          			data = canvas.toDataURL('image/jpeg').slice('data:image/jpeg;base64,'.length);
+          			// Convert the data to binary form
+          			data = atob(data);
+          			document.body.removeChild(canvas);
+
+          			ret['data'] = data;
+          			ret['pending'] = false;
+          			if (typeof callback === 'function') {
+          				document.getElementById("error").value = data;
+          				callback(data);
+          			}
+          		};
+          		img.src = url;
+
+          		return ret;
+          	};
+
+          	// Since images are loaded asyncronously, we must wait to create
+          	// the pdf until we actually have the image data.
+          	// If we already had the jpeg image binary data loaded into
+          	// a string, we create the pdf without delay.
+          	
+					var createPDF = function(imgData) {
+			
+  				document.getElementById("error").value = imgData;
+ 
+					}
+  				getImageFromUrl('firma01.jpg', createPDF);
+  		
+  				
+	
+	
+}
+
+

@@ -260,8 +260,8 @@
 			<!-- Main content -->
 			<!-- ############################################################################################################################################ -->
 			<section class="content">
-			<form action="">
-			<input type="hidden" value="actualizarEstado" name="operacion">
+		 <!--	<form name="form01">   
+			 <input type="hidden" value="actualizarEstadoVisado" name="operacion">   -->
 				<div class="row">
 				<div class="col-md-12">
                         <div class="box box-success">
@@ -289,7 +289,12 @@
                                  
                                   <div class="form-group">
                                             <label>Vista de Solicitud</label>
-                                            <iframe frameborder="0" width="700" height="900"></iframe> 
+                                             
+                                            <% if(res!=null){%>	
+                                            	<iframe src="<%=res.getPdf()%>" frameborder="0" width="700" height="900"></iframe>
+                                            <%} else {%>
+                                            	<iframe frameborder="0" width="700" height="900"></iframe>
+                                            <%}%>  
                                      </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -332,42 +337,43 @@
                         <div class="col-md-12">
                         <div class="box box-success">
                         <div class="box-body">
+                        
+                       <form name="form01" onsubmit="return grabarEstado(this)"> 
                         <div class="form-group" align="center">
                         
                         				<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="radio" value="9" name="rdEstado">
+												type="radio" value="9" name="rdEstado" id="rbVisado">
 											</span> <input type="text" class="form-control" value="Visado"
 												readonly="readonly">
 										</div>
 										<div class="input-group">
 											<span class="input-group-addon"> <input
-												type="radio" value="7" name="rdEstado">
+												type="radio" value="7" name="rdEstado" id="rbRechazado">
 											</span> <input type="text" class="form-control" value="Rechazado ó Desaprobado"
 												readonly="readonly">
 										</div>
 										
                                         <br>
                                         
-                                        <input type="hidden" value="<%=empleado.getIdEmpleado()%>" name="txtIdEmpleado">
+                                        
                                         <%
                                         
                                         if(res!=null){
                                         %>
-                                        <input type="hidden" value="<%=res.getIdRes()%>" name="txtIdRES">
+                                        <input type="hidden" value="<%=empleado.getIdEmpleado()%>" name="txtIdEmpleado" id="txtIdEmpleado">
+                                        <input type="hidden" value="<%=res.getIdRes()%>" name="txtIdRES" id="txtIdRES">
                                         
                                         <%
-                                        }else {
+                                        }else {%>
+                                        	<input type="hidden"  name="txtIdEmpleado" id="txtIdEmpleado">
+                                        	<input type="hidden"  name="txtIdRES" id="txtIdRES">
+                                        <%}
                                         %>
                                         
-                                        
-                                        <%
-                                        }
-                                        %>
-                                        
-                                        <button type="submit" class="btn btn-success btn-lg" >Grabar Revisión</button>
-                                    </div>
-                        
+                                        <button   class="btn btn-success btn-lg" >Grabar Revisión</button>
+                              </div>
+                 </form>        
                         </div>
                         </div>
                         </div>
@@ -385,19 +391,22 @@
                                 	<display:column property="nombreAprobador" title="Aprobado por"></display:column>      
                                 	<display:column property="fechaAprobada" title="Fecha Aprobada"></display:column>
                                 	
-                                <!--  	<display:column title="Estado">
+                                  	<display:column title="Estado">
                                 			<c:choose>
-                                						<c:when test="${aux.getIdEstado().equals('Generado')}">
+                                						<c:when test="${aux.getIdEstado().equals('Aprobado')}">
                                 						<span class="label label-primary">${aux.getIdEstado()}</span>
                                 						</c:when>                                						
-                                						<c:when test="${aux.getIdEstado().equals('Actualizado')}">
+                                						<c:when test="${aux.getIdEstado().equals('Generado')}">
                                 						<span class="label label-info">${aux.getIdEstado()}</span>
+                                						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Visado')}">
+                                						<span class="label label-success">${aux.getIdEstado()}</span>
                                 						</c:when>                               						
                                 						
                                 			</c:choose> 
-                                	</display:column>  -->
+                                	</display:column>  
                                 	<display:column title="Operacion">            
-                                			<span class="btn btn-default btn-flat"> <a onclick="visar(${aux.getIdRes()})"><i class="fa fa-circle-o"></i>Evaluar</a></span>            
+                                			<span class="btn btn-default btn-flat"> <a href="GestionarRES?operacion=visarRES&id=${aux.getIdRes()}">   <i class="fa fa-circle-o"></i>Evaluar</a></span>            
                                             
                                 	</display:column>                                   	    
                                 </display:table>
@@ -405,7 +414,7 @@
                      </div>
 			    
 		</div>
-		</form>
+		   <!-- </form>  -->
 			</section>
 			<!-- /.content -->
 
@@ -431,8 +440,8 @@
 		type="text/javascript"></script>
 	<script src="js/plugins/datatables/dataTables.bootstrap.js"
 		type="text/javascript"></script>
-	<!-- funciones propias -->
-	<script src="js/VisarRES/ajax.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/VisarRES/visarRES.js"></script>
+	<script type="text/javascript" src="js/VisarRES/actualizarEstado.js"></script>
 
 	<script type="text/javascript">
 	// Example:
@@ -442,10 +451,13 @@
 	
 	
 	$(document).ready(function() {
+		
 	    $('input[type=checkbox]').live('click', function(){
 	        var parent = $(this).parent().attr('id');
 	        $('#'+parent+' input[type=checkbox]').removeAttr('checked');
 	        $(this).attr('checked', 'checked');
+	        
+	       
 	    });
 	});
 	
@@ -465,13 +477,26 @@
 	form.intereses[1].disabled = true;
 	form.intereses[2].disabled = true;
 	}
-	    
+	
+	function visado(){
+		var idRES=''+document.getElementById('txtIdRES').value;
+		var tipo=typeof(idRES);
+		
+		
+		
+		if(tipo=="string"){
+			alert(idRES);
+		}else{
+			alert('no hay codigo');
+			
+		}
+		
+	}
+
 	
 	
 	
-	
-	
-	
+
 	
 	</script>
 	<%}%>

@@ -15,6 +15,6 @@ public interface ResDao {
 	public List<Res> ResxRangoFecha(String fecha1, String fecha2, String idEstado) throws SQLException;
 	//Romario
 	public ArrayList<Res> listarVisaRES () throws SQLException;
-	public int actualizaEstado(Res res, Asalariado_RES asalariado_RES) throws SQLException;
+	public int actualizaEstado(String idRES,String idAprobador,int idEstado,String pdf,String fecha) throws SQLException;
 	
 }

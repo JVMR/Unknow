@@ -87,4 +87,6 @@ public class Res {
 	public void setPdf(String pdf) {
 		this.pdf = pdf;
 	}
+	
+	
 }
