@@ -41,7 +41,11 @@
   		<script type="text/javascript" src="examples/js/jquery/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="examples/js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
 		<script type="text/javascript" src="dist/jspdf.debug.js"></script>
-
+		
+		<!-- para confirm jquery -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/styles.css">-->
+		<link rel="stylesheet" type="text/css" href="jquery.confirm/jquery.confirm.css" /> 
+		
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -245,15 +249,15 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Evaluacion de Solicitudes LES<small>Aprobacion, conforme o
+					Visar Resoluciones de Solicitudes LES<small>Visación o
 						desaprobación de solicitudes</small>
 				</h1>
 				<!-- Modificar al crear nuevos -->
 				<ol class="breadcrumb">
 					<li><a href="bienvenido.jsp"><i class="fa fa-dashboard"></i>
 							Home</a></li>
-					<li><a href="unidadOrganica.jsp">Unidad Organica</a></li>
-					<li class="active">Registrar Unidad Orgánica</li>
+					<li><a href="unidadOrganica.jsp">RES</a></li>
+					<li class="active">Visar RES</li>
 				</ol>
 			</section>
 
@@ -267,35 +271,37 @@
                         <div class="box box-success">
                         <div class="box-body">
                         <div class="form-group" align="center">
-                        				<h4>Para la Evaluacion, primero consulte una Solicitud de Licencia Por Enfermedad Subsidiada</h4> 
+                        				<h4>Para la Evaluación, primero consulte una Resolución de Solicitud de Licencia por Enfermedad Subsidiada</h4> 
                                        <br>                                       
                              			<button class="btn btn-success btn-lg" data-toggle="modal"  href="#lstRES" style="display:inline;">Buscar Resoluciones de LES <i class="fa fa-arrow-circle-right"></i></button> 
-                                        
-                                    </div>
+                         <br><br>                       
+                       <div id="mensaje" style="display: none;">
+			                <i id="iconoMensaje" class=""></i>
+			                <div id="contenido"></div>
+			             <!-- <b id="tituloMensaje">Alert!</b> <p id="contenidoMensaje"></p> -->   
+       					</div>
+                       
+                        </div>
                         
+                         
                         </div>
                         </div>
-                        </div>
-                        
-                        
+               </div>
                         
                         <div class="col-md-8">
-
                             <div class="box box-success">
                                 <div class="box-header">
-                                    <h3 class="box-title">Vista de Solicitud LES </h3>
+                                    <h3 class="box-title">Vista de Resolución de Solicitud de Licencia por Enfermedad Subsidiada</h3>
                                 </div>
                                 <div class="box-body">
                                  
                                   <div class="form-group">
-                                            <label>Vista de Solicitud</label>
-                                             
                                             <% if(res!=null){%>	
-                                            	<iframe src="<%=res.getPdf()%>" frameborder="0" width="700" height="900"></iframe>
+                                            	<iframe id="pdf" src="<%=res.getPdf()%>" frameborder="0" width="700" height="900"></iframe>
                                             <%} else {%>
-                                            	<iframe frameborder="0" width="700" height="900"></iframe>
+                                            	<iframe id="pdf" frameborder="0" width="700" height="900"></iframe>
                                             <%}%>  
-                                     </div>
+                                  </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
 
@@ -367,11 +373,11 @@
                                         <%
                                         }else {%>
                                         	<input type="hidden"  name="txtIdEmpleado" id="txtIdEmpleado">
-                                        	<input type="hidden"  name="txtIdRES" id="txtIdRES">
+                                        	<input type="hidden"  value="0" name="txtIdRES" id="txtIdRES">
                                         <%}
                                         %>
                                         
-                                        <button   class="btn btn-success btn-lg" >Grabar Revisión</button>
+                                        <button type="submit"  class="btn btn-success btn-lg" >Grabar Revisión</button>
                               </div>
                  </form>        
                         </div>
@@ -399,21 +405,53 @@
                                 						<c:when test="${aux.getIdEstado().equals('Generado')}">
                                 						<span class="label label-info">${aux.getIdEstado()}</span>
                                 						</c:when>
+                                						<c:when test="${aux.getIdEstado().equals('Desaprobado')}">
+                                						<span class="label label-danger">${aux.getIdEstado()}</span>
+                                						</c:when>
                                 						<c:when test="${aux.getIdEstado().equals('Visado')}">
                                 						<span class="label label-success">${aux.getIdEstado()}</span>
                                 						</c:when>                               						
                                 						
                                 			</c:choose> 
                                 	</display:column>  
-                                	<display:column title="Operacion">            
+                                	<display:column title="Operacion">
+                                			<c:if test="${aux.getIdEstado().equalsIgnoreCase('Desaprobado') || aux.getIdEstado().equalsIgnoreCase('Visado')}">
+                                				<span class="btn btn-default btn-flat"><i class="fa fa-circle-o"></i>Ver Documento</a></span>
+                                			</c:if>
+                                		   <c:if test="${!aux.getIdEstado().equalsIgnoreCase('Desaprobado')}">
                                 			<span class="btn btn-default btn-flat"> <a href="GestionarRES?operacion=visarRES&id=${aux.getIdRes()}">   <i class="fa fa-circle-o"></i>Evaluar</a></span>            
-                                            
+                                            </c:if>
                                 	</display:column>                                   	    
                                 </display:table>
                                 </div>
                      </div>
 			    
 		</div>
+		
+		<!-- modal para confirmacion de firma -->
+		<div id="mConfirmarFirma" class="modal fade" tabindex="-1" data-width="780" style="display: none;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h4 class="modal-title">Resoluciones de LES a visar</h4>
+			</div>
+			<div class="modal-body">
+			
+				<div class="form-group">
+					<label>ID de Usuario : </label>
+					<input type="text" class="form-control" placeholder="Ingrese su número de DNI">
+				</div>
+				<div class="form-group">
+					<label>DNI de Usuario : </label>
+					<input type="text" class="form-control" placeholder="Ingrese su número de DNI">
+				</div>
+				
+				<button class="btn btn-warning btn-flat">Validar</button> <button class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
+			
+			</div>		
+		</div>
+		
+	  <button onclick="mensaje()">Mensaje</button>
+	<button onclick="cambio()">Mensaje</button>
 		   <!-- </form>  -->
 			</section>
 			<!-- /.content -->
@@ -443,6 +481,9 @@
 	<script type="text/javascript" src="js/VisarRES/visarRES.js"></script>
 	<script type="text/javascript" src="js/VisarRES/actualizarEstado.js"></script>
 
+	<!-- JS PARA JQUERY condirmf -->
+	<script src="jquery.confirm/jquery.confirm.js"></script>
+	
 	<script type="text/javascript">
 	// Example:
 	$(document).ready(function(){
@@ -478,25 +519,26 @@
 	form.intereses[2].disabled = true;
 	}
 	
-	function visado(){
-		var idRES=''+document.getElementById('txtIdRES').value;
-		var tipo=typeof(idRES);
+	function alerta(){
 		
-		
-		
-		if(tipo=="string"){
-			alert(idRES);
-		}else{
-			alert('no hay codigo');
-			
-		}
+		$('#mensaje').modal('show');
 		
 	}
 
-	
-	
-	
+function mensaje(){
+	jAlert('This is a custom alert box', 'Alert Dialog');
+}
 
+function cambio(){
+	$('#mensaje').attr({
+		'class': 'alert alert-danger alert-dismissable',
+		'style':'display: block;'
+	});
+	$('#iconoMensaje').attr('class','fa fa-ban');
+	$('#contenido').empty();
+	$('#contenido').append('<b>CAMBIO!</b><p>Este es cambio</p>');
+	window.scrollTo(0,0);
+}
 	
 	</script>
 	<%}%>
