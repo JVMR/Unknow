@@ -264,8 +264,7 @@
 			<!-- Main content -->
 			<!-- ############################################################################################################################################ -->
 			<section class="content">
-		 <!--	<form name="form01">   
-			 <input type="hidden" value="actualizarEstadoVisado" name="operacion">   -->
+
 				<div class="row">
 				<div class="col-md-12">
                         <div class="box box-success">
@@ -278,7 +277,6 @@
                        <div id="mensaje" style="display: none;">
 			                <i id="iconoMensaje" class=""></i>
 			                <div id="contenido"></div>
-			             <!-- <b id="tituloMensaje">Alert!</b> <p id="contenidoMensaje"></p> -->   
        					</div>
                        
                         </div>
@@ -428,31 +426,38 @@
 			    
 		</div>
 		
+		
 		<!-- modal para confirmacion de firma -->
 		<div id="mConfirmarFirma" class="modal fade" tabindex="-1" data-width="780" style="display: none;">
+			
+			<form id="formMensaje">
+		
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			    <h4 class="modal-title">Resoluciones de LES a visar</h4>
+			    <h4 class="modal-title">Validación de Usuario</h4>
+			    <p>Para la obtención de su firma ingrese los datos solicitados</p>
 			</div>
 			<div class="modal-body">
-			
 				<div class="form-group">
 					<label>ID de Usuario : </label>
-					<input type="text" class="form-control" placeholder="Ingrese su número de DNI">
+					<input id="txtIdUsuario" name="txtIdUsuario" type="text" class="form-control"  placeholder="Ingrese su código de Usuario">
 				</div>
 				<div class="form-group">
 					<label>DNI de Usuario : </label>
-					<input type="text" class="form-control" placeholder="Ingrese su número de DNI">
+					<input id="txtDNI" name="txtDNI" type="text" class="form-control" placeholder="Ingrese su número de DNI">
 				</div>
-				
-				<button class="btn btn-warning btn-flat">Validar</button> <button class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
+				<div class="form-group">
+					<label>Contraseña : </label>
+					<input id="txtContrasena" name="txtContrasena" type="password" class="form-control" placeholder="Ingrese contraseña de la firma">
+				</div>
+				<button type="button" onclick="validar()"  class="btn btn-warning btn-flat">Validar</button> <button class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
+			</div>	
 			
-			</div>		
+			
+			</form>	
 		</div>
+
 		
-	  <button onclick="mensaje()">Mensaje</button>
-	<button onclick="cambio()">Mensaje</button>
-		   <!-- </form>  -->
 			</section>
 			<!-- /.content -->
 
@@ -480,6 +485,7 @@
 		type="text/javascript"></script>
 	<script type="text/javascript" src="js/VisarRES/visarRES.js"></script>
 	<script type="text/javascript" src="js/VisarRES/actualizarEstado.js"></script>
+	<script type="text/javascript" src="js/VisarRES/validacionFirma.js"></script>
 
 	<!-- JS PARA JQUERY condirmf -->
 	<script src="jquery.confirm/jquery.confirm.js"></script>
@@ -519,26 +525,12 @@
 	form.intereses[2].disabled = true;
 	}
 	
-	function alerta(){
-		
-		$('#mensaje').modal('show');
-		
+	
+	function validar(){
+		FormValidator.init();
+		alert('hola');
+		return false;
 	}
-
-function mensaje(){
-	jAlert('This is a custom alert box', 'Alert Dialog');
-}
-
-function cambio(){
-	$('#mensaje').attr({
-		'class': 'alert alert-danger alert-dismissable',
-		'style':'display: block;'
-	});
-	$('#iconoMensaje').attr('class','fa fa-ban');
-	$('#contenido').empty();
-	$('#contenido').append('<b>CAMBIO!</b><p>Este es cambio</p>');
-	window.scrollTo(0,0);
-}
 	
 	</script>
 	<%}%>

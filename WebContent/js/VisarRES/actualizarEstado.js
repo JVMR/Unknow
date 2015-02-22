@@ -20,7 +20,7 @@ function grabarEstado(obj){
 		
 		return false;
 	}else{
-		'si hay una resolucion'
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° si hay una resolucion  °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°'
 		if (!obj.rdEstado[0].checked && !obj.rdEstado[1].checked){
 			
 			$('#mensaje').attr({
@@ -33,7 +33,7 @@ function grabarEstado(obj){
 			window.scrollTo(0,0);
 			return false;
 		}else if(!obj.rdEstado[0].checked){
-			'rechazado'
+			'-------------------------------------- rechazado ---------------------------------------------'
 			
 			$('#mensaje').attr('style','display: none');
 			window.scrollTo(0,0);
@@ -109,13 +109,22 @@ function grabarEstado(obj){
 			
 			
 			return false;
+			'-------------------------------------- hasta aca esta rechazado ---------------------------------------------'
 		}else{
-			'aprobado'
+			'+++++++++++++++++++++++++++++++++++++++++ aprobado +++++++++++++++++++++++++++++++++++++++++++++++'
+			
+			
+			$('#mensaje').attr('style','display: none');
+			window.scrollTo(0,0);
+			
 			$('#mConfirmarFirma').modal('show');
+			
 			return false;
+			'+++++++++++++++++++++++++++++++++++++++++ hasta aca esta aprobado +++++++++++++++++++++++++++++++++++++++++++++++'
 		}
 		
 		return false;
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° hasta aca hay una resolucion  °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°'
 	}
 	
 	return false;
@@ -124,173 +133,6 @@ function grabarEstado(obj){
 
 
 
-
-function grabarEstado02(obj){
-	
-	var idAprobador=document.getElementById('txtIdEmpleado').value;
-	var idRES=document.getElementById('txtIdRES').value;
-	var tipo=typeof(idRES);
-	
-	alert(tipo);
-	
-	var idEstado;
-	var pdf;
-	
-	if(tipo!="string"){
-			
-			alert('no hay codgio');
-			
-		return false;
-		
-		
-	}else{
-		if (!obj.rdEstado[0].checked && !obj.rdEstado[1].checked){
-			alert("Debe elegir una opción de estado")
-			return false;
-		}else if(!obj.rdEstado[0].checked){
-			'rechazado'
-			idEstado=7;
-			pdf='no hay';
-			
-			'falta confirmar operación'
-			 $.ajax({
-		          type: 'GET',
-		          url: 'GestionarRES?operacion=actualizarEstadoVisado',
-		          data: 'txtIdRES='+idRES+'&rdEstado='+idEstado+'&txtIdEmpleado='+idAprobador+'&pdf='+pdf,
-		          statusCode: {
-		              404: function() {
-		                  console.log('Pagina no encontrada');
-		              },
-		              500: function(){
-		                  console.log('Error en el servidor');
-		              }
-		          },
-		          success: function(datos){
-		       	  
-		       	  alert('Se actualizó correctamente el estado de la REsolución');
-			       	 $.ajax({ 
-			       		 type: 'GET',
-				          url: 'GestionarRES?operacion=listaVisarRES',
-			       		 
-			       	 })
-		          	
-		          }
-		      }) 
-			
-			return false;
-		
-		}else{
-			'aprobado'
-			idEstado=9;
-			'falta confirmar operación'
-			'##############################################################################################################################'
-			
-			
-			
-			'##############################################################################################################################'
-			return false;
-		}
-		
-		return false;
-		
-		
-	}
-	return false;
-		
-				
-}
+'#############################################################################################################'
 
 
-
-function grabarEstado01(obj){
-	
-	var idAprobador=document.getElementById('txtIdEmpleado').value;
-	var idRES=document.getElementById('txtIdRES').value;
-	var tipo=typeof(idRES);
-	
-	
-	var idEstado;
-	var pdf;
-	
-	if(tipo=="string"){
-			if (!obj.rdEstado[0].checked && !obj.rdEstado[1].checked){
-				alert("Debe elegir una opción de estado")
-				return false;
-			}else if(!obj.rdEstado[0].checked){
-				'rechazado'
-				idEstado=7;
-				pdf='no hay';
-				
-				'falta confirmar operación'
-				 $.ajax({
-			          type: 'GET',
-			          url: 'GestionarRES?operacion=actualizarEstadoVisado',
-			          data: 'txtIdRES='+idRES+'&rdEstado='+idEstado+'&txtIdEmpleado='+idAprobador+'&pdf='+pdf,
-			          statusCode: {
-			              404: function() {
-			                  console.log('Pagina no encontrada');
-			              },
-			              500: function(){
-			                  console.log('Error en el servidor');
-			              }
-			          },
-			          success: function(datos){
-			       	  
-			       	  alert('Se actualizó correctamente el estado de la REsolución');
-				       	 $.ajax({ 
-				       		 type: 'GET',
-					          url: 'GestionarRES?operacion=listaVisarRES',
-				       		 
-				       	 })
-			          	
-			          }
-			      }) 
-				
-				return false;
-				 break;
-			}else{
-				'aprobado'
-				idEstado=9;
-				'falta confirmar operación'
-				'##############################################################################################################################'
-				
-				
-				
-				'##############################################################################################################################'
-				return false;
-			}
-			
-			
-		return false;
-		
-		
-	}else{
-		alert('Primero debe buscar una resolución a evaluar');
-		
-		return false;
-		
-		
-	}
-	return false;
-		
-				
-}
-
-
-
-function grabar00Estado(obj){
-	
-	var idRES=''+document.getElementById('txtIdRES').value;
-	if(idRES.length>1){
-		alert('no hay codigo  '+idRES);
-		return false;
-	}else{
-		
-		alert(idRES);
-		return false;
-	}
-
-				
-	}
-	
-	
