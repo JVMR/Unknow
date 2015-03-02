@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 import util.ConexionDB;
+import util.ConexionSQL;
 import entidad.Asalariado_RES;
 import entidad.Res;
 
@@ -269,6 +270,50 @@ public class MySqlResDao implements ResDao{
 		return salida;
 	}
 
+	@Override
+	public String verificaPersonaMYSQL(String idUsuario, String dni)
+			throws SQLException {
+		
+		Connection conn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		String resultadoMYSQL="";
+		
+		
+		try {
+			conn= new ConexionDB().getConexion();
+			String sql="select FN_VERIFICAR_PERSONA(?,?)";
+			pstm=conn.prepareStatement(sql);
+			pstm.setString(1, idUsuario);
+			pstm.setString(2, dni);
+			
+			rs=pstm.executeQuery();
+			
+			while(rs.next()){
+				resultadoMYSQL=rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(pstm!=null) pstm.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return resultadoMYSQL;
+	}
+
+	@Override
+	public String verificarFirma(String dni, String contraseña)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	
 	
 }

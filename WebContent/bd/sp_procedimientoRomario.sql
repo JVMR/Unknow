@@ -554,6 +554,26 @@ begin
 end$$
 DELIMITER ;
 
+############################### VERFICAR PERSONA EN MYSQL ####################################
 
+DROP FUNCTION IF EXISTS FN_VERIFICAR_PERSONA
+DELIMITER $$
+CREATE FUNCTION FN_VERIFICAR_PERSONA(idUsuario char(6),dni char(8)
+)
+RETURNS char(2)
+BEGIN
+	
+    declare respuesta char(2);
+    
+	IF EXISTS(SELECT * FROM empleado where idEmpleado=idUsuario and nDNI=dni) then
+		set respuesta='SI';
+    else
+		set respuesta='NO';
+    end if;
+	return respuesta;
+END$$
+DELIMITER ;
 
+#select FN_VERIFICAR_PERSONA('EM0001','12345678')
 
+#############################################################################################

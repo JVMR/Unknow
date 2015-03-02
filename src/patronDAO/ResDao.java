@@ -16,5 +16,6 @@ public interface ResDao {
 	//Romario
 	public ArrayList<Res> listarVisaRES () throws SQLException;
 	public int actualizaEstado(String idRES,String idAprobador,int idEstado,String pdf,String fecha) throws SQLException;
-	
+	public String verificaPersonaMYSQL(String idUsuario, String dni) throws SQLException;
+	public String verificarFirma(String dni, String contraseña) throws SQLException; 
 }

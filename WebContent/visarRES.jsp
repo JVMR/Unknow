@@ -430,8 +430,7 @@
 		<!-- modal para confirmacion de firma -->
 		<div id="mConfirmarFirma" class="modal fade" tabindex="-1" data-width="780" style="display: none;">
 			
-			<form id="formMensaje">
-		
+			<form name="formMensaje" onsubmit="return verificarFirma()">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			    <h4 class="modal-title">Validación de Usuario</h4>
@@ -440,20 +439,18 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label>ID de Usuario : </label>
-					<input id="txtIdUsuario" name="txtIdUsuario" type="text" class="form-control"  placeholder="Ingrese su código de Usuario">
+					<input id="txtIdUsuario" type="text" class="form-control"  placeholder="Ingrese su código de Usuario">
 				</div>
 				<div class="form-group">
 					<label>DNI de Usuario : </label>
-					<input id="txtDNI" name="txtDNI" type="text" class="form-control" placeholder="Ingrese su número de DNI">
+					<input id="txtDNI" type="text" class="form-control" placeholder="Ingrese su número de DNI">
 				</div>
 				<div class="form-group">
 					<label>Contraseña : </label>
-					<input id="txtContrasena" name="txtContrasena" type="password" class="form-control" placeholder="Ingrese contraseña de la firma">
+					<input id="txtContrasena"  type="password" class="form-control" placeholder="Ingrese contraseña de la firma">
 				</div>
-				<button type="button" onclick="validar()"  class="btn btn-warning btn-flat">Validar</button> <button class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
-			</div>	
-			
-			
+				<button type="submit" class="btn btn-warning btn-flat">Validar</button> <button class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
+			</div>				
 			</form>	
 		</div>
 
@@ -485,7 +482,8 @@
 		type="text/javascript"></script>
 	<script type="text/javascript" src="js/VisarRES/visarRES.js"></script>
 	<script type="text/javascript" src="js/VisarRES/actualizarEstado.js"></script>
-	<script type="text/javascript" src="js/VisarRES/validacionFirma.js"></script>
+	<script src="js/VisarRES/validacionFirma.js"></script>
+	<script type="text/javascript" src="js/VisarRES/verificarFirma.js"></script>
 
 	<!-- JS PARA JQUERY condirmf -->
 	<script src="jquery.confirm/jquery.confirm.js"></script>
@@ -525,12 +523,13 @@
 	form.intereses[2].disabled = true;
 	}
 	
-	
-	function validar(){
+	$(function(){
 		FormValidator.init();
-		alert('hola');
-		return false;
-	}
+	});
+	
+	
+	
+	
 	
 	</script>
 	<%}%>

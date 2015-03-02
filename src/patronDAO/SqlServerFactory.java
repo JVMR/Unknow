@@ -47,7 +47,7 @@ public class SqlServerFactory extends Factory{
 	public ResDao getRes() {
 
 		// TODO Auto-generated method stub
-		return null;
+		return new SqlServerRESDao();
 	}
 
 	@Override

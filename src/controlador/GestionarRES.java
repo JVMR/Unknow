@@ -31,7 +31,7 @@ public class GestionarRES extends HttpServlet {
 	 */
 	
 	Factory fabrica= Factory.getTipo(Factory.TIPO_MYSQL);
-	ResDao dao= null;
+	ResDao dao= null, dao02=null;
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operacion= request.getParameter("operacion");
@@ -49,22 +49,62 @@ public class GestionarRES extends HttpServlet {
 		if(operacion.equals("actualizarEstadoVisado")){
 			this.actualizarEstadoVisado(request,response);
 		}
+		if (operacion.equals("validarFirma")) {
+			this.validarFirma(request,response);
+		}
+		
+	}
+
+	private void validarFirma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Factory factorySQL=Factory.getTipo(Factory.TIPO_SQL_SERVER);
+		
+		String idUsuario=request.getParameter("txtIdUsuario");
+		String dni=request.getParameter("txtDNI");
+		String contraseña = request.getParameter("txtContrasena");
+		
+		System.out.println("==========servlet============");
+		
+		System.out.println(idUsuario);
+		System.out.println(dni);
+		System.out.println(contraseña);
+		
+		String respuesta01="";
+		PrintWriter out=response.getWriter();
+		
+		dao=fabrica.getRes();
+		try {
+			respuesta01=dao.verificaPersonaMYSQL(idUsuario, dni);
+			
+			if(respuesta01.equalsIgnoreCase("SI")){
+				dao02=factorySQL.getRes();
+				respuesta01=dao02.verificarFirma(dni, contraseña);
+				if(respuesta01.equalsIgnoreCase("NO")){
+					respuesta01="Los datos ingresados son incorrectos, en SQL SERVER";
+				}
+							
+			}else{
+				respuesta01="Los datos ingresados son incorrectos";
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(respuesta01);
+		
+		out.write(respuesta01.toString());
+
 	}
 
 	private void actualizarEstadoVisado(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
 		
 		String idRES = request.getParameter("txtIdRES");
 		String idEstado = request.getParameter("rdEstado");
 		String idAsalariadoAprobador=request.getParameter("txtIdEmpleado");
 		String pdf=request.getParameter("pdf");
-		
-		System.out.println(idRES);
-		System.out.println(idEstado);
-		System.out.println(idAsalariadoAprobador);
-		System.out.println(pdf);
-		
+	
 		//fecha  de la operación
 		DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String fechaOperacion=fecha.format(new Date());
@@ -97,30 +137,6 @@ public class GestionarRES extends HttpServlet {
 		request.setAttribute("ResaEvaluar", res);
 		//request.getRequestDispatcher("/visarRES.jsp").forward(request, response);
 		listaVisarRES(request, response);
-		
-	/*	String cod=request.getParameter("id");
-		Res res= null;
-		
-		PrintWriter out = response.getWriter();
-		StringBuilder sb = new StringBuilder("");
-		
-		try {
-			dao = fabrica.getRes();
-			res = dao.ResxCodigo(cod);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		sb.append(res.getFechaGenerado()+"/");
-		sb.append(res.getReferencia()+"/");
-		sb.append(res.getDescriptor()+"/");
-		sb.append(res.getObjetoConsulta()+"/");
-		sb.append(res.getAnalisis()+"/");
-		sb.append(res.getIdLes()+"/");
-		sb.append(res.getIdAsalariado()+"/");
-		
-		out.write(sb.toString());	*/
 	}
 
 	private void listaVisarRES(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
