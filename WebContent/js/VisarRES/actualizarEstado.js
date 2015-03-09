@@ -81,7 +81,7 @@ function grabarEstado(obj){
 								          }
 							       	 })
 							       	 
-							       	$('#mensaje').attr({
+							       	 	$('#mensaje').attr({
 						                  'class': 'alert alert-success alert-dismissable',
 						                  'style':'display: block;'
 						                });

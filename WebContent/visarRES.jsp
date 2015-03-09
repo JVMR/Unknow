@@ -366,14 +366,19 @@
                                         if(res!=null){
                                         %>
                                         <input type="hidden" value="<%=empleado.getIdEmpleado()%>" name="txtIdEmpleado" id="txtIdEmpleado">
+                                        <input type="hidden" value="<%=empleado.getNombresEmpleado()+empleado.getApellidoPaterno()+empleado.getApellidoMaterno()%>" id="txtEmpleadoNmbres">
+                                        <input type="hidden" value="<%=empleado.getnDNI()%>" id="txtEmpleadoDNI">
                                         <input type="hidden" value="<%=res.getIdRes()%>" name="txtIdRES" id="txtIdRES">
                                         
+                                     	
                                         <%
-                                        }else {%>
+                                        }else {
+                                        %>
                                         	<input type="hidden"  name="txtIdEmpleado" id="txtIdEmpleado">
                                         	<input type="hidden"  value="0" name="txtIdRES" id="txtIdRES">
                                         <%}
                                         %>
+                                        <input type="text"  id="rutaPDF">
                                         
                                         <button type="submit"  class="btn btn-success btn-lg" >Grabar Revisión</button>
                               </div>
@@ -417,7 +422,7 @@
                                 				<span class="btn btn-default btn-flat"><i class="fa fa-circle-o"></i>Ver Documento</a></span>
                                 			</c:if>
                                 		   <c:if test="${!aux.getIdEstado().equalsIgnoreCase('Desaprobado')}">
-                                			<span class="btn btn-default btn-flat"> <a href="GestionarRES?operacion=visarRES&id=${aux.getIdRes()}">   <i class="fa fa-circle-o"></i>Evaluar</a></span>            
+                                			<span class="btn btn-default btn-flat"> <a href="GestionarRES?operacion=visarRES&id=${aux.getIdRes()}&tipo=1">   <i class="fa fa-circle-o"></i>Evaluar</a></span>            
                                             </c:if>
                                 	</display:column>                                   	    
                                 </display:table>
@@ -439,7 +444,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label>ID de Usuario : </label>
-					<input id="txtIdUsuario" type="text" class="form-control"  placeholder="Ingrese su código de Usuario">
+					<input id="txtIdUsuario" type="text" class="form-control" value="<%=empleado.getIdEmpleado()%>" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label>DNI de Usuario : </label>
@@ -449,7 +454,7 @@
 					<label>Contraseña : </label>
 					<input id="txtContrasena"  type="password" class="form-control" placeholder="Ingrese contraseña de la firma">
 				</div>
-				<button type="submit" class="btn btn-warning btn-flat">Validar</button> <button class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
+				<button type="submit" class="btn btn-warning btn-flat">Validar</button> <button id="btnCancelar" class="close" data-dismiss="modal" aria-hidden="true" style="left: auto;" class="btn btn-danger btn-flat">Cancelar</button>
 			</div>				
 			</form>	
 		</div>

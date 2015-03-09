@@ -520,7 +520,7 @@ DROP PROCEDURE IF EXISTS SP_RESxCODIGO;
 DELIMITER $$
 CREATE PROCEDURE SP_RESxCODIGO(codRES int)
 BEGIN 
-    SELECT idRES, pdf FROM Res where idRES=codRES;
+    SELECT idRES,referencia,descriptor,objetoConsulta,analisis,fechaGenerado,idLES,idAsalariado,pdf FROM Res where idRES=codRES;
 END$$ 
 DELIMITER ;
 
@@ -542,8 +542,8 @@ begin
 		pdf=pdf02
 		where idRES=codRES;
 		
-		insert into asa_res(`idAsalariado`,`idRES`,`fechaAprob`) values(idAprobador,codRES,fecha);
-		
+		insert into asa_res(`idAsalariado`,`idRES`,`fechaAprob`,`pdf`) values(idAprobador,codRES,fecha,pdf02);
+ 	
     else
 		UPDATE res 
 		set 

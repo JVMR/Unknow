@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.print.attribute.standard.PresentationDirection;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 import util.ConexionDB;
 import util.ConexionSQL;
 import entidad.Asalariado_RES;
+import entidad.Empleado;
 import entidad.Res;
 
 public class MySqlResDao implements ResDao{
@@ -64,7 +66,14 @@ public class MySqlResDao implements ResDao{
 			while(rs.next()){
 				obj = new Res();
 				obj.setIdRes(rs.getString(1));
-				obj.setPdf(rs.getString(2));
+				obj.setReferencia(rs.getString(2));
+				obj.setDescriptor(rs.getString(3));
+				obj.setObjetoConsulta(rs.getString(4));
+				obj.setAnalisis(rs.getString(5));
+				obj.setFechaGenerado(rs.getString(6));
+				obj.setIdLes(rs.getString(7));
+				obj.setIdAsalariado(rs.getString(8));
+				obj.setPdf(rs.getString(9));
 				}	
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -309,6 +318,50 @@ public class MySqlResDao implements ResDao{
 	@Override
 	public String verificarFirma(String dni, String contraseña)
 			throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Empleado buscaDNI(String idRES) throws SQLException {
+		Connection conn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		Empleado empleado=null;
+		
+		try {
+			
+			conn= new ConexionDB().getConexion();
+			String sql="SELECT e.nDNI,e.nombre,e.apellidoP,e.apellidoM FROM asa_res r inner join empleado e on r.idAsalariado=e.idEmpleado where idRES=?;";
+			pstm=conn.prepareStatement(sql);
+			pstm.setString(1, idRES);
+			rs=pstm.executeQuery();
+			while(rs.next()){
+				empleado= new Empleado();
+				empleado.setnDNI(rs.getString(1));
+				empleado.setNombresEmpleado(rs.getString(2));
+				empleado.setApellidoPaterno(rs.getString(3));
+				empleado.setApellidoMaterno(rs.getString(4));
+			}
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(pstm!=null) pstm.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+		
+		return empleado;
+	}
+
+	@Override
+	public String obtengoFirma02(String dni) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
